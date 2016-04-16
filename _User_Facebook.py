@@ -280,6 +280,7 @@ class User_Facebook(User):
             id2=requests.get("https://graph.facebook.com/search?q="+id+"&type=group&access_token="+self.token).json()
             id=id2["data"][0]["id"]
         meta=requests.get("https://graph.facebook.com/v2.3/"+id+"?metadata=1&access_token="+self.token).json()
+        print(meta)
         meta=meta["metadata"]["type"]
         if(meta!="group"):
             raise Exception("ERROR: This ID is not from a group")
@@ -392,3 +393,9 @@ class User_Facebook(User):
         if (self.work!=""):
              retorno+="WORK: <"+str(self.work)+">\n"
         return retorno
+
+    def getMyFriends(self):
+        friends=requests.get("https://graph.facebook.com/v2.6/me/friendlists?&access_token="+self.token).json()
+        for f in friends["data"]:
+            print(f)
+        return
