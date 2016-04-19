@@ -6,6 +6,7 @@ import _User
 import requests
 import _Post_Facebook
 User=_User.User
+from _Facebook_Classes import *
 
 
 class User_Facebook(User):
@@ -13,7 +14,7 @@ class User_Facebook(User):
     A autenticação é feita por um Token, que deve ser obtido no site do facebook'''
 
 
-    def __init__(self, token=""):
+    def __init__(self, token="", dictionary=dict()):
         '''O construtor pode receber o token de acesso, ou não receber nada
         Caso o construtor já receba o token, ele fará a conexão de uma vez
         Descriçao dos campos: https://developers.facebook.com/docs/graph-api/reference/user/
@@ -127,7 +128,12 @@ class User_Facebook(User):
         self.work=""
         if (token!=""):
             self.connect()
-
+        if "name" in dictionary:
+            self.name=dictionary["name"]
+        if "id" in dictionary:
+            self.id=dictionary["id"]
+        if "relationship" in dictionary:
+            self.relationship=dictionary["relationship"]
 
 
     def connect(self):
@@ -135,7 +141,7 @@ class User_Facebook(User):
         que usuario.token possua um token válido.'''
 
         #self.connection = facebook.GraphAPI(access_token=self.token)
-        dict_user=requests.get("https://graph.facebook.com/v2.6/me?&fields=id,about,age_range,bio,birthday,context,cover,currency,devices,education,email,favorite_athletes,favorite_teams,first_name,gender,hometown,inspirational_people,install_type,installed,interested_in,is_shared_login,is_verified,languages,last_name,link,locale,location,meeting_for,middle_name,name,name_format,payment_pricepoints,political,public_key,quotes,relationship_status,religion,security_settings,shared_login_upgrade_required_by,significant_other,sports,test_group,third_party_id,timezone,updated_time,verified,video_upload_limits,viewer_can_send_gift,website,work&access_token="+self.token).json()
+        dict_user=requests.get("https://graph.facebook.com/v2.6/me?&fields=id,about,age_range,bio,birthday,context,cover,currency,devices,education,email,favorite_athletes,favorite_teams,first_name,gender,hometown,inspirational_people,install_type,installed,interested_in,is_shared_login,is_verified,languages,last_name,link,locale,location,meeting_for,middle_name,name,name_format,payment_pricepoints,political,public_key,quotes,relationship_status,religion,security_settings,shared_login_upgrade_required_by,significant_other,sports,test_group,third_party_id,timezone,updated_time,verified,video_upload_limits,viewer_can_send_gift,website,work&access_token="+str(self.token)).json()
 
         if ("id") in dict_user:
              self.id=dict_user["id"]
@@ -260,7 +266,7 @@ class User_Facebook(User):
 
 
     def __str__(self):
-        return "USER:[name=<"+self.name+">; id=<"+self.id+">; token=<"+self.token+">; Type=<"+self.type+">]"
+        return "USER:[name=<"+str(self.name)+">; id=<"+str(self.id)+">; token=<"+str(self.token)+">; Type=<"+str(self.type)+">]"
 
 
 
@@ -399,3 +405,265 @@ class User_Facebook(User):
         for f in friends["data"]:
             print(f)
         return
+
+    def getAccounts(self):
+        r=requests.get("https://graph.facebook.com/v2.6/me/accounts?&access_token="+self.token).json()
+        lista=list()
+        while ("data" in r and len(r["data"])>0):
+            for a in r["data"]:
+                lista.append(Accounts(a))
+            if ("next" in r["paging"]):
+                r=requests.get(r["paging"]["next"]).json()
+            else:
+                break
+        return lista
+
+    def getAchievements(self):
+        r=requests.get("https://graph.facebook.com/v2.6/me/achievements?&access_token="+self.token).json()
+        lista=list()
+        while ("data" in r and len(r["data"])>0):
+            for a in r["data"]:
+                lista.append(Achievements(a))
+            if ("next" in r["paging"]):
+                r=requests.get(r["paging"]["next"]).json()
+            else:
+                break
+        return lista
+
+    def getAdaccountgroups(self):
+             r=requests.get("https://graph.facebook.com/v2.6/me/Adaccountgroups?&access_token="+self.token).json()
+             lista=list()
+             while ("data" in r and len(r["data"])>0):
+                 for a in r["data"]:
+                     lista.append(Adaccountgroups(a))
+                 if ("next" in r["paging"]):
+                    r=requests.get(r["paging"]["next"]).json()
+                 else:
+                     break
+             return lista
+
+    def getAdaccounts(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Adaccounts?fields=id,account_groups,account_id,account_status,age,agency_client_declaration,amount_spent,balance,business,business_city,business_country_code,business_name,business_state,business_street,business_street2,business_zip,can_create_brand_lift_study,capabilities,created_time,currency,end_advertiser_name,failed_delivery_checks,funding_source,funding_source_details,has_migrated_permissions,end_advertiser,disable_reason,io_number,is_notifications_enabled,is_personal,is_prepay_account,is_tax_id_required,last_used_time,line_numbers,media_agency,min_campaign_group_spend_cap,min_daily_budget,name,offsite_pixels_tos_accepted,owner,owner_business,partner,rf_spec,spend_cap,tax_id,tax_id_status,tax_id_type,timezone_id,timezone_name,timezone_offset_hours_utc,tos_accepted,user_role&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Adaccounts(a))
+             if ("next" in r["paging"]):
+                r=requests.get(r["paging"]["next"]).json()
+             else:
+                break
+         return lista
+
+    def _getAdcontracts(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Adcontracts?fields=account_id,account_mgr_fbid,account_mgr_name,adops_person_name,advertiser_name,agency_name,campaign_name,created_by,created_date,io_number,io_type,last_updated_by,last_updated_date,max_end_date,mdc_fbid,min_start_date,salesrep_fbid,salesrep_name,status,subvertical,thirdparty_billed,thirdparty_password,thirdparty_uid,thirdparty_url,version,vertical&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Adcontracts(a))
+             if ("next" in r["paging"]):
+                r=requests.get(r["paging"]["next"]).json()
+             else:
+                break
+         return lista
+
+    def getAdmined_Groups(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Admined_Groups?fields=id,cover,description,email,icon,link,member_request_count,name,owner,parent,privacy,updated_time,cover_url&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Group(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getAlbums(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Albums?fields=id,can_upload,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Albums(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getApprequests(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Apprequests?fields=id,action_type,application,created_time,data,from,message,object,to&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Apprequests(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getBooks(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Books?fields=id,about,affiliation,app_id,app_links,artists_we_like,attire,awards,band_interests,band_members,best_page,bio,birthday,booking_agent,built,can_checkin,can_post,category,category_list,checkins,company_overview,contact_address,country_page_likes,cover,culinary_team,current_location,description,description_html,directed_by,display_subtext,emails,features,food_styles,founded,general_info,general_manager,genre,global_brand_page_name,global_brand_root_id,has_added_app,hometown,hours,influences,is_community_page,is_permanently_closed,is_published,is_unclaimed,is_verified,last_used_time,leadgen_tos_accepted,link,location,members,mission,mpg,name,network,new_like_count,offer_eligible,owner_business,parent_page,parking,payment_options,personal_info,personal_interests,pharma_safety_info,phone,place_type,plot_outline,press_contact,price_range,produced_by,products,public_transit,record_label,release_date,restaurant_services,restaurant_specialties,schedule,screenplay_by,season,single_line_address,starring,store_number,studio,talking_about_count,unread_message_count,unread_notif_count,unseen_message_count,username,voip_info,website,were_here_count,written_by&access_token="+self.token).json()
+         lista=list()
+         print(r)
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Page(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getEvents(self):
+             r=requests.get("https://graph.facebook.com/v2.6/me/Events?fields=id,can_guests_invite,cover,description,end_time,guest_list_enabled,is_page_owned,is_viewer_admin,name,owner,parent_group,start_time,ticket_uri,timezone,updated_time&access_token="+self.token).json()
+             lista=list()
+             while ("data" in r and len(r["data"])>0):
+                 for a in r["data"]:
+                     lista.append(Events(a))
+                 if ("next" in r["paging"]):
+                     r=requests.get(r["paging"]["next"]).json()
+                 else:
+                     break
+             return lista
+
+    def getFamily(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Family?&access_token="+self.token).json()
+         lista=list()
+         print (r)
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(User_Facebook(dictionary=a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getGames(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Books?fields=id,about,affiliation,app_id,app_links,artists_we_like,attire,awards,band_interests,band_members,best_page,bio,birthday,booking_agent,built,can_checkin,can_post,category,category_list,checkins,company_overview,contact_address,country_page_likes,cover,culinary_team,current_location,description,description_html,directed_by,display_subtext,emails,features,food_styles,founded,general_info,general_manager,genre,global_brand_page_name,global_brand_root_id,has_added_app,hometown,hours,influences,is_community_page,is_permanently_closed,is_published,is_unclaimed,is_verified,last_used_time,leadgen_tos_accepted,link,location,members,mission,mpg,name,network,new_like_count,offer_eligible,owner_business,parent_page,parking,payment_options,personal_info,personal_interests,pharma_safety_info,phone,place_type,plot_outline,press_contact,price_range,produced_by,products,public_transit,record_label,release_date,restaurant_services,restaurant_specialties,schedule,screenplay_by,season,single_line_address,starring,store_number,studio,talking_about_count,unread_message_count,unread_notif_count,unseen_message_count,username,voip_info,website,were_here_count,written_by&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Page(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getGroups(self):
+         r=requests.get("https://graph.facebook.com/v2.2/me/Groups?fields=id,cover,description,email,icon,link,member_request_count,name,owner,parent,privacy,updated_time,cover_url&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Group(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getLikes(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Likes?&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Page(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getLive_Videos(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Live_Videos?fields=id,broadcast_start_time,creation_time,description,from,is_reference_only,live_views,permalink_url,seconds_left,status,title,total_views,video&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Live_Videos(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getMovies(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Books?fields=id,about,affiliation,app_id,app_links,artists_we_like,attire,awards,band_interests,band_members,best_page,bio,birthday,booking_agent,built,can_checkin,can_post,category,category_list,checkins,company_overview,contact_address,country_page_likes,cover,culinary_team,current_location,description,description_html,directed_by,display_subtext,emails,features,food_styles,founded,general_info,general_manager,genre,global_brand_page_name,global_brand_root_id,has_added_app,hometown,hours,influences,is_community_page,is_permanently_closed,is_published,is_unclaimed,is_verified,last_used_time,leadgen_tos_accepted,link,location,members,mission,mpg,name,network,new_like_count,offer_eligible,owner_business,parent_page,parking,payment_options,personal_info,personal_interests,pharma_safety_info,phone,place_type,plot_outline,press_contact,price_range,produced_by,products,public_transit,record_label,release_date,restaurant_services,restaurant_specialties,schedule,screenplay_by,season,single_line_address,starring,store_number,studio,talking_about_count,unread_message_count,unread_notif_count,unseen_message_count,username,voip_info,website,were_here_count,written_by&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Page(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+
+    def getMusic(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Books?fields=id,about,affiliation,app_id,app_links,artists_we_like,attire,awards,band_interests,band_members,best_page,bio,birthday,booking_agent,built,can_checkin,can_post,category,category_list,checkins,company_overview,contact_address,country_page_likes,cover,culinary_team,current_location,description,description_html,directed_by,display_subtext,emails,features,food_styles,founded,general_info,general_manager,genre,global_brand_page_name,global_brand_root_id,has_added_app,hometown,hours,influences,is_community_page,is_permanently_closed,is_published,is_unclaimed,is_verified,last_used_time,leadgen_tos_accepted,link,location,members,mission,mpg,name,network,new_like_count,offer_eligible,owner_business,parent_page,parking,payment_options,personal_info,personal_interests,pharma_safety_info,phone,place_type,plot_outline,press_contact,price_range,produced_by,products,public_transit,record_label,release_date,restaurant_services,restaurant_specialties,schedule,screenplay_by,season,single_line_address,starring,store_number,studio,talking_about_count,unread_message_count,unread_notif_count,unseen_message_count,username,voip_info,website,were_here_count,written_by&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Page(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getPermissions(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Permissions?&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(a)
+             if ("paging" in r and "next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getPhotos(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+self.token).json()
+         lista=list()
+         print (r)
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Photo(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getPicture(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Picture?fields=height,is_silhouette,url,width&redirect=0&access_token="+self.token).json()
+         print(r)
+         return r["data"]["url"]
+
+    def getTelevision(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Television?fields=id,about,affiliation,app_id,app_links,artists_we_like,attire,awards,band_interests,band_members,best_page,bio,birthday,booking_agent,built,can_checkin,can_post,category,category_list,checkins,company_overview,contact_address,country_page_likes,cover,culinary_team,current_location,description,description_html,directed_by,display_subtext,emails,features,food_styles,founded,general_info,general_manager,genre,global_brand_page_name,global_brand_root_id,has_added_app,hometown,hours,influences,is_community_page,is_permanently_closed,is_published,is_unclaimed,is_verified,last_used_time,leadgen_tos_accepted,link,location,members,mission,mpg,name,network,new_like_count,offer_eligible,owner_business,parent_page,parking,payment_options,personal_info,personal_interests,pharma_safety_info,phone,place_type,plot_outline,press_contact,price_range,produced_by,products,public_transit,record_label,release_date,restaurant_services,restaurant_specialties,schedule,screenplay_by,season,single_line_address,starring,store_number,studio,talking_about_count,unread_message_count,unread_notif_count,unseen_message_count,username,voip_info,website,were_here_count,written_by&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Page(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getVideo_Broadcasts(self):
+         r=requests.get("https://graph.facebook.com/v2.6/me/Video_Broadcasts?fields=id,broadcast_start_time,creation_time,description,from,is_reference_only,live_views,permalink_url,seconds_left,status,title,total_views,video&access_token="+self.token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Live_Videos(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+

@@ -2,6 +2,8 @@ __author__ = 'Joao'
 import _User_Facebook
 from Utility import *
 User_Facebook=_User_Facebook.User_Facebook
+import requests
+from _Facebook_Classes import *
 
 '''
 #Caso de uso 1 (4 linhas): Pegar posts da Dilma de 2015 (Mesma coisa que o código do wladek fazia)
@@ -33,3 +35,10 @@ for post in posts:
 u = User_Facebook("CAACxxfv6ORIBAPip9leRDpWkrOEOmZAZA9rlwEanVuAexUxv4VhAXIqB0uEHQ1uhEU5IxaNpVKwWqq8E8aWI8tsSMFQLKpVzoZBCBM2Bo0wTNrGEeLIV2x2pNlGqa3lKtVkwbzdbVPtOiXsHz9SlWVViZCXxbtHbofdfkFG6TbbR5Yd6X9pazIvkTLYT2un0tYJXuxmKygZDZD")
 print("Nome:"+u.name+"; Email:"+u.email+"; Religião:"+u.religion)
 '''
+
+u = User_Facebook("CAACxxfv6ORIBAPip9leRDpWkrOEOmZAZA9rlwEanVuAexUxv4VhAXIqB0uEHQ1uhEU5IxaNpVKwWqq8E8aWI8tsSMFQLKpVzoZBCBM2Bo0wTNrGEeLIV2x2pNlGqa3lKtVkwbzdbVPtOiXsHz9SlWVViZCXxbtHbofdfkFG6TbbR5Yd6X9pazIvkTLYT2un0tYJXuxmKygZDZD")
+r=requests.get("https://graph.facebook.com/v2.6/me/books?&access_token="+u.token).json()
+
+lol=u.getInbox()
+for l in lol:
+    print(str(l))

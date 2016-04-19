@@ -2,6 +2,7 @@ __author__ = 'Joao'
 import requests
 import _User_Facebook
 from dateutil.parser import parse
+from _Facebook_Classes import *
 
 class Post_Facebook: #Classe para os POSTs das redes sociais
     def __init__(self, id=-1, created_date="", message="", story=""):
@@ -209,94 +210,5 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
             posts=requests.get(posts["paging"]["next"]).json()
         return lista
 
-class Feed_Targeting:
-    def __init__(self, dictionary=None):
-        self.age_max=""
-        self.age_min=""
-        self.genders=""
-        self.geo_locations=""
-        self.locales=""
-        self.education_statuses=""
-        self.fan_of=""
-        self.relationship_statuses=""
-        if (dictionary!=None):
-            if "age_max" in dictionary:
-                self.age_max=dictionary["age_max"]
-            if "age_min" in dictionary:
-                self.age_min=dictionary["age_min"]
-            if "genders" in dictionary:
-                self.genders=dictionary["genders"]
-            if "geo_locations" in dictionary:
-                self.geo_locations=dictionary["geo_locations"]
-            if "locales" in dictionary:
-                self.locales=dictionary["locales"]
-            if "education_statuses" in dictionary:
-                self.education_statuses=dictionary["education_statuses"]
-            if "fan_of" in dictionary:
-                self.fan_of=dictionary["fan_of"]
-            if "relationship_statuses" in dictionary:
-                self.relationship_statuses=dictionary["relationship_statuses"]
-    def __str__(self):
-        return "{AGE_MAX: "+str(self.age_max)+"; AGE_MIN: "+str(self.age_min)+"; GENDERS"+str(self.genders)+"; GEO_LOCATIONS: "+str(self.geo_locations)+"; LOCATES: "+str(self.locales)+"; EDUCATION_STATUSES: "+str(self.education_statuses)+"; FAN_OF: "+str(self.fan_of)+"; RELETIONSHIP_STATUSES: "+str(self.relationship_statuses)+"}"
-
-class Place:
-    def __init__(self, dictionary=dict()):
-        self.name=""
-        self.latitude=""
-        self.longitude=""
-        self.id=""
-        if "name" in dictionary:
-            self.name=dictionary["name"]
-        if "location" in dictionary:
-            self.latitude=dictionary["location"]["latitude"]
-            self.longitude=dictionary["location"]["longitude"]
-        if "id" in dictionary:
-            self.id=dictionary["id"]
-    def __str__(self, *args, **kwargs):
-        return "LOCATION: [Name=<"+self.name+">; Latitude=<"+str(self.latitude)+">; Longitude=<"+str(self.longitude)+">; ID=<"+str(self.id)+">]"
-
-class Privacy:
-    def __init__(self, dictionary=dict()):
-        self.allow=""
-        self.deny=""
-        self.value=""
-        self.friends=list()
-        self.description=""
-        self.properties=""
-        if "allow" in dictionary:
-            self.allow=dictionary["allow"]
-        if "deny" in dictionary:
-            self.deny=dictionary["deny"]
-        if "value" in dictionary:
-            self.value=dictionary["value"]
-        if "friends" in dictionary:
-            self.friends=dictionary["friends"]
-        if "description" in dictionary:
-            self.description=dictionary["description"]
-
-
-    def __str__(self):
-        return "PRIVACY: [Allow=<"+self.allow+">; Deny=<"+str(self.deny)+">; Value=<"+str(self.value)+">; Friends=<"+str(self.friends)+">; Description=<"+str(self.description)+">]"
-
-class Targeting:
-    def __init__(self, dictionary=dict()):
-        self.countries=list()
-        self.locales=list()
-        self.regions=""
-        self.cities=list()
-        self.description=""
-        self.properties=""
-        if "countries" in dictionary:
-            self.countries=dictionary["countries"]
-        if "locales" in dictionary:
-            self.locales=dictionary["locales"]
-        if "regions" in dictionary:
-            self.value=dictionary["value"]
-        if "cities" in dictionary:
-            self.friends=dictionary["friends"]
-
-
-    def __str__(self):
-        return "[Countries=<"+str(self.countries)+">; Locales=<"+str(self.locales)+">; Regions=<"+str(self.regions)+">; Cities=<"+str(self.cities)+">]"
 
 
