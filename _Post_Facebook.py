@@ -3,9 +3,10 @@ import requests
 import _User_Facebook
 from dateutil.parser import parse
 from _Facebook_Classes import *
+import _Settings
 
 class Post_Facebook: #Classe para os POSTs das redes sociais
-    def __init__(self, id=-1, created_date="", message="", story=""):
+    def __init__(self, id=-1, created_date="", message="", story="", dictionary=dict()):
         '''self.id é o ID do post. Campo id
         self.data é a data de criação. Campo create_date
         self.message é o texto escrito pelo usuário. Campo message
@@ -47,6 +48,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
         self.is_hidden=""
         self.is_published=""
         self.link=""
+        self.from_=""
         self.message_tags=list()
         self.name=""
         self.object_id=""
@@ -63,65 +65,89 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
         self.type="" #enum{link, status, photo, video, offer}
         self.updated_time=""
         self.with_tags=list()
+        if ("id" in dictionary):
+             self.id=dictionary["id"]
+        if ("admin_creator" in dictionary):
+         self.admin_creator=dictionary["admin_creator"]
+        if ("application" in dictionary):
+         self.application=dictionary["application"]
+        if ("call_to_action" in dictionary):
+         self.call_to_action=dictionary["call_to_action"]
+        if ("caption" in dictionary):
+         self.caption=dictionary["caption"]
+        if ("created_time" in dictionary):
+         self.created_time=dictionary["created_time"]
+        if ("description" in dictionary):
+         self.description=dictionary["description"]
+        if ("feed_targeting" in dictionary):
+         self.feed_targeting=dictionary["feed_targeting"]
+        if ("from" in dictionary):
+         self.from_=dictionary["from"]
+        if ("icon" in dictionary):
+         self.icon=dictionary["icon"]
+        if ("is_hidden" in dictionary):
+         self.is_hidden=dictionary["is_hidden"]
+        if ("is_published" in dictionary):
+         self.is_published=dictionary["is_published"]
+        if ("link" in dictionary):
+         self.link=dictionary["link"]
+        if ("message" in dictionary):
+         self.message=dictionary["message"]
+        if ("message_tags" in dictionary):
+         self.message_tags=dictionary["message_tags"]
+        if ("name" in dictionary):
+         self.name=dictionary["name"]
+        if ("object_id" in dictionary):
+         self.object_id=dictionary["object_id"]
+        if ("parent_id" in dictionary):
+         self.parent_id=dictionary["parent_id"]
+        if ("picture" in dictionary):
+         self.picture=dictionary["picture"]
+        if ("place" in dictionary):
+         self.place=dictionary["place"]
+        if ("privacy" in dictionary):
+         self.privacy=dictionary["privacy"]
+        if ("properties" in dictionary):
+         self.properties=dictionary["properties"]
+        if ("shares" in dictionary):
+         self.shares=dictionary["shares"]
+        if ("source" in dictionary):
+         self.source=dictionary["source"]
+        if ("status_type" in dictionary):
+         self.status_type=dictionary["status_type"]
+        if ("story" in dictionary):
+         self.story=dictionary["story"]
+        if ("story_tags" in dictionary):
+         self.story_tags=dictionary["story_tags"]
+        if ("targeting" in dictionary):
+         self.targeting=dictionary["targeting"]
+        if ("to" in dictionary):
+         self.to=dictionary["to"]
+        if ("type" in dictionary):
+         self.type=dictionary["type"]
+        if ("updated_time" in dictionary):
+         self.updated_time=dictionary["updated_time"]
+        if ("with_tags" in dictionary):
+         self.with_tags=dictionary["with_tags"]
 
     def __str__(self):
-        retorno= "POST: [ID="+self.id+"\nCreated_date: "+ self.created_date
-        if (self.story!=""):
-            retorno+="\nStory: "+self.story.rstrip('\n')
-        if(self.message!=""):
-            retorno+="\nMessage: "+self.message.rstrip('\n')
-        if (self.feed_targeting!=""):
-            retorno+="\nFeed_Targeging: "+str(self.feed_targeting).rstrip('\n')
-        if (self.created_by!=""):
-            retorno+="\nFrom: "+str(self.created_by).rstrip('\n')
-        if (self.icon!=""):
-            retorno+="\nIcon: "+str(self.icon).rstrip('\n')
-        if (self.is_hidden!=""):
-            retorno+="\nIs_hidden: "+str(self.is_hidden).rstrip('\n')
-        if (self.is_published!=""):
-            retorno+="\nIs_published: "+str(self.is_published).rstrip('\n')
-        if (self.link!=""):
-            retorno+="\nLink: "+str(self.link).rstrip('\n')
-        if (self.message_tags!=""):
-            retorno+="\nMessage_tags: "+"; ".join(str(u) for u in self.message_tags).rstrip('\n')
-        if (self.name!=""):
-            retorno+="\nName: "+str(self.name).rstrip('\n')
-        if (self.object_id!=""):
-            retorno+="\nObject_id: "+str(self.object_id).rstrip('\n')
-        if (self.parent_id!=""):
-            retorno+="\nParent_id: "+str(self.parent_id).rstrip('\n')
-        if (self.picture!=""):
-            retorno+="\nPicture: "+str(self.picture).rstrip('\n')
-        if (self.place!=""):
-            retorno+="\nPlace: "+str(self.place).rstrip('\n')
-        if (self.privacy!=""):
-            retorno+="\nPrivacy: "+str(self.privacy).rstrip('\n')
-        if (self.properties!=""):
-            retorno+="\nProperties: "+str(self.properties).rstrip('\n')
-        if (self.shares!=""):
-            retorno+="\nShares: "+str(self.shares).rstrip('\n')
-        if (self.source!=""):
-            retorno+="\nSource: "+str(self.source).rstrip('\n')
-        if (self.status_type!=""):
-            retorno+="\nStatus_type: "+str(self.status_type).rstrip('\n')
-        if (self.targeting!=""):
-            retorno+="\nTargeting: "+str(self.targeting).rstrip('\n')
-        if (self.to!=""):
-            retorno+="\nTo: "+"; ".join(str(u) for u in self.to).rstrip('\n')
-        if (self.type!=""):
-            retorno+="\nType: "+str(self.type).rstrip('\n')
-        if (self.updated_time!=""):
-            retorno+="\nUpdated_time: "+str(self.updated_time).rstrip('\n')
-        if (self.with_tags!=""):
-            retorno+="\nWith_tags: "+"; ".join(str(u) for u in self.with_tags).rstrip('\n')
-        return retorno+"]\n\n"
+        dic=self.__dict__
+        lista=list()
+        for key in dic:
+         lista.append(key)
+        for key in lista:
+         if dic[key]==None or dic[key]=="":
+             del dic[key]
+        return "POST: "+str(dic)
 
 
 
     def createListFromData(posts, limit, dateMin="", dateMax=""):
         lista = list() #lista de posts a ser retornada
         while(posts["data"] and len(posts["data"])>0): #Enquanto houver posts a serem lidos:
+            print(len(lista))
             for p in posts['data']:
+                print(len(lista))
                 if (dateMin!="" and parse(p["created_time"]).replace(tzinfo=None)<dateMin):
                     #O facebook ordena os postrs por data decrescente. Então se temos um post cuja data é menor do que DateMin, daquele post em diante não terá nenhum post que iremos querer
                     return lista
@@ -207,8 +233,92 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
                 if (len(lista)>=limit and limit!=-1):
                     return lista
             #Pega a próxima página de posts
-            posts=requests.get(posts["paging"]["next"]).json()
+            i=0
+            while (i<100):
+                try:
+                    posts=requests.get(posts["paging"]["next"],timeout=(10, 10)).json()
+                    break
+                except:
+                    print("erro "+str(i))
+                    i=i+1
+
+            print(len(lista))
         return lista
 
 
+    def postComment(self, message, token):
+        if (token==None):
+            token=_Settings.token
+        r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/comments?message="+message+"&access_token="+token).json()
+
+    def getLikes(self,token=None):
+         if (token==None):
+            token=_Settings.token
+         #print("token="+str(token))
+         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def postLike(self,token=None):
+         if (token==None):
+            token=_Settings.token
+         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         return str(r)
+
+    def getReactions(self,token=None):
+         if (token==None):
+            token=_Settings.token
+         #print("token="+str(token))
+         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/reactions?&access_token="+token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(a)
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getAttachments(self,token=None):
+         if (token==None):
+            token=_Settings.token
+         #print("token="+str(token))
+         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Attachments?&access_token="+token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Story_Attachment(a))
+             if ("paging" in r and "next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def getComments(self,token=None):
+         if (token==None):
+            token=_Settings.token
+
+         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token).json()
+         lista=list()
+         while ("data" in r and len(r["data"])>0):
+             for a in r["data"]:
+                 lista.append(Comment(a))
+             if ("next" in r["paging"]):
+                 r=requests.get(r["paging"]["next"]).json()
+             else:
+                 break
+         return lista
+
+    def postComment(self, message, token=None):
+        if (token==None):
+            token=_Settings.token
+        return requests.post("https://graph.facebook.com/v2.6/"+self.id+"/comments?message="+message+"&access_token="+token).json()
 
