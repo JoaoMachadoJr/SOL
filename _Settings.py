@@ -3,7 +3,7 @@ import sys
 import pip
 import urllib.request
 import requests
-import Utility
+import _Utility
 from shutil import copyfile
 
 #Variaveis globais

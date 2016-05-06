@@ -1,12 +1,13 @@
 __author__ = 'Joao'
 import requests
-import _User_Facebook
+import _User
 from dateutil.parser import parse
 from _Facebook_Classes import *
 import _Settings
+import _Utility
 
 class Post_Facebook: #Classe para os POSTs das redes sociais
-    def __init__(self, id=-1, created_date="", message="", story="", dictionary=dict()):
+    def __init__(self, id=-1, created_time="", message="", story="", dictionary=dict()):
         '''self.id é o ID do post. Campo id
         self.data é a data de criação. Campo create_date
         self.message é o texto escrito pelo usuário. Campo message
@@ -37,7 +38,8 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
         self.with_tags: Usuários marcados com o marcador 'com'. (Exemplo: Maria postou uma foto COM joão)
         '''
         self.id=id
-        self.created_date = created_date
+        self.admin_creator=list()
+        self.created_time = created_time
         self.message=message
         self.story = story
         self.caption=""
@@ -56,7 +58,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
         self.picture=""
         self.place=Place()
         self.privacy = Privacy()
-        self.properties=dict()  #Dictonary fields: 'text', 'name', 'href';
+        self.properties=list()
         self.shares=0
         self.source=""
         self.status_type="" #enum{mobile_status_update, created_note, added_photos, added_video, shared_story, created_group, created_event, wall_post, app_created_story, published_story, tagged_in_photo, approved_friend}
@@ -68,67 +70,70 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
         if ("id" in dictionary):
              self.id=dictionary["id"]
         if ("admin_creator" in dictionary):
-         self.admin_creator=dictionary["admin_creator"]
+             for i in dictionary["admin_creator"]:
+                self.admin_creator.append(_User.User(dictionary=i))
         if ("application" in dictionary):
-         self.application=dictionary["application"]
+             self.application=dictionary["application"]
         if ("call_to_action" in dictionary):
-         self.call_to_action=dictionary["call_to_action"]
+             self.call_to_action=dictionary["call_to_action"]
         if ("caption" in dictionary):
-         self.caption=dictionary["caption"]
+             self.caption=dictionary["caption"]
         if ("created_time" in dictionary):
-         self.created_time=dictionary["created_time"]
+             self.created_time=dictionary["created_time"]
         if ("description" in dictionary):
-         self.description=dictionary["description"]
+             self.description=dictionary["description"]
         if ("feed_targeting" in dictionary):
-         self.feed_targeting=dictionary["feed_targeting"]
+             self.feed_targeting=Feed_Targeting(dictionary=dictionary["feed_targeting"])
         if ("from" in dictionary):
-         self.from_=dictionary["from"]
+             self.from_=_User.User(dictionary["from"])
         if ("icon" in dictionary):
-         self.icon=dictionary["icon"]
+             self.icon=dictionary["icon"]
         if ("is_hidden" in dictionary):
-         self.is_hidden=dictionary["is_hidden"]
+             self.is_hidden=dictionary["is_hidden"]
         if ("is_published" in dictionary):
-         self.is_published=dictionary["is_published"]
+             self.is_published=dictionary["is_published"]
         if ("link" in dictionary):
-         self.link=dictionary["link"]
+             self.link=dictionary["link"]
         if ("message" in dictionary):
-         self.message=dictionary["message"]
+             self.message=dictionary["message"]
         if ("message_tags" in dictionary):
-         self.message_tags=dictionary["message_tags"]
+             self.message_tags=dictionary["message_tags"]
         if ("name" in dictionary):
-         self.name=dictionary["name"]
+             self.name=dictionary["name"]
         if ("object_id" in dictionary):
-         self.object_id=dictionary["object_id"]
+             self.object_id=dictionary["object_id"]
         if ("parent_id" in dictionary):
-         self.parent_id=dictionary["parent_id"]
+             self.parent_id=dictionary["parent_id"]
         if ("picture" in dictionary):
-         self.picture=dictionary["picture"]
+             self.picture=dictionary["picture"]
         if ("place" in dictionary):
-         self.place=dictionary["place"]
+             self.place=dictionary["place"]
         if ("privacy" in dictionary):
-         self.privacy=dictionary["privacy"]
+             self.privacy=dictionary["privacy"]
         if ("properties" in dictionary):
-         self.properties=dictionary["properties"]
+             for i in dictionary["properties"]:
+                self.properties.append(Properties(dictionary=i))
         if ("shares" in dictionary):
-         self.shares=dictionary["shares"]
+             self.shares=dictionary["shares"]
         if ("source" in dictionary):
-         self.source=dictionary["source"]
+             self.source=dictionary["source"]
         if ("status_type" in dictionary):
-         self.status_type=dictionary["status_type"]
+             self.status_type=dictionary["status_type"]
         if ("story" in dictionary):
-         self.story=dictionary["story"]
+             self.story=dictionary["story"]
         if ("story_tags" in dictionary):
-         self.story_tags=dictionary["story_tags"]
+             self.story_tags=dictionary["story_tags"]
         if ("targeting" in dictionary):
-         self.targeting=dictionary["targeting"]
+             self.targeting=dictionary["targeting"]
         if ("to" in dictionary):
-         self.to=dictionary["to"]
+             for i in dictionary["to"]:
+                self.to.append(_User.User(dictionary=i))
         if ("type" in dictionary):
-         self.type=dictionary["type"]
+             self.type=dictionary["type"]
         if ("updated_time" in dictionary):
-         self.updated_time=dictionary["updated_time"]
+             self.updated_time=dictionary["updated_time"]
         if ("with_tags" in dictionary):
-         self.with_tags=dictionary["with_tags"]
+             self.with_tags=dictionary["with_tags"]
 
     def __str__(self):
         dic=self.__dict__
@@ -167,7 +172,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
                 if ("feed_targeting") in p:
                     post.feed_targeting=Feed_Targeting(p["feed_targeting"])
                 if ("from") in p:
-                    u = _User_Facebook.User_Facebook()
+                    u = _User.User()
                     u.name=p["from"]["name"]
                     u.id=p["from"]["id"]
                     post.created_by=u
@@ -181,7 +186,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
                     post.link=p["link"]
                 if ("message_tags") in p:
                     for m in p["message_tags"]:
-                        u = _User_Facebook.User_Facebook()
+                        u = _User.User()
                         if ("name") in m:
                             u.name=m["name"]
                         if ("id") in m:
@@ -213,7 +218,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
                     post.targeting=Targeting(p["targeting"])
                 if ("to") in p:
                     for user in p["to"]["data"]:
-                        u = _User_Facebook.User_Facebook()
+                        u = _User.User()
                         u.name=user["name"]
                         u.id=user["id"]
                         post.to.append(u)
@@ -223,7 +228,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
                     post.updated_time=p["updated_time"]
                 if ("with_tags") in p:
                     for user in p["with_tags"]["data"]:
-                        u = _User_Facebook.User_Facebook()
+                        u = _User.User()
                         u.name=user["name"]
                         u.id=user["id"]
                         post.with_tags.append(u)
@@ -246,79 +251,101 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
         return lista
 
 
-    def postComment(self, message, token):
-        if (token==None):
-            token=_Settings.token
-        r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/comments?message="+message+"&access_token="+token).json()
 
-    def getLikes(self,token=None):
+    def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-    def postLike(self,token=None):
+    def getLikesCount(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"?fields=likes.summary(true)&access_token="+token, timeout=timeout).json()
+         return r["likes"]["summary"]["total_count"]
+
+
+    def postLike(self,token=None, timeout=(5,5), maxRetries=50):
+         if (token==None):
+            token=_Settings.token
+         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          return str(r)
 
-    def getReactions(self,token=None):
+    def getReactions(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/reactions?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/reactions?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-    def getAttachments(self,token=None):
+    def getAttachments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Attachments?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Attachments?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Story_Attachment(a))
              if ("paging" in r and "next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-    def getComments(self,token=None):
+    def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
 
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Comment(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-    def postComment(self, message, token=None):
-        if (token==None):
+    def postComment(self, message, token=None, Localpath=None, FileURL=None):
+         if (token==None):
             token=_Settings.token
-        return requests.post("https://graph.facebook.com/v2.6/"+self.id+"/comments?message="+message+"&access_token="+token).json()
+         if (Localpath==None and FileURL==None):
+             params={"message":message}
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
+             s=requests.post(graphurl, params=params).json()
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
+
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
+             files={'file':open(Localpath,'rb')}
+             params={"message":message}
+             s=requests.post(graphurl, files=files,params=params).json()
+
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
+             params={"message":message}
+             params["attachment_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
+
 

@@ -1,9 +1,12 @@
 __author__ = 'Joao'
-import _User_Facebook
+import _User
 import requests
 import _Settings
 import os
 import _Post_Facebook
+import _Utility
+from dateutil.parser import parse
+
 
 class Feed_Targeting:
     def __init__(self, dictionary=None):
@@ -161,6 +164,7 @@ class Achievements:
         self.no_feed_story=""
         self.photos=""
         self.place=""
+        self.from_=""
         self.publish_time=""
         self.ref=""
         self.start_time=""
@@ -175,7 +179,7 @@ class Achievements:
         if ("end_time" in dictionary):
             self.end_time=dictionary["end_time"]
         if ("from" in dictionary):
-            self.from_=_User_Facebook.User_Facebook(dictionary=dictionary["from"])
+            self.from_=_User.User(dictionary=dictionary["from"])
         if ("image" in dictionary):
             self.image=dictionary["image"]
         if ("is_explicitly_shared" in dictionary):
@@ -194,6 +198,8 @@ class Achievements:
             self.publish_time=dictionary["publish_time"]
         if ("ref" in dictionary):
             self.ref=dictionary["ref"]
+        if ("from" in dictionary):
+            self.from_=_User.User(dictionary=dictionary["from"])
         if ("start_time" in dictionary):
             self.start_time=dictionary["start_time"]
         if ("tags" in dictionary):
@@ -211,41 +217,44 @@ class Achievements:
                  del dic[key]
          return "ARCHIEVEMENT: "+str(dic)
 
-    def getComments(self,token=None):
+    def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
 
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_hide,can_like,can_reply_privately,comment_count,created_time,from,like_count,message,message_tags,object,parent,private_reply_conversation,user_likes,message,is_hidden&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_hide,can_like,can_reply_privately,comment_count,created_time,from,like_count,message,message_tags,object,parent,private_reply_conversation,user_likes,message,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Comment(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-    def getLikes(self,token=None):
+
+    def postComment(self, message, token=None, Localpath=None,FileURL=None,timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
-         lista=list()
-         while ("data" in r and len(r["data"])>0):
-             for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
-             if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
-             else:
-                 break
-         return lista
+             token=_Settings.token
+         if (Localpath==None and FileURL==None):
+             params={"message":message}
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
+             s=requests.post(graphurl, params=params).json()
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
 
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
+             files={'file':open(Localpath,'rb')}
+             params={"message":message}
+             s=requests.post(graphurl, files=files,params=params).json()
 
-    def postComment(self, message, token):
-        if (token==None):
-            token=_Settings.token
-        r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/comments?message=\""+message+"\"&access_token="+token).json()
-
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
+             params={"message":message}
+             params["attachment_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
 class Adaccountgroups:
      def __init__(self, dictionary=dict()):
          self.id=""
@@ -579,6 +588,10 @@ class Group:
              self.updated_time=dictionary["updated_time"]
          if ("cover_url" in dictionary):
              self.cover_url=dictionary["cover_url"]
+         if ("administrator" in dictionary):
+             self.administrator=dictionary["administrator"]
+         if ("unread" in dictionary):
+             self.unread=dictionary["unread"]
 
 
      def __str__(self):
@@ -591,191 +604,199 @@ class Group:
                  del dic[key]
          return "GROUP: "+str(dic)
 
-     def getAdmins(self,token=None):
+     def getAdmins(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/admins?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/admins?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getDocs(self,token=None):
+     def getDocs(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/docs?fields=id,from,subject,message,icon,created_time,updated_time,revision,can_edit,can_delete&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/docs?fields=id,from,subject,message,icon,created_time,updated_time,revision,can_edit,can_delete&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Group_Doc(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getEvents(self,token=None):
+     def getEvents(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/docs?fields=id,can_guests_invite,cover,description,end_time,guest_list_enabled,is_page_owned,is_viewer_admin,name,owner,parent_group,start_time,ticket_uri,timezone,updated_time&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/docs?fields=id,can_guests_invite,cover,description,end_time,guest_list_enabled,is_page_owned,is_viewer_admin,name,owner,parent_group,start_time,ticket_uri,timezone,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Events(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getAlbums(self,token=None):
+     def getAlbums(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/albums?fields=id,can_upload,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/albums?fields=id,can_upload,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Albums(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getFiles(self,token=None):
+     def getFiles(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/files?fields=id,from,group,download_link,updated_time&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/files?fields=id,from,group,download_link,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getPosts(self, token=None, dateMin="", dateMax="", limit=100):
+     def getPosts(self, token=None, dateMin="", dateMax="", limit=100, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         i=0
-         while (i<100):
-                     try:
-                          r=requests.get("https://graph.facebook.com/v2.5/"+self.id+"/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=100&access_token="+token,timeout=(5,5)).json()
-                          break
-                     except:
-                          i=i+1
-         lista=list()
-         while ("data" in r and len(r["data"])>0):
 
-             for a in r["data"]:
-                 lista.append(_Post_Facebook.Post_Facebook(a))
-             if ("next" in r["paging"]):
+         params={}
+         if (token == None):
+            token = _Settings.token
+         if (dateMin!="" and dateMax!="" and dateMin > dateMax):
+            raise Exception("Cannot use dateMin > dateMax")
+         if (dateMax != ""):
+            params["until"]=dateMax
 
-                 i=0
-                 while (i<100):
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.5/"+self.id+"/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=100&access_token="+token, timeout=timeout).json()
 
-                     try:
-                         r=requests.get(r["paging"]["next"], timeout=(5,5)).json()
-                         break
-                     except:
-                         i=i+1
-
-             else:
-                 break
+         lista = list()
+         while ("data" in r and len(r["data"]) > 0):
+            for a in r["data"]:
+                post=_Post_Facebook.Post_Facebook(dictionary=a)
+                if ((len(lista)==limit) or (dateMin!="" and parse(post.created_time).replace(tzinfo=None)<dateMin)):
+                    return lista
+                lista.append(post)
+            if ("next" in r["paging"]):
+                r = _Utility.prepareRequest(maxRetries).get(r["paging"]["next"], timeout=timeout).json()
+            else:
+                break
          return lista
 
-     def postPost (self,message=" ", token=None):
+     def postPost (self,message=" ", token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         url="https://graph.facebook.com/v2.6/"+self.id+"/feed?message="+message+"&access_token="+str(token)
-         s=requests.post(url).json()
+         params={"message":message}
+         url="https://graph.facebook.com/v2.6/"+self.id+"/feed?&access_token="+str(token)
+         s=requests.post(url,params=params).json()
          return s
 
-     def getMembers(self,token=None):
+     def getMembers(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/members?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/members?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getPhotos(self, token=None):
+     def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Photo(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def postPhoto(self, path,message=" ", token=None):
+     def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
          if (token==None):
              token=_Settings.token
-         random_string = _Settings.Utility.randomword(50)
-         extension=os.path.splitext(path)[1]
-         file= _Settings.copyfile(path,random_string+extension)
-         url="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
-         files={'file':open(path,'rb')}
-         params={"message":message}
-         s=requests.post(url, files=files,params=params).json()
-         os.remove(file)
-         return s
+         if (Localpath==None and FileURL==None):
+             raise Exception("You should use a LocalPath or a URL")
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
+             files={'file':open(Localpath,'rb')}
+             params={"description":message}
+             s=requests.post(graphurl, files=files,params=params).json()
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
+             params={"description":message}
+             params["file_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
 
-     def getVideos(self, token=None):
+     def getVideos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Videos?fields=id,created_time,description,embed_html,format,from,icon,picture,privacy,source,updated_time&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Videos?fields=id,created_time,description,embed_html,format,from,icon,picture,privacy,source,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Video(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-
-
-     def postVideo(self, path,message=" ", token=None):
+     def postVideo(self,message=" ", token=None, Localpath=None, FileURL=None):
          if (token==None):
              token=_Settings.token
+         if (Localpath==None and FileURL==None):
+             raise Exception("You should use a LocalPath or a URL")
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
 
 
-         random_string = _Settings.Utility.randomword(50)
-         extension=os.path.splitext(path)[1]
-         file= _Settings.copyfile(path,random_string+extension)
-         url="https://graph-video.facebook.com/"+self.id+"/videos?access_token="+str(token)
-         files={'file':open(path,'rb')}
-         params={"description":message}
-         s=requests.post(url, files=files,params=params).json()
-         os.remove(file)
+             graphurl="https://graph-video.facebook.com/"+self.id+"/videos?access_token="+str(token)
+             files={'file':open(Localpath,'rb')}
+             params={"description":message}
+             s=requests.post(graphurl, files=files,params=params).json()
 
-         return s
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph-video.facebook.com/"+self.id+"/videos?access_token="+str(token)
+             params={"description":message}
+             params["file_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
 
 class Photo:
      def __init__(self, dictionary=dict()):
@@ -786,6 +807,7 @@ class Photo:
          self.can_delete=""
          self.can_tag=""
          self.created_time=""
+         self.event=""
          self.from_=""
          self.height=""
          self.icon=""
@@ -801,7 +823,7 @@ class Photo:
          if ("id" in dictionary):
              self.id=dictionary["id"]
          if ("album" in dictionary):
-             self.album=dictionary["album"]
+             self.album=Albums(dictionary["album"])
          if ("backdated_time" in dictionary):
              self.backdated_time=dictionary["backdated_time"]
          if ("backdated_time_granularity" in dictionary):
@@ -812,6 +834,8 @@ class Photo:
              self.can_tag=dictionary["can_tag"]
          if ("created_time" in dictionary):
              self.created_time=dictionary["created_time"]
+         if ("event" in dictionary):
+             self.created_time=Events(dictionary["event"])
          if ("from" in dictionary):
              self.from_=dictionary["from"]
          if ("height" in dictionary):
@@ -848,17 +872,17 @@ class Photo:
                  del dic[key]
          return "PHOTO: "+str(dic)
 
-     def getInfo(self, token=None):
+     def getInfo(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
          c=Photo(dictionary=r)
          return c;
 
-     def delete(self,token=None):
+     def delete(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token+"&method=delete").json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token+"&method=delete", timeout=timeout).json()
          return str(r)
 
 class Albums:
@@ -893,7 +917,7 @@ class Albums:
          if ("event" in dictionary):
              self.event=Events(dictionary=dictionary["event"])
          if ("from" in dictionary):
-             self.from_=_User_Facebook.User_Facebook(dictionary= dictionary["from"])
+             self.from_=_User.User(dictionary= dictionary["from"])
          if ("link" in dictionary):
              self.link=dictionary["link"]
          if ("location" in dictionary):
@@ -920,75 +944,97 @@ class Albums:
                  del dic[key]
          return "ALBUMS: "+str(dic)
 
-     def getPhotos(self, token=None):
+     def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Photo(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def postPhoto(self, path,message=" ", token=None):
+     def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
          if (token==None):
              token=_Settings.token
+         if (Localpath==None and FileURL==None):
+             raise Exception("You should use a LocalPath or a URL")
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
+             files={'file':open(Localpath,'rb')}
+             params={"description":message}
+             s=requests.post(graphurl, files=files,params=params).json()
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
+             params={"description":message}
+             params["file_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
 
-
-         random_string = _Settings.Utility.randomword(50)
-         extension=os.path.splitext(path)[1]
-         file= _Settings.copyfile(path,random_string+extension)
-         url="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
-         files={'file':open(path,'rb')}
-         params={"message":message}
-         s=requests.post(url, files=files,params=params).json()
-         os.remove(file)
-         return s
-
-     def getLikes(self,token=None):
+     def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
-     def getComments(self,token=None):
+     
+     def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
 
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Comment(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def postLike(self,token=None):
+     def postLike(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          return str(r)
 
-     def postComment(self, message, token):
-        if (token==None):
+     def postComment(self, message, token=None, Localpath=None, FileURL=None):
+         if (token==None):
             token=_Settings.token
-        r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/comments?message=\""+message+"\"&access_token="+token).json()
+         if (Localpath==None and FileURL==None):
+             params={"message":message}
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
+             s=requests.post(graphurl, params=params).json()
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
 
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
+             files={'file':open(Localpath,'rb')}
+             params={"message":message}
+             s=requests.post(graphurl, files=files,params=params).json()
+
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
+             params={"message":message}
+             params["attachment_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
 
 class Apprequests:
      def __init__(self, dictionary=dict()):
@@ -1012,13 +1058,13 @@ class Apprequests:
          if ("data" in dictionary):
              self.data=dictionary["data"]
          if ("from" in dictionary):
-             self.from_=dictionary["from"]
+             self.from_=_User.User(dictionary=dictionary["from"])
          if ("message" in dictionary):
              self.message=dictionary["message"]
          if ("object" in dictionary):
              self.object=dictionary["object"]
          if ("to" in dictionary):
-             self.to=dictionary["to"]
+             self.to=_User.User(dictionary["to"])
 
 
      def __str__(self):
@@ -1333,7 +1379,8 @@ class Page:
              self.were_here_count=dictionary["were_here_count"]
          if ("written_by" in dictionary):
              self.written_by=dictionary["written_by"]
-
+         if ("created_time" in dictionary):
+             self.created_time=dictionary["created_time"]
 
      def __str__(self):
          dic=self.__dict__
@@ -1346,322 +1393,336 @@ class Page:
          return "PAGE: "+str(dic)
 
 
-     def getAdminNotes(self,Pagetoken=None):
+     def getAdmin_Notes(self,Pagetoken=None, timeout=(5,5), maxRetries=50):
          if (Pagetoken==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (Pagetoken==None):
             Pagetoken=self.access_token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/admin_notes?&access_token="+Pagetoken).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/admin_notes?&access_token="+Pagetoken, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getAlbums(self,token=None):
+     def getAlbums(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/albums?fields=id,can_upload,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/albums?fields=id,can_upload,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Albums(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def postAlbum(self,token=None, name="MyAlbum", message=""):
+     def postAlbum(self,token=None, name="MyAlbum", message="", timeout=(5,5), maxRetries=50):
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
             token=self.access_token
          params={"message":message,"name":name}
-         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/albums?access_token="+token,params=params).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"/albums?access_token="+token,params=params, timeout=timeout).json()
          return r
 
-     def getBlocked(self,token=None):
+     def getBlocked(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
             token=self.access_token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/blocked?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/blocked?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getEvents(self,token=None):
+     def getEvents(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/events?fields=id,can_guests_invite,cover,description,end_time,guest_list_enabled,is_page_owned,is_viewer_admin,name,owner,parent_group,start_time,ticket_uri,timezone,updated_time&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/events?fields=id,can_guests_invite,cover,description,end_time,guest_list_enabled,is_page_owned,is_viewer_admin,name,owner,parent_group,start_time,ticket_uri,timezone,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Events(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getFeatured_Videos_Collection(self,token=None):
+     def getFeatured_Videos_Collection(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
             token=self.access_token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/featured_videos_collection?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/featured_videos_collection?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Video(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getGlobal_Brand_Children(self,token=None):
+     def getGlobal_Brand_Children(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Global_Brand_Children?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Global_Brand_Children?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Page(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getInstagram_Accounts(self,token=None):
+     def getInstagram_Accounts(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
             token=self.access_token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Instagram_Accounts?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Instagram_Accounts?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getInstant_Articles(self,token=None):
+     def getInstant_Articles(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Instant_Articles?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Instant_Articles?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getLabels(self,token=None):
+     def getLabels(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
             token=self.access_token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/labels?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/labels?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getLikedPages(self,token=None):
+     def getLikedPages(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/likes?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getLive_videos(self,token=None):
+     def getLive_videos(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
             token=self.access_token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/live_videos?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/live_videos?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Live_Videos(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getLife_Events(self,token=None):
+     def getLife_Events(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/milestones?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/milestones?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Life_Event(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getPhotos(self,token=None):
+     def getPhotos(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Photo(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def postPhoto(self, path,message=" ", token=None):
+     def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
          if (token==None):
              token=_Settings.token
-         random_string = _Settings.Utility.randomword(50)
-         extension=os.path.splitext(path)[1]
-         file= _Settings.copyfile(path,random_string+extension)
-         url="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
-         files={'file':open(path,'rb')}
-         params={"message":message}
-         s=requests.post(url, files=files,params=params).json()
-         os.remove(file)
-         return s
+         if (Localpath==None and FileURL==None):
+             raise Exception("You should use a LocalPath or a URL")
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
+             files={'file':open(Localpath,'rb')}
+             params={"description":message}
+             s=requests.post(graphurl, files=files,params=params).json()
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
+             params={"description":message}
+             params["file_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
 
-     def getPicture(self,token=None):
+
+     def getPicture(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Picture?fields=height,is_silhouette,url,width&redirect=0&type=large&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Picture?fields=height,is_silhouette,url,width&redirect=0&type=large&access_token="+token, timeout=timeout).json()
          return r["data"]["url"]
 
-     def getPlace_Topics(self,token=None):
+     def getPlace_Topics(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/place_topics?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/place_topics?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getRoles(self,token=None):
+     def getRoles(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
             token=self.access_token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/roles?access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/roles?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(a)
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getVideos(self,token=None):
+     def getVideos(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/videos?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/videos?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Video(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getPosts(self, token=None, dateMin="", dateMax="", limit=100):
+     def getPosts(self, token=None, dateMin="", dateMax="", limit=100, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         i=0
-         while (i<100):
-                     try:
-                          r=requests.get("https://graph.facebook.com/v2.5/"+self.id+"/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=100&access_token="+token,timeout=(5,5)).json()
-                          break
-                     except:
-                          i=i+1
-         lista=list()
-         while ("data" in r and len(r["data"])>0):
-             for a in r["data"]:
-                 lista.append(_Post_Facebook.Post_Facebook(a))
-             if ("next" in r["paging"]):
-                 i=0
-                 while (i<100):
-                     try:
-                         r=requests.get(r["paging"]["next"], timeout=(5,5)).json()
-                         break
-                     except:
-                         i=i+1
-             else:
-                 break
+
+         params={}
+         if (token == None):
+            token = _Settings.token
+         if (dateMin!="" and dateMax!="" and dateMin > dateMax):
+            raise Exception("Cannot use dateMin > dateMax")
+         if (dateMax != ""):
+            params["until"]=dateMax
+
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.5/"+self.id+"/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=100&access_token="+token, timeout=timeout).json()
+
+         lista = list()
+         while ("data" in r and len(r["data"]) > 0):
+            for a in r["data"]:
+                post=_Post_Facebook.Post_Facebook(dictionary=a)
+                if ((len(lista)==limit) or (dateMin!="" and parse(post.created_time).replace(tzinfo=None)<dateMin)):
+                    return lista
+                lista.append(post)
+            if ("next" in r["paging"]):
+                r = _Utility.prepareRequest(maxRetries).get(r["paging"]["next"], timeout=timeout).json()
+            else:
+                break
          return lista
 
      def postPost (self,message=" ", token=None):
          if (token==None):
              token=_Settings.token
-         url="https://graph.facebook.com/v2.6/"+self.id+"/feed?message="+message+"&access_token="+str(token)
-         s=requests.post(url).json()
+         params={"message":message}
+         url="https://graph.facebook.com/v2.6/"+self.id+"/feed?&access_token="+str(token)
+         s=requests.post(url,params=params).json()
          return s
 
-     def postVideo(self, path,message=" ", token=None):
+     def postVideo(self,message=" ", token=None, Localpath=None, FileURL=None):
          if (token==None):
              token=_Settings.token
-         random_string = _Settings.Utility.randomword(50)
-         extension=os.path.splitext(path)[1]
-         file= _Settings.copyfile(path,random_string+extension)
-         url="https://graph-video.facebook.com/"+self.id+"/videos?access_token="+str(token)
-         files={'file':open(path,'rb')}
-         params={"description":message}
-         s=requests.post(url, files=files,params=params).json()
-         os.remove(file)
-
-         return s
+         if (Localpath==None and FileURL==None):
+             raise Exception("You should use a LocalPath or a URL")
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
 
 
+             graphurl="https://graph-video.facebook.com/"+self.id+"/videos?access_token="+str(token)
+             files={'file':open(Localpath,'rb')}
+             params={"description":message}
+             s=requests.post(graphurl, files=files,params=params).json()
 
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph-video.facebook.com/"+self.id+"/videos?access_token="+str(token)
+             params={"description":message}
+             params["file_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
 
 
 class Events:
@@ -1711,7 +1772,8 @@ class Events:
              self.timezone=dictionary["timezone"]
          if ("updated_time" in dictionary):
              self.updated_time=dictionary["updated_time"]
-
+         if ("rsvp_status" in dictionary):
+             self.rsvp_status=dictionary["rsvp_status"]
 
      def __str__(self):
          dic=self.__dict__
@@ -1724,237 +1786,250 @@ class Events:
          return "EVENT: "+str(dic)
 
 
-     def getAdmins(self,token=None):
+     def getAdmins(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/admins?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/admins?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getAttending(self,token=None):
+     def getAttending(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Attending?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Attending?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getDeclined(self,token=None):
+     def getDeclined(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/declined?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/declined?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getInterested(self,token=None):
+     def getInterested(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/interested?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/interested?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getLive_Videos(self,token=None):
+     def getLive_Videos(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/live_videos?fields=id,broadcast_start_time,creation_time,description,from,is_reference_only,live_views,permalink_url,seconds_left,status,title,total_views,video&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/live_videos?fields=id,broadcast_start_time,creation_time,description,from,is_reference_only,live_views,permalink_url,seconds_left,status,title,total_views,video&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Live_Videos(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getMaybe(self,token=None):
+     def getMaybe(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/maybe?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/maybe?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getNoReply(self,token=None):
+     def getNoReply(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/noreply?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/noreply?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getRoles(self,token=None):
+     def getRoles(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/noles?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/noles?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getPicture(self,token=None):
+     def getPicture(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Picture?fields=height,is_silhouette,url,width&redirect=0&type=large&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Picture?fields=height,is_silhouette,url,width&redirect=0&type=large&access_token="+token, timeout=timeout).json()
          return r["data"]["url"]
 
-     def getComments(self,token=None):
+     def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Comment(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getPhotos(self, token=None):
+     def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Photo(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getVideos(self, token=None):
+     def getVideos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Videos?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Videos?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Video(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
 
-
-     def postVideo(self, path,message=" ", token=None):
+     def postVideo(self,message=" ", token=None, Localpath=None, FileURL=None):
          if (token==None):
              token=_Settings.token
+         if (Localpath==None and FileURL==None):
+             raise Exception("You should use a LocalPath or a URL")
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
 
 
-         random_string = _Settings.Utility.randomword(50)
-         extension=os.path.splitext(path)[1]
-         file= _Settings.copyfile(path,random_string+extension)
-         url="https://graph-video.facebook.com/"+self.id+"/videos?access_token="+str(token)
-         files={'file':open(path,'rb')}
-         params={"description":message}
-         s=requests.post(url, files=files,params=params).json()
-         os.remove(file)
+             graphurl="https://graph-video.facebook.com/"+self.id+"/videos?access_token="+str(token)
+             files={'file':open(Localpath,'rb')}
+             params={"description":message}
+             s=requests.post(graphurl, files=files,params=params).json()
 
-         return s
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph-video.facebook.com/"+self.id+"/videos?access_token="+str(token)
+             params={"description":message}
+             params["file_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
 
-     def postPhoto(self, path,message=" ", token=None):
+     def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
          if (token==None):
              token=_Settings.token
-         random_string = _Settings.Utility.randomword(50)
-         extension=os.path.splitext(path)[1]
-         file= _Settings.copyfile(path,random_string+extension)
-         url="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
-         files={'file':open(path,'rb')}
-         params={"message":message}
-         s=requests.post(url, files=files,params=params).json()
-         os.remove(file)
-         return s
+         if (Localpath==None and FileURL==None):
+             raise Exception("You should use a LocalPath or a URL")
+         if (Localpath!=None and FileURL!=None):
+             raise Exception("You cannot use a LocalPath and a URL at same time. Use only one of them")
+         if (Localpath!=None and FileURL==None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
+             files={'file':open(Localpath,'rb')}
+             params={"description":message}
+             s=requests.post(graphurl, files=files,params=params).json()
+             return s
+         if (Localpath==None and FileURL!=None):
+             graphurl="https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+str(token)
+             params={"description":message}
+             params["file_url"]=FileURL
+             return requests.post(graphurl,params=params).json()
 
      def postPost (self,message=" ", token=None):
          if (token==None):
              token=_Settings.token
-         url="https://graph.facebook.com/v2.6/"+self.id+"/feed?message="+message+"&access_token="+str(token)
-         s=requests.post(url).json()
+         params={"message":message}
+         url="https://graph.facebook.com/v2.6/"+self.id+"/feed?&access_token="+str(token)
+         s=requests.post(url,params=params).json()
          return s
 
-     def getPosts(self, token=None, dateMin="", dateMax="", limit=100):
+     def getPosts(self, token=None, dateMin="", dateMax="", limit=100, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         i=0
-         while (i<100):
-                     try:
-                          r=requests.get("https://graph.facebook.com/v2.5/"+self.id+"/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=100&access_token="+token,timeout=(5,5)).json()
-                          break
-                     except:
-                          i=i+1
-         lista=list()
-         while ("data" in r and len(r["data"])>0):
-             for a in r["data"]:
-                 lista.append(_Post_Facebook.Post_Facebook(a))
-             if ("next" in r["paging"]):
-                 i=0
-                 while (i<100):
-                     try:
-                         r=requests.get(r["paging"]["next"], timeout=(5,5)).json()
-                         break
-                     except:
-                         i=i+1
-             else:
-                 break
+
+         params={}
+         if (token == None):
+            token = _Settings.token
+         if (dateMin!="" and dateMax!="" and dateMin > dateMax):
+            raise Exception("Cannot use dateMin > dateMax")
+         if (dateMax != ""):
+            params["until"]=dateMax
+
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.5/"+self.id+"/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=100&access_token="+token, timeout=timeout).json()
+
+         lista = list()
+         while ("data" in r and len(r["data"]) > 0):
+            for a in r["data"]:
+                post=_Post_Facebook.Post_Facebook(dictionary=a)
+                if ((len(lista)==limit) or (dateMin!="" and parse(post.created_time).replace(tzinfo=None)<dateMin)):
+                    return lista
+                lista.append(post)
+            if ("next" in r["paging"]):
+                r = _Utility.prepareRequest(maxRetries).get(r["paging"]["next"], timeout=timeout).json()
+            else:
+                break
          return lista
 
 class Live_Videos:
@@ -2010,31 +2085,31 @@ class Live_Videos:
                  del dic[key]
          return "LIVE_VIDEO: "+str(dic)
 
-     def getLikes(self,token=None):
+     def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
-     def getComments(self,token=None):
+     def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
 
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Comment(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
@@ -2146,7 +2221,7 @@ class Comment:
          if ("created_time" in dictionary):
              self.created_time=dictionary["created_time"]
          if ("from" in dictionary):
-             self.from_=_User_Facebook.User_Facebook(dictionary=dictionary["from"])
+             self.from_=_User.User(dictionary=dictionary["from"])
          if ("like_count" in dictionary):
              self.like_count=dictionary["like_count"]
          if ("message" in dictionary):
@@ -2177,53 +2252,54 @@ class Comment:
                  del dic[key]
          return "COMMENT: "+str(dic)
 
-     def getInfo(self, token=None):
+     def getInfo(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token, timeout=timeout).json()
          c=Comment(dictionary=r)
          return c;
 
-     def getLikes(self,token=None):
+     def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def postLike(self,token=None):
+     def postLike(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          return str(r)
 
-     def deleteLike(self,token=None):
+     def deleteLike(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
-         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token+"&method=delete").json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token+"&method=delete", timeout=timeout).json()
          return str(r)
 
-     def update(self,message=None, token=None):
+     def update(self,message=None, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          if message==None:
              message=self.message
-         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"?message="+message+"&access_token="+token).json()
+         params={"message":message}
+         r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token,params=params, timeout=timeout).json()
          return str(r)
 
-     def delete(self,token=None):
+     def delete(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          self.update(message=" ",token=token)
-         r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token+"&method=delete").json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token+"&method=delete", timeout=timeout).json()
          return str(r)
 
 class Story_Attachment:
@@ -2287,7 +2363,7 @@ class Education_Experience:
              self.type=dictionary["type"]
          if ("with" in dictionary):
              for user in dictionary["with"]:
-                 self.with_.append(_User_Facebook.User_Facebook(dictionary=dictionary["with"]))
+                 self.with_.append(_User.User(dictionary=dictionary["with"]))
          if ("year" in dictionary):
              self.year=Page(dictionary["year"])
 
@@ -2314,12 +2390,12 @@ class Experience:
          if ("description" in dictionary):
              self.description=dictionary["description"]
          if ("from" in dictionary):
-             self.from_=_User_Facebook.User_Facebook(dictionary= dictionary["from"])
+             self.from_=_User.User(dictionary= dictionary["from"])
          if ("name" in dictionary):
              self.name=dictionary["name"]
          if ("with" in dictionary):
              for user in dictionary["with"]:
-                self.with_.append(_User_Facebook.User_Facebook(dictionary=dictionary["with"]))
+                self.with_.append(_User.User(dictionary=dictionary["with"]))
 
 
      def __str__(self):
@@ -2444,7 +2520,7 @@ class Group_Doc:
          if ("id" in dictionary):
              self.id=dictionary["id"]
          if ("from" in dictionary):
-             self.from_=_User_Facebook.User_Facebook(dictionary["from"])
+             self.from_=_User.User(dictionary["from"])
          if ("subject" in dictionary):
              self.subject=dictionary["subject"]
          if ("message" in dictionary):
@@ -2472,14 +2548,14 @@ class Group_Doc:
              if dic[key]==None or dic[key]=="":
                  del dic[key]
          return "GROUP_DOC: "+str(dic)
-     def getGroup_Doc(self):
-         r=requests.get("https://graph.facebook.com/v2.6/me/Group_Doc?&access_token="+self.token).json()
+     def getGroup_Doc(self, token=None,timeout=(5,5), maxRetries=50):
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/me/Group_Doc?&access_token="+str(token), timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Group_Doc(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
@@ -2525,46 +2601,189 @@ class Life_Event:
                  del dic[key]
          return "LIFE_EVENT: "+str(dic)
 
-     def getPhotos(self, token=None):
+     def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
              token=_Settings.token
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Photo(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
-     def getLikes(self,token=None):
+     def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
          #print("token="+str(token))
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User_Facebook.User_Facebook(dictionary=a))
+                 lista.append(_User.User(dictionary=a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
-     def getComments(self,token=None):
+     def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
             token=_Settings.token
 
-         r=requests.get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token).json()
+         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
                  lista.append(Comment(a))
              if ("next" in r["paging"]):
-                 r=requests.get(r["paging"]["next"]).json()
+                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
                  break
          return lista
 
+class Admin_Note:
+     def __init__(self, dictionary=dict()):
+         self.body=""
+         self.from_=""
+         self.id=""
+         self.user=""
+         if ("body" in dictionary):
+             self.body=dictionary["body"]
+         if ("from" in dictionary):
+             self.from_=Page(dictionary["from"])
+         if ("id" in dictionary):
+             self.id=dictionary["id"]
+         if ("user" in dictionary):
+             self.user=_User.User(dictionary["user"])
+
+
+     def __str__(self):
+         dic=self.__dict__
+         lista=list()
+         for key in dic:
+             lista.append(key)
+         for key in lista:
+             if dic[key]==None or dic[key]=="":
+                 del dic[key]
+         return "ADMIN_NOTE: "+str(dic)
+
+class Age_Range:
+     def __init__(self, dictionary=dict()):
+         self.max=""
+         self.min=""
+         if ("max" in dictionary):
+             self.max=dictionary["max"]
+         if ("min" in dictionary):
+             self.min=dictionary["min"]
+
+
+     def __str__(self):
+         dic=self.__dict__
+         lista=list()
+         for key in dic:
+             lista.append(key)
+         for key in lista:
+             if dic[key]==None or dic[key]=="":
+                 del dic[key]
+         return "AGE_RANGE: "+str(dic)
+
+class Currency:
+     def __init__(self, dictionary=dict()):
+         self.currency_offset=""
+         self.usd_exchange=""
+         self.usd_exchange_inverse=""
+         self.user_currency=""
+         if ("currency_offset" in dictionary):
+             self.currency_offset=dictionary["currency_offset"]
+         if ("usd_exchange" in dictionary):
+             self.usd_exchange=dictionary["usd_exchange"]
+         if ("usd_exchange_inverse" in dictionary):
+             self.usd_exchange_inverse=dictionary["usd_exchange_inverse"]
+         if ("user_currency" in dictionary):
+             self.user_currency=dictionary["user_currency"]
+
+
+     def __str__(self):
+         dic=self.__dict__
+         lista=list()
+         for key in dic:
+             lista.append(key)
+         for key in lista:
+             if dic[key]==None or dic[key]=="":
+                 del dic[key]
+         return "CURRENCY: "+str(dic)
+
+class User_Device:
+     def __init__(self, dictionary=dict()):
+         self.hardware=""
+         self.os=""
+         if ("hardware" in dictionary):
+             self.hardware=dictionary["hardware"]
+         if ("os" in dictionary):
+             self.os=dictionary["os"]
+
+
+     def __str__(self):
+         dic=self.__dict__
+         lista=list()
+         for key in dic:
+             lista.append(key)
+         for key in lista:
+             if dic[key]==None or dic[key]=="":
+                 del dic[key]
+         return "USER_DEVICE: "+str(dic)
+
+class Page_Label:
+     def __init__(self, dictionary=dict()):
+         self.creation_time=""
+         self.creator_id=""
+         self.from_=""
+         self.id=""
+         self.name=""
+         if ("creation_time" in dictionary):
+             self.creation_time=dictionary["creation_time"]
+         if ("creator_id" in dictionary):
+             self.creator_id=dictionary["creator_id"]
+         if ("from" in dictionary):
+             self.from_=dictionary["from"]
+         if ("id" in dictionary):
+             self.id=dictionary["id"]
+         if ("name" in dictionary):
+             self.name=dictionary["name"]
+
+
+     def __str__(self):
+         dic=self.__dict__
+         lista=list()
+         for key in dic:
+             lista.append(key)
+         for key in lista:
+             if dic[key]==None or dic[key]=="":
+                 del dic[key]
+         return "PAGE_LABEL: "+str(dic)
+
+class Properties:
+     def __init__(self, dictionary=dict()):
+         self.name=""
+         self.text=""
+         self.href=""
+         if ("name" in dictionary):
+             self.name=dictionary["name"]
+         if ("text" in dictionary):
+             self.text=dictionary["text"]
+         if ("href" in dictionary):
+             self.href=dictionary["href"]
+
+
+     def __str__(self):
+         dic=self.__dict__
+         lista=list()
+         for key in dic:
+             lista.append(key)
+         for key in lista:
+             if dic[key]==None or dic[key]=="":
+                 del dic[key]
+         return "PROPERTIES: "+str(dic)
