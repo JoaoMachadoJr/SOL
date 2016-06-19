@@ -14,7 +14,7 @@ class Accounts:
             self.category=dictionary["category"]
 
     def __str__(self):
-         print(self.__dict__)
+         #print(self.__dict__)
          dic=self.__dict__
          dict={}
 

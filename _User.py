@@ -1,6 +1,14 @@
 __author__ = 'Joao'
+import _Entity
+import _Tweet
+import _Utils
+import _Access
+import _Actions
+import lib.tweepy as tweepy
 class User:
-     def __init__(self, dictionary=dict()):
+     def __init__(self, id="", dictionary=dict()):
+         dictionary=_Utils.CastToDictionary(dictionary)
+         dictionary=_Utils.removeEmptyFields(dictionary)
          self.contributors_enabled=""
          self.created_at=""
          self.default_profile=""
@@ -13,7 +21,7 @@ class User:
          self.followers_count=""
          self.friends_count=""
          self.geo_enabled=""
-         self.id=""
+         self.id=id
          self.id_str=""
          self.is_translator=""
          self.lang=""
@@ -55,7 +63,7 @@ class User:
          if ("description" in dictionary):
              self.description=dictionary["description"]
          if ("entities" in dictionary):
-             self.entities=dictionary["entities"]
+             self.entities= _Entity.Entity(dictionary=dictionary["entities"])
          if ("favourites_count" in dictionary):
              self.favourites_count=dictionary["favourites_count"]
          if ("follow_request_sent" in dictionary):
@@ -115,7 +123,7 @@ class User:
          if ("show_all_inline_media" in dictionary):
              self.show_all_inline_media=dictionary["show_all_inline_media"]
          if ("status" in dictionary):
-             self.status=dictionary["status"]
+             self.status=_Tweet.Tweet(dictionary=dictionary["status"])
          if ("statuses_count" in dictionary):
              self.statuses_count=dictionary["statuses_count"]
          if ("time_zone" in dictionary):
@@ -131,6 +139,114 @@ class User:
          if ("withheld_scope" in dictionary):
              self.withheld_scope=dictionary["withheld_scope"]
 
+
+
+     def getMentionsTimeline(self, Access : _Access.StrongAccess = None, count=None, since_id=None, max_id=None):
+         '''Pega as vezes que fui mencionado. Minhas Mentions
+            Documentado em https://dev.twitter.com/rest/reference/get/statuses/mentions_timeline
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         mentions=None
+         mentions = api.mentions_timeline(count=count, since_id=since_id, max_id=max_id)
+         lista = list()
+         for mention in mentions:
+             lista.append(_Tweet.Tweet(dictionary=mention))
+         return lista
+
+     def getTimeline(self, Access : _Access.WeakAccess = None, count=None, since_id=None, max_id=None, include_rts=False):
+         '''Pega a timeline de um usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         tweets = api.user_timeline(user_id=self.id ,count=count, since_id=since_id, max_id=max_id, include_rts=include_rts)
+         for tweet in tweets:
+            lista.append(_Tweet.Tweet(dictionary=tweet))
+         return lista;
+
+     def getHomeTimeline(self, Access : _Access.StrongAccess = None, count=None, since_id=None, max_id=None):
+         '''Pega os posts na HOME do usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/statuses/home_timeline
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         tweets = api.home_timeline(user_id=self.id ,count=count, since_id=since_id, max_id=max_id)
+         lista = list()
+         for tweet in tweets:
+             lista.append(_Tweet.Tweet(dictionary=tweet))
+         return lista;
+
+     def getRetweetsOfMe(self, Access : _Access.StrongAccess = None, count=None, since_id=None, max_id=None):
+         '''Pega os retweets de tweets escritos pelo usuario
+         NAO FUNCIONA?!?
+         Documentado em https://dev.twitter.com/rest/reference/get/statuses/retweets_of_me
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         tweets = api.retweets_of_me(user_id=self.id ,count=count, since_id=since_id, max_id=max_id)
+         lista = list()
+         for tweet in tweets:
+             lista.append(_Tweet.Tweet(dictionary=tweet))
+         return lista;
+
+     def getFriends(self, Access : _Access.WeakAccess = None, cursor=None):
+         '''Pega os amigos do usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/friends/ids
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         friends = api.friends_ids(user_id=self.id, cursor=cursor)
+         lista = list()
+         for f in friends:
+             lista.append(User(id=f))
+         return lista;
+
+     def getFollowers(self, Access : _Access.WeakAccess = None, cursor=None, count=None):
+         '''Pega os seguidores do usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/followers/ids
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         users = api.followers_ids(user_id=self.id, cursor=cursor,count=count)
+         lista = list()
+         for u in users:
+             lista.append(User(id=u))
+         return lista;
+
+
+     def getFriendshipIncoming(self, Access : _Access.StrongAccess = None, cursor=None):
+         '''Pega requisições de amizade do usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/friendships/incoming
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         friends = api.friendships_incoming( cursor=cursor)
+         lista = list()
+         for f in friends:
+             lista.append(User(id=f))
+         return lista;
+
+     def getFriendshipOutgoing(self, Access : _Access.StrongAccess = None, cursor=None):
+         '''Pega requisições de amizade feita pelo usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/friendships/outgoing
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         friends = api.friendships_outgoing( cursor=cursor)
+         lista = list()
+         for f in friends:
+             lista.append(User(id=f))
+         return lista;
 
      def __str__(self):
          dic=self.__dict__

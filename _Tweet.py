@@ -1,8 +1,20 @@
 __author__ = 'Joao'
+import _Contributor
+import _Coordinates
+import _Entity
+import _Place
+import _User
+import _Utils
+import _Access
+import _Actions
+import lib.tweepy as tweepy
 class Tweet:
-     def __init__(self, dictionary=dict()):
+     def __init__(self,id="", dictionary=dict()):
+
+         dictionary=_Utils.CastToDictionary(dictionary)
+         dictionary=_Utils.removeEmptyFields(dictionary)
          self.annotations=""
-         self.contributors=""
+         self.contributors=list()
          self.coordinates=""
          self.created_at=""
          self.current_user_retweet=""
@@ -10,7 +22,7 @@ class Tweet:
          self.favorite_count=""
          self.favorited=""
          self.filter_level=""
-         self.id=""
+         self.id=id
          self.id_str=""
          self.in_reply_to_screen_name=""
          self.lang=""
@@ -33,15 +45,16 @@ class Tweet:
          if ("annotations" in dictionary):
              self.annotations=dictionary["annotations"]
          if ("contributors" in dictionary):
-             self.contributors=dictionary["contributors"]
+             for cont in dictionary["contributors"]:
+                self.contributors.append(_Contributor.Contributor(dictionary=cont))
          if ("coordinates" in dictionary):
-             self.coordinates=dictionary["coordinates"]
+             self.coordinates=_Coordinates.Coordinates(dictionary=dictionary["coordinates"])
          if ("created_at" in dictionary):
              self.created_at=dictionary["created_at"]
          if ("current_user_retweet" in dictionary):
              self.current_user_retweet=dictionary["current_user_retweet"]
          if ("entities" in dictionary):
-             self.entities=dictionary["entities"]
+             self.entities=_Entity.Entity(dictionary=dictionary["entities"])
          if ("favorite_count" in dictionary):
              self.favorite_count=dictionary["favorite_count"]
          if ("favorited" in dictionary):
@@ -57,7 +70,7 @@ class Tweet:
          if ("lang" in dictionary):
              self.lang=dictionary["lang"]
          if ("place" in dictionary):
-             self.place=dictionary["place"]
+             self.place=_Place.Place(dictionary=dictionary["place"])
          if ("possibly_sensitive" in dictionary):
              self.possibly_sensitive=dictionary["possibly_sensitive"]
          if ("quoted_status_id" in dictionary):
@@ -65,7 +78,7 @@ class Tweet:
          if ("quoted_status_id_str" in dictionary):
              self.quoted_status_id_str=dictionary["quoted_status_id_str"]
          if ("quoted_status" in dictionary):
-             self.quoted_status=dictionary["quoted_status"]
+             self.quoted_status=Tweet(dictionary=dictionary["quoted_status"])
          if ("scopes" in dictionary):
              self.scopes=dictionary["scopes"]
          if ("retweet_count" in dictionary):
@@ -73,7 +86,7 @@ class Tweet:
          if ("retweeted" in dictionary):
              self.retweeted=dictionary["retweeted"]
          if ("retweeted_status" in dictionary):
-             self.retweeted_status=dictionary["retweeted_status"]
+             self.retweeted_status=Tweet(dictionary=dictionary["retweeted_status"])
          if ("source" in dictionary):
              self.source=dictionary["source"]
          if ("text" in dictionary):
@@ -81,7 +94,7 @@ class Tweet:
          if ("truncated" in dictionary):
              self.truncated=dictionary["truncated"]
          if ("user" in dictionary):
-             self.user=dictionary["user"]
+             self.user=_User.User(dictionary=dictionary["user"])
          if ("withheld_copyright" in dictionary):
              self.withheld_copyright=dictionary["withheld_copyright"]
          if ("withheld_in_countries" in dictionary):
@@ -89,6 +102,41 @@ class Tweet:
          if ("withheld_scope" in dictionary):
              self.withheld_scope=dictionary["withheld_scope"]
 
+
+     def getRetweets(self, Access : _Access.WeakAccess = None, count=None):
+         '''Pega os retweets de um tweet especifico
+         Documentado em https://dev.twitter.com/rest/reference/get/statuses/retweets/%3Aid
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         tweets = api.retweets(id=self.id ,count=count)
+         lista = list()
+         for tweet in tweets:
+             lista.append(Tweet(dictionary=tweet))
+         return lista;
+
+     def getShow(self, Access : _Access.WeakAccess = None):
+         '''Pega informações de um tweet especifico
+         Documentado em https://dev.twitter.com/rest/reference/get/statuses/show/%3Aid
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         return Tweet(dictionary=api.get_status(id=self.id))
+
+     def getRetweeters(self, Access : _Access.WeakAccess = None, cursor=None, stringify_ids=None):
+         '''Pega ua lista de IDs das pessoas que deram retweet em um tweet especifico
+         Documentado em https://dev.twitter.com/rest/reference/get/statuses/retweeters/ids
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         users = api.retweeters(id=self.id,cursor=cursor,stringify_ids=stringify_ids)
+         lista = list()
+         for user in users:
+             lista.append(_User.User(id=user))
+         return lista;
 
      def __str__(self):
          dic=self.__dict__

@@ -1,18 +1,22 @@
 __author__ = 'Joao'
+import _Size
+import _Utils
 class Sizes:
      def __init__(self, dictionary=dict()):
+         dictionary=_Utils.CastToDictionary(dictionary)
+         dictionary=_Utils.removeEmptyFields(dictionary)
          self.thumb=""
          self.large=""
          self.medium=""
          self.small=""
          if ("thumb" in dictionary):
-             self.thumb=dictionary["thumb"]
+             self.thumb=_Size.Size(dictionary=dictionary["thumb"])
          if ("large" in dictionary):
-             self.large=dictionary["large"]
+             self.large=_Size.Size(dictionary=dictionary["large"])
          if ("medium" in dictionary):
-             self.medium=dictionary["medium"]
+             self.medium=_Size.Size(dictionary=dictionary["medium"])
          if ("small" in dictionary):
-             self.small=dictionary["small"]
+             self.small=_Size.Size(dictionary=dictionary["small"])
 
 
      def __str__(self):

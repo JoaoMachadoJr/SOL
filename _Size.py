@@ -1,6 +1,11 @@
 __author__ = 'Joao'
+import _Utils
+
+
 class Size:
      def __init__(self, dictionary=dict()):
+         dictionary=_Utils.CastToDictionary(dictionary)
+         dictionary=_Utils.removeEmptyFields(dictionary)
          self.h=""
          self.resize=""
          self.w=""

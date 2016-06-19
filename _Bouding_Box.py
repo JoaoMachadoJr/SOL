@@ -1,6 +1,9 @@
 __author__ = 'Joao'
+import _Utils
 class Bounding_box:
      def __init__(self, dictionary=dict()):
+         dictionary=_Utils.CastToDictionary(dictionary)
+         dictionary=_Utils.removeEmptyFields(dictionary)
          self.coordinates=""
          self.type=""
          if ("coordinates" in dictionary):

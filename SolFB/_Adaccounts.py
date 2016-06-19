@@ -158,7 +158,7 @@ class Adaccounts:
          if ("user_role" in dictionary):
              self.user_role=dictionary["user_role"]
      def __str__(self):
-         print(self.__dict__)
+        # print(self.__dict__)
          dic=self.__dict__
          dict={}
 

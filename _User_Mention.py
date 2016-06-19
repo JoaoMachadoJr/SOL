@@ -1,7 +1,10 @@
 __author__ = 'Joao'
+import _Utils
 class User_Mention:
-     def __init__(self, dictionary=dict()):
-         self.id=""
+     def __init__(self, id="",dictionary=dict()):
+         dictionary=_Utils.CastToDictionary(dictionary)
+         dictionary=_Utils.removeEmptyFields(dictionary)
+         self.id=id
          self.id_str=""
          self.indices=""
          self.name=""

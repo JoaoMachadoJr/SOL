@@ -1,6 +1,10 @@
 __author__ = 'Joao'
+import _Utils
+
 class URL:
      def __init__(self, dictionary=dict()):
+         dictionary=_Utils.CastToDictionary(dictionary)
+         dictionary=_Utils.removeEmptyFields(dictionary)
          self.display_url=""
          self.expanded_url=""
          self.indices=""

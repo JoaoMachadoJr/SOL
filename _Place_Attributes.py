@@ -1,6 +1,11 @@
 __author__ = 'Joao'
+import _Utils
+
+
 class Place_Attributes:
      def __init__(self, dictionary=dict()):
+         dictionary=_Utils.CastToDictionary(dictionary)
+         dictionary=_Utils.removeEmptyFields(dictionary)
          self.street_address=""
          self.locality=""
          self.region=""

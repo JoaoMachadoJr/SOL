@@ -1,19 +1,24 @@
 __author__ = 'Joao'
+import _Place_Attributes
+import _Bouding_Box
+import _Utils
 class Place:
-     def __init__(self, dictionary=dict()):
+     def __init__(self, id="",dictionary=dict()):
+         dictionary=_Utils.CastToDictionary(dictionary)
+         dictionary=_Utils.removeEmptyFields(dictionary)
          self.attributes=""
          self.bounding_box=""
          self.country=""
          self.country_code=""
          self.full_name=""
-         self.id=""
+         self.id=id
          self.name=""
          self.place_type=""
          self.url=""
          if ("attributes" in dictionary):
-             self.attributes=dictionary["attributes"]
+             self.attributes=_Place_Attributes.Place_Attributes(dictionary=dictionary["attributes"])
          if ("bounding_box" in dictionary):
-             self.bounding_box=dictionary["bounding_box"]
+             self.bounding_box=_Bouding_Box.Bounding_box(dictionary=dictionary["bounding_box"])
          if ("country" in dictionary):
              self.country=dictionary["country"]
          if ("country_code" in dictionary):
