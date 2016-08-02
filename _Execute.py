@@ -38,9 +38,7 @@ Joao2 = _Actions.Actions.getUser(741008881145548800)
 tweetSerra = _Tweet.Tweet(id=742841643259334660)
 tweetPunch = _Tweet.Tweet(id=143763933654827008)
 mentions =_Actions.Actions.getFriendshipInfo(source_id=Joao.id,target_id=Joao2.id);
-for m in mentions:
-    print(m)
-print(len(mentions))
+help(Joao)
 #print(tweetSerra.getRetweeters())
 
 
