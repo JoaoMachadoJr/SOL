@@ -138,6 +138,31 @@ class Tweet:
              lista.append(_User.User(id=user))
          return lista;
 
+     def postDestroy(self, Access : _Access.StrongAccess = None):
+         '''Destroi um tweet
+         Documentado em https://dev.twitter.com/rest/reference/post/statuses/destroy/%3Aid
+         '''
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         api.destroy_status(self.id)
+         return True
+
+     def postReply(self, msg,latitude=None,longitude=None,place_id=None,Access : _Access.StrongAccess = None):
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api=tweepy.API(Access.auth)
+         api.update_status(in_reply_to_status_id=self.id, lat=latitude,long=longitude,status=msg,place_id=place_id)
+         return True
+
+     def postRetweet(self,Access : _Access.StrongAccess = None ):
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api=tweepy.API(Access.auth)
+         api.retweet(self.id)
+         api.retweets
+         return True
+
      def __str__(self):
          dic=self.__dict__
          lista=list()

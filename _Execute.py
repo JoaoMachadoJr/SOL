@@ -8,7 +8,8 @@ import _User
 import _Access
 import _Actions
 import _Tweet
-
+import _User
+import _Actions
 Actions = _Actions.Actions
 
 Consumer_Key = "aqJhPEV5nKmki92nM8kDKeJdR"
@@ -16,13 +17,6 @@ Consumer_Secret= "WQ3aYy6brirvCkYWRtkmf6iyZSUjvzyLxc9Xu9MGFx1MxjYpNw"
 Access_Token_Secret="6D1XaR1ZMj2spCGogmD1vHG12RxMk1tvmzs0kkZhlmmsK"
 Access_Token="179494740-x4OS9UjoxYDOYElxh8izYMnca5V0ilq3yJpVZ3lR"
 
-print("oi")
-x=1
-y=x
-del(x)
-print(y)
-
-pass
 #api = tweepy.API()
 #ID Smurf= 741008881145548800
 
@@ -30,37 +24,76 @@ pass
 #acesso = _Access.StrongAccess(Consumer_Key,Consumer_Secret,Access_Token,Access_Token_Secret)
 acesso = _Access.StrongAccess(Consumer_Key,Consumer_Secret,Access_Token,Access_Token_Secret)
 
-Joao = Actions.me()
-Joao2 = _Actions.Actions.getUser(741008881145548800)
+#Joao = Actions.me()
+#Joao2 = _Actions.Actions.getUser(741008881145548800)
 #mentions = Joao.getMentionsTimeline(count=2, since_id=None, max_id=None)
 #id=mentions[0].user.id
 #mentions = _User.User(id=741008881145548800).getTimeline()
-tweetSerra = _Tweet.Tweet(id=742841643259334660)
-tweetPunch = _Tweet.Tweet(id=143763933654827008)
-mentions =_Actions.Actions.getFriendshipInfo(source_id=Joao.id,target_id=Joao2.id);
-help(Joao)
+#tweetSerra = _Tweet.Tweet(id=742841643259334660)
+#tweetPunch = _Tweet.Tweet(id=143763933654827008)
+#mentions =_Actions.Actions.getFriendshipInfo(source_id=Joao.id,target_id=Joao2.id);
+#help(Joao)
 #print(tweetSerra.getRetweeters())
 
 
+
+
+
+
 '''
-url="https://api.twitter.com/1.1/users/show.json?screen_name=joaoxmachado"
-usuario="joaoxmachado"
-params={"CONSUMER_KEY":"aqJhPEV5nKmki92nM8kDKeJdR"}
-r = requests.get(url=url, auth=("juninho_machado_s@hotmail.com","Jj246810"))
-print(r)
+#Destruindo meu mais recente Tweet pelo seu objeto
+Joao =acesso.me()       #Meu usuario
+lista=Joao.getTimeline()      #Minha Timeline
+tweet = lista[0]            #Pego o ultimo post da timeline
+print(tweet.postDestroy(acesso))   #<--- destruo o post
 '''
-
-
-
-
-
-
-
-
-
-
-
-
+'''
+#Destruindo meu mais recente Tweet pelo seu ID
+_Actions.Actions.postDestroyTweetById(741536688992706560)
+'''
+'''
+#Fazendo um post no Twitter
+Joao = acesso.me()
+texto = "Esse é um texto de teste para um post no twitter"
+latitude=-22.503640
+longitude= -41.923904
+Joao.postTweet(texto,latitude,longitude)
+'''
+'''
+#Respondendo a um post no twitter
+Joao=acesso.me()
+post=_Tweet.Tweet(763838518422605824)
+texto="testando resposta"
+post.postReply(msg=texto)
+'''
+'''
+#Retweetando
+Joao=acesso.me()
+tweet=_Tweet.Tweet(734456681669746693)
+tweet.postRetweet(Access=acesso)
+'''
+'''
+#Enviando mensagem
+Joao = acesso.me()
+Remetente = Actions.getUser("JMachadoJr");
+texto = "Teste de envio de mensagem";
+Joao.postDirectMessage(Remetente,texto,acesso)
+'''
+'''
+#Enviando mensagem (Pelo ID)
+Joao = acesso.me()
+texto = "Teste de envio de mensagem";
+Joao.postDirectMessage("JMachadoJr",texto,acesso)
+'''
+'''
+#Exibe a ultima mensagem, apaga, e exibe a nova ultima mensagem
+Joao=acesso.me()
+mensagem=Joao.getDirectMessages(Access=acesso)[0]
+print(mensagem)
+print(mensagem.postDestroy(Access=acesso))
+mensagem=Joao.getDirectMessages(Access=acesso)[0]
+print(mensagem)
+'''
 
 
 
@@ -111,11 +144,11 @@ print("Nome:"+u.name+"; Email:"+u.email+"; Religião:"+u.religion)
                                             GET statuses/retweets_of_me
                                             GET statuses/retweets/:id
                                             GET statuses/show/:id
-POST statuses/destroy/:id
-POST statuses/update
-POST statuses/retweet/:id
-POST statuses/unretweet/:id
-POST statuses/update_with_media
+                                            POST statuses/destroy/:id
+                                            POST statuses/update
+                                            POST statuses/retweet/:id
+                                                                                    POST statuses/unretweet/:id
+                                                                                    POST statuses/update_with_media
                                             GET statuses/oembed
                                             GET statuses/retweeters/ids
                                             GET statuses/lookup
@@ -123,8 +156,8 @@ POST statuses/update_with_media
                                             GET direct_messages/show
                                             GET search/tweets
                                             GET direct_messages
-POST direct_messages/destroy
-POST direct_messages/new
+                                            POST direct_messages/destroy
+                                            POST direct_messages/new
                                                                                   (REMOVED) GET friendships/no_retweets/ids
                                             GET friends/ids
                                             GET followers/ids

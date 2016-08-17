@@ -117,3 +117,22 @@ class Actions:
             Access=defaultAccess
         api = tweepy.API(Access.auth)
         return api.show_friendship(source_id=source_id, source_screen_name=source_screen_name,target_id=target_id,target_screen_name=target_screen_name )
+
+    def postDestroyTweetById(id, Access : _Access.StrongAccess = None):
+        if (Access == None):
+            Access=defaultAccess
+        api = tweepy.API(Access.auth)
+        return api.destroy_status(id)
+
+    def postTweet(msg,latitude=None,longitude=None,reply_to=None,place_id=None,Access : _Access.StrongAccess = None):
+        if (Access == None):
+            Access=defaultAccess
+        api = tweepy.API(Access.auth)
+        return api.update_status(lat=latitude,long=longitude,status=msg,in_reply_to_status_id=reply_to,place_id=place_id)
+
+    def postRetweet(id):
+        return _Tweet.Tweet(id).postRetweet()
+
+
+
+

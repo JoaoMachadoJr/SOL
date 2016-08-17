@@ -2,6 +2,7 @@ __author__ = 'Joao'
 import _Utils
 import _Entity
 import _User
+import _Access
 class DirectMessage:
      def __init__(self,id=None, dictionary=dict()):
          dictionary=_Utils.CastToDictionary(dictionary)
@@ -47,6 +48,8 @@ class DirectMessage:
          if ("sender_id_str" in dictionary):
              self.sender_id_str=dictionary["sender_id_str"]
 
+     def postDestroy(self, Access : _Access.StrongAccess = None):
+         return _User.User().postDestroyDirectMessage(id=self.id,Access=Access)
 
      def __str__(self):
          dic=self.__dict__

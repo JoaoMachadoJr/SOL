@@ -4,6 +4,7 @@ import _Tweet
 import _Utils
 import _Access
 import _Actions
+import _DirectMessage
 import lib.tweepy as tweepy
 class User:
      def __init__(self, id="", dictionary=dict()):
@@ -248,6 +249,30 @@ class User:
              lista.append(User(id=f))
          return lista;
 
+     def postTweet(self, msg,latitude=None,longitude=None,place_id=None,Access : _Access.StrongAccess = None):
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api=tweepy.API(Access.auth)
+         api.update_status(lat=latitude,long=longitude,status=msg,place_id=place_id)
+         return True
+
+     def postDirectMessage(self, receiver, msg,Access : _Access.StrongAccess = None ):
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         if (isinstance(receiver,User)):
+             user=receiver.id
+         api.send_direct_message(user=user,text=msg)
+         return True
+
+     def getDirectMessages(self,Access : _Access.StrongAccess = None, since_id=None, max_id=None, count=None,  full_text=None):
+         return _Actions.Actions.getMyMessages(Access=Access, since_id=since_id,max_id=max_id,count=count,full_text=full_text)
+
+     def postDestroyDirectMessage(self,id,Access : _Access.StrongAccess = None):
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         return _DirectMessage.DirectMessage(dictionary= api.destroy_direct_message(id=id));
      def __str__(self):
          dic=self.__dict__
          lista=list()
@@ -257,3 +282,4 @@ class User:
              if dic[key]==None or dic[key]=="":
                  del dic[key]
          return "USER: "+str(dic)
+
