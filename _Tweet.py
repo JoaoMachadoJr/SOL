@@ -163,7 +163,31 @@ class Tweet:
          api.retweets
          return True
 
+     def postFavoriteCreate(self,Access  : _Access.StrongAccess = None ):
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api=tweepy.API(Access.auth)
+         return Tweet(dictionary=api.create_favorite(id=self.id))
+
+     def postFavoriteDestroy(self,Access  : _Access.StrongAccess = None ):
+         if (Access == None):
+            Access=_Actions.defaultAccess
+         api=tweepy.API(Access.auth)
+         return Tweet(dictionary=api.destroy_favorite(id=self.id))
+
+
+
      def __str__(self):
+         dic=self.__dict__
+         lista=list()
+         for key in dic:
+             lista.append(key)
+         for key in lista:
+             if dic[key]==None or dic[key]=="":
+                 del dic[key]
+         return "TWEET: "+str(dic)
+
+     def __repr__(self):
          dic=self.__dict__
          lista=list()
          for key in dic:

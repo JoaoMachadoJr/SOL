@@ -21,3 +21,13 @@ class Coordinates:
              if dic[key]==None or dic[key]=="":
                  del dic[key]
          return "COORDINATES: "+str(dic)
+
+     def __repr__(self):
+         dic=self.__dict__
+         lista=list()
+         for key in dic:
+             lista.append(key)
+         for key in lista:
+             if dic[key]==None or dic[key]=="":
+                 del dic[key]
+         return "COORDINATES: "+str(dic)

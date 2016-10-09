@@ -133,6 +133,16 @@ class Actions:
     def postRetweet(id):
         return _Tweet.Tweet(id).postRetweet()
 
+    def getFavorites(user, page=0,Access : _Access.WeakAccess = None):
+         if (Access == None):
+            Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         resp = api.favorites(id=user,page=page)
+         lista = list()
+         for u in resp:
+             lista.append(_Tweet.Tweet(dictionary=u))
+         return lista
+
 
 
 

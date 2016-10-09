@@ -94,43 +94,113 @@ print(mensagem.postDestroy(Access=acesso))
 mensagem=Joao.getDirectMessages(Access=acesso)[0]
 print(mensagem)
 '''
-
-
-
-
 '''
-#Caso de uso 1 (4 linhas): Pegar posts da Dilma de 2015 (Mesma coisa que o código do wladek fazia)
-u = User("CAACxxfv6ORIBAPip9leRDpWkrOEOmZAZA9rlwEanVuAexUxv4VhAXIqB0uEHQ1uhEU5IxaNpVKwWqq8E8aWI8tsSMFQLKpVzoZBCBM2Bo0wTNrGEeLIV2x2pNlGqa3lKtVkwbzdbVPtOiXsHz9SlWVViZCXxbtHbofdfkFG6TbbR5Yd6X9pazIvkTLYT2un0tYJXuxmKygZDZD")
-posts=Page("Dilmarousseff").getPosts(dateMin=Utility.date("01/01/2015"),dateMax=Utility.date("31/12/2015"),limit=100)
-for post in posts:
-    print(post)
+#Criando amizade entre dois usuarios
+Joao=acesso.me()
+resposta=Joao.postFriendshipCreate("JmachadoJr", False)
+print(resposta)
 '''
-
 '''
-#Caso de uso 2 (4 linhas): Exibir todos os meus posts desde sempre
-u = User("CAACxxfv6ORIBAPip9leRDpWkrOEOmZAZA9rlwEanVuAexUxv4VhAXIqB0uEHQ1uhEU5IxaNpVKwWqq8E8aWI8tsSMFQLKpVzoZBCBM2Bo0wTNrGEeLIV2x2pNlGqa3lKtVkwbzdbVPtOiXsHz9SlWVViZCXxbtHbofdfkFG6TbbR5Yd6X9pazIvkTLYT2un0tYJXuxmKygZDZD")
-posts=u.getMyPosts(limit=-1)
-for post in posts:
-    print(post)
+#Desfazendo amizade entre dois usuarios
+Joao=acesso.me()
+resposta=Joao.postFriendshipDestroy("JmachadoJr")
+print(resposta)
 '''
-
 '''
-#Caso de uso 3 (5 linhas): Pegar os ultimos 100 posts de um grupo e imprimir os que não tiverem textos ou vídeos (O grupo é o A.P.D.A. Associação de Programadores Depressivos Anônimos)
-u = User("CAACxxfv6ORIBAPip9leRDpWkrOEOmZAZA9rlwEanVuAexUxv4VhAXIqB0uEHQ1uhEU5IxaNpVKwWqq8E8aWI8tsSMFQLKpVzoZBCBM2Bo0wTNrGEeLIV2x2pNlGqa3lKtVkwbzdbVPtOiXsHz9SlWVViZCXxbtHbofdfkFG6TbbR5Yd6X9pazIvkTLYT2un0tYJXuxmKygZDZD")
-posts=Group.getGroupFromUsername("osadpa").getPosts(limit=100)
-for post in posts:
-    if post.object_id=="":
-        print(post)
+#Pega lista de amigos
+Joao=acesso.me()
+resposta=Joao.getFriends()
+for u in resposta:
+    print(u.name)
 '''
-
 '''
-#Caso de uso 4: Imprimir meu Nome, e-mail e religião
-u = User("CAACxxfv6ORIBAPip9leRDpWkrOEOmZAZA9rlwEanVuAexUxv4VhAXIqB0uEHQ1uhEU5IxaNpVKwWqq8E8aWI8tsSMFQLKpVzoZBCBM2Bo0wTNrGEeLIV2x2pNlGqa3lKtVkwbzdbVPtOiXsHz9SlWVViZCXxbtHbofdfkFG6TbbR5Yd6X9pazIvkTLYT2un0tYJXuxmKygZDZD")
-print("Nome:"+u.name+"; Email:"+u.email+"; Religião:"+u.religion)
+#Pega lista de seguidores
+Joao=acesso.me()
+resposta=Joao.getFollowers()
+for u in resposta:
+    print(u.name)
 '''
-
-
-#TWITTER===============================================================================================
+'''
+#Exibe estado de amizade entre dois usuarios
+Joao=acesso.me()
+resposta=Joao.getFriendship("JmachadoJr")
+print(resposta)
+'''
+'''
+#Exibe se o acesso possui credenciais corretamente
+print(acesso.verify_credentials())
+'''
+'''
+#Exibe a quantidade de requisições que essa API pode fazer na proxima hora
+print(acesso.rate_limit_status())
+'''
+'''
+#Altera minha descrição no meu perfil
+Joao=acesso.me()
+print(Joao.postUpdateProfile(description="Teste de mudança de descrição"))
+'''
+'''
+#alterando minha imagem de perfil
+Joao=acesso.me()
+print(Joao.postUpdateProfileImage("C:\\Users\\Joao\\Pictures\\Imagens2\\Foto0022.jpg"))
+'''
+'''
+#Bloqueia um usuario, exibe a lista de bloqueados. Desbloqueia, exibe a lista de bloqueados.
+Joao=acesso.me()
+print("Bloqueio: "+str(Joao.postBlockCreate("JmachadoJr")))
+print("LISTA DE USUARIOS BLOQUEADOS")
+for bloqueado in Joao.getBlocks():
+    print("Esse usuário está bloqueado: "+str(bloqueado))
+print("Desbloqueio "+str(Joao.postBlockDestroy("JmachadoJr")))
+print("LISTA DE USUARIOS BLOQUEADOS")
+for bloqueado in Joao.getBlocks():
+    print("Esse usuário está bloqueado: "+str(bloqueado))
+'''
+'''
+#Altera umagem de fundo
+Joao=acesso.me()
+print(Joao.postUpdateProfileBanner("C:\\Users\\Joao\\Pictures\\fma.jpg"))
+'''
+'''
+#Pego usuarios sugeridos a partir de um SLUG (SLUG é como um 'tema')
+Joao=acesso.me()
+print(Joao.getSuggestedUsers(slug="música"))
+'''
+'''
+#Pego slugs sugeridos para mim
+Joao=acesso.me()
+print(Joao.getSuggestedCategories())
+'''
+'''
+#Pego usuarios vinculados a um SLUG assim como seu ultimo tweet
+Joao=acesso.me()
+print(Joao.getSuggestedUsersWithTweetBySlug(slug="música"))
+'''
+'''
+#Pego tweetes favoritos de um usuario
+Joao=acesso.me()
+for tweet in Joao.getFavorites(0):
+    print(tweet)
+'''
+'''
+#Favorito um tweet
+Joao=acesso.me()
+tweet = _Tweet.Tweet(id=767160987720056832)
+print(tweet.postFavoriteCreate())
+'''
+'''
+#Desfavorito um tweet
+Joao=acesso.me()
+tweet = _Tweet.Tweet(id=767160987720056832)
+print(tweet.postFavoriteDestroy())
+'''
+'''
+#Pego listas vinculadas ao usuario
+Joao=acesso.me()
+listas=Joao.getLists()
+for l in listas:
+    print(l)
+'''
 
 
 
@@ -163,45 +233,46 @@ print("Nome:"+u.name+"; Email:"+u.email+"; Religião:"+u.religion)
                                             GET followers/ids
                                             GET friendships/incoming
                                             GET friendships/outgoing
-POST friendships/create
-POST friendships/destroy
-POST friendships/update
+                                            POST friendships/create
+                                            POST friendships/destroy
+                                                                                   (Não atendido pelo Tweepy) POST friendships/update
                                             GET friendships/show
-GET friends/list
-GET followers/list
-GET friendships/lookup
-GET account/settings
-GET account/verify_credentials
-POST account/settings
-POST account/update_profile
-POST account/update_profile_image
-GET blocks/list
-GET blocks/ids
-POST blocks/create
-POST blocks/destroy
-                                                GET users/lookup
-                                                GET users/show
-                                                GET users/search
-POST account/remove_profile_banner
-POST account/update_profile_banner
-GET users/profile_banner
-POST mutes/users/create
-POST mutes/users/destroy
-GET mutes/users/ids
-GET mutes/users/list
-GET users/suggestions/:slug
-GET users/suggestions
-GET users/suggestions/:slug/members
-GET favorites/list
-POST favorites/destroy
-POST favorites/create
-GET lists/list
+                                            GET friends/list
+                                            GET followers/list
+                                            GET friendships/lookup
+                                                                                    (Não atendido pelo Tweepy)GET account/settings
+                                            GET account/verify_credentials
+                                                                                    (Não atendido pelo Tweepy)POST account/settings
+                                            POST account/update_profile
+                                            POST account/update_profile_image
+                                            GET blocks/list
+                                                                                    (Se o metodo acima funciona, esse metodo é pouco interessante)GET blocks/ids
+                                            POST blocks/create
+                                            POST blocks/destroy
+                                            GET users/lookup
+                                            GET users/show
+                                            GET users/search
+                                                                                    (Não atendido pelo Tweepy) POST account/remove_profile_banner
+                                            POST account/update_profile_banner
+                                                                                    (Não atendido pelo Tweepy) GET users/profile_banner
+                                                                                    (Não atendido pelo Tweepy)POST mutes/users/create
+                                                                                    (Não atendido pelo Tweepy)POST mutes/users/destroy
+                                                                                    (Não atendido pelo Tweepy)GET mutes/users/ids
+                                                                                    (Não atendido pelo Tweepy)GET mutes/users/list
+                                            GET users/suggestions/:slug
+                                            GET users/suggestions
+                                            GET users/suggestions/:slug/members
+                                            GET favorites/list
+                                            POST favorites/destroy
+                                            POST favorites/create
+                                            GET lists/list
 GET lists/statuses
 POST lists/members/destroy
 GET lists/memberships
 GET lists/subscribers
 POST lists/subscribers/create
 GET lists/subscribers/show
+
 POST lists/subscribers/destroy
 POST lists/members/create_all
 GET lists/members/show
@@ -212,6 +283,7 @@ POST lists/update
 POST lists/create
 GET lists/show
 GET lists/subscriptions
+
 POST lists/members/destroy_all
 GET lists/ownerships
 GET saved_searches/list
@@ -222,9 +294,10 @@ GET geo/id/:place_id
 GET geo/reverse_geocode
 GET geo/search
 POST geo/place
+
 GET trends/place
 GET trends/available
-GET application/rate_limit_status
+                                            GET application/rate_limit_status
 GET help/configuration
 GET help/languages
 GET help/privacy
