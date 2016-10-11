@@ -143,6 +143,16 @@ class Actions:
              lista.append(_Tweet.Tweet(dictionary=u))
          return lista
 
+    def getTweetsFromList(owner_screen_name=None, slug=None, owner_id=None, list_id=None,since_id=None, max_id=None, count=None, include_rts=None,Access : _Access.WeakAccess = None):
+         if (Access == None):
+            Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         resp=api.list_timeline(owner_screen_name=owner_screen_name, slug=slug, owner_id=owner_id, list_id=list_id, since_id=since_id, max_id=max_id, count=count, include_rts=include_rts)
+         lista = list()
+         for tweet in resp:
+             lista.append(_Tweet.Tweet(dictionary=tweet))
+         return lista
+
 
 
 

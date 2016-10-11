@@ -2,7 +2,7 @@ __author__ = 'Joao'
 import _Actions
 import lib.tweepy as tweepy
 import _Access
-
+import _Tweet
 class List:
      def __init__(self, dictionary=dict()):
          self.subscriber_count=""
@@ -48,11 +48,9 @@ class List:
          if ("following" in dictionary):
              self.following=dictionary["following"]
 
-     def getTweets(self,IdOrSlug,owner,since_id,max_id,per_page,page,Access : _Access.WeakAccess = None):
-         if (Access == None):
-            Access=_Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         resp=api.list_timeline
+     def getTweets(self,max_id=None, count=None, include_rts=None,Access : _Access.WeakAccess = None):
+         return _Actions.Actions.getTweetsFromList(owner_screen_name=self.user,slug=self.slug,max_id=max_id,count=count,include_rts=include_rts,Access=Access)
+
 
 
 

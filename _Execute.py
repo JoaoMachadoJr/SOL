@@ -10,6 +10,7 @@ import _Actions
 import _Tweet
 import _User
 import _Actions
+import _List
 Actions = _Actions.Actions
 
 Consumer_Key = "aqJhPEV5nKmki92nM8kDKeJdR"
@@ -201,7 +202,15 @@ listas=Joao.getLists()
 for l in listas:
     print(l)
 '''
-
+'''
+#Tweets de uma lista
+Joao= acesso.me()
+lista = _List.List()
+lista.slug="pokemon"
+lista.user="LainadAngouleme"
+for tweet in lista.getTweets():
+    print(tweet)
+'''
 
 
 
@@ -266,7 +275,7 @@ for l in listas:
                                             POST favorites/destroy
                                             POST favorites/create
                                             GET lists/list
-GET lists/statuses
+                                            GET lists/statuses
 POST lists/members/destroy
 GET lists/memberships
 GET lists/subscribers
