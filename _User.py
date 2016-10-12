@@ -434,6 +434,19 @@ class User:
          resp=api.subscribe_list(owner_screen_name=owner_screen_name,slug=slug,owner_id=owner_id,list_id=list_id)
          return resp
 
+     def postSubscribeDestroy(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _Access.StrongAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/post/lists/subscribers/create
+         '''
+         if (Access == None):
+             Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         try:
+             resp=api.unsubscribe_list(owner_screen_name=owner_screen_name,slug=slug,owner_id=owner_id,list_id=list_id)
+             return resp
+         except tweepy.TweepError:
+             return False
 
      def getIsSubscriber(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _Access.WeakAccess = None):
          return _Actions.Actions.getUserIsSubscriber(owner_screen_name=owner_screen_name,slug=slug,screen_name=self.screen_name,owner_id=owner_id,list_id=list_id,user_id=self.id)

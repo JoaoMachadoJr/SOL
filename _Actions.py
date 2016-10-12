@@ -183,7 +183,7 @@ class Actions:
              lista = list()
              resp=api.show_list_subscriber(owner_screen_name=owner_screen_name,slug=slug,screen_name=screen_name,owner_id=owner_id,list_id=list_id,user_id=user_id)
              return True
-         except:
+         except tweepy.TweepError:
              return False
 
 

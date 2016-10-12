@@ -237,10 +237,15 @@ for tweet in lista.getSubscribers():
 Joao=acesso.me()
 print(Joao.postSubscribe(owner_screen_name="LainadAngouleme",slug="hogwarts"))
 '''
+'''
 #Verifico se o usuario é subscriber de uma lista
 Joao=acesso.me()
 print(Joao.getIsSubscriber(owner_screen_name="LainadAngouleme",slug="hogwarts"))
+'''
 
+#Faço Unsubscribe em uma lista
+Joao=acesso.me()
+print(Joao.postSubscribeDestroy(owner_screen_name="LainadAngouleme",slug="hogwarts"))
 
 
 
@@ -317,7 +322,7 @@ print(Joao.getIsSubscriber(owner_screen_name="LainadAngouleme",slug="hogwarts"))
                                             POST lists/subscribers/create
                                             GET lists/subscribers/show
 
-POST lists/subscribers/destroy
+                                            POST lists/subscribers/destroy
 POST lists/members/create_all
 GET lists/members/show
 GET lists/members
