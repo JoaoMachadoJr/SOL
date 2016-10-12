@@ -172,6 +172,20 @@ class Actions:
          for U in resp:
              lista.append(_User.User(dictionary=U.__dict__))
          return lista
+    def getUserIsSubscriber(owner_screen_name=None,slug=None,screen_name=None,owner_id=None,list_id=None,user_id=None,Access : _Access.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/docs/api/1.1/get/lists/subscribers/show
+         '''
+         try:
+             if (Access == None):
+                 Access=defaultAccess
+             api = tweepy.API(Access.auth)
+             lista = list()
+             resp=api.show_list_subscriber(owner_screen_name=owner_screen_name,slug=slug,screen_name=screen_name,owner_id=owner_id,list_id=list_id,user_id=user_id)
+             return True
+         except:
+             return False
+
 
 
 
