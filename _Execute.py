@@ -242,11 +242,14 @@ print(Joao.postSubscribe(owner_screen_name="LainadAngouleme",slug="hogwarts"))
 Joao=acesso.me()
 print(Joao.getIsSubscriber(owner_screen_name="LainadAngouleme",slug="hogwarts"))
 '''
-
+'''
 #Faço Unsubscribe em uma lista
 Joao=acesso.me()
 print(Joao.postSubscribeDestroy(owner_screen_name="LainadAngouleme",slug="hogwarts"))
-
+'''
+Joao=acesso.me()
+SlytherinWorld=Actions.getUser("SlytherinWorld")
+print(SlytherinWorld.getIsMember(owner_screen_name="LainadAngouleme",slug="hogwarts"))
 
 
 
@@ -323,8 +326,8 @@ print(Joao.postSubscribeDestroy(owner_screen_name="LainadAngouleme",slug="hogwar
                                             GET lists/subscribers/show
 
                                             POST lists/subscribers/destroy
-POST lists/members/create_all
-GET lists/members/show
+                                                                                    (Redundante) POST lists/members/create_all
+                                            GET lists/members/show
 GET lists/members
 POST lists/members/create
 POST lists/destroy

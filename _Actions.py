@@ -186,6 +186,22 @@ class Actions:
          except tweepy.TweepError:
              return False
 
+    def getUserIsMember(list_id=None,slug=None,user_id=None,screen_name=None,owner_screen_name=None,owner_id=None,Access : _Access.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/lists/members/show
+         '''
+         if (Access == None):
+             Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         try:
+             resp=api.show_list_member(list_id=list_id,slug=slug,user_id=user_id,screen_name=screen_name,owner_screen_name=owner_screen_name,owner_id=owner_id)
+             return True
+         except tweepy.TweepError:
+             return False
+
+
+
 
 
 

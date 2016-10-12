@@ -451,7 +451,8 @@ class User:
      def getIsSubscriber(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _Access.WeakAccess = None):
          return _Actions.Actions.getUserIsSubscriber(owner_screen_name=owner_screen_name,slug=slug,screen_name=self.screen_name,owner_id=owner_id,list_id=list_id,user_id=self.id)
 
-
+     def getIsMember(self,list_id=None,slug=None,user_id=None,screen_name=None,owner_screen_name=None,owner_id=None,Access : _Access.WeakAccess = None):
+        return _Actions.Actions.getUserIsMember(list_id=list_id,slug=slug,user_id=self.id,screen_name=self.screen_name,owner_screen_name=owner_screen_name,owner_id=owner_id,Access=Access)
 
 
 
