@@ -211,7 +211,9 @@ lista.user="LainadAngouleme"
 for tweet in lista.getTweets():
     print(tweet)
 '''
-
+#Removendo um usuário de uma lista
+Joao=acesso.me()
+print(_Actions.Actions.postRemoveMemberFromList("NoMansSkyGame",slug="minha-lista",owner_screen_name="joaoxmachado"))
 
 
 
@@ -276,7 +278,7 @@ for tweet in lista.getTweets():
                                             POST favorites/create
                                             GET lists/list
                                             GET lists/statuses
-POST lists/members/destroy
+                                            POST lists/members/destroy
 GET lists/memberships
 GET lists/subscribers
 POST lists/subscribers/create

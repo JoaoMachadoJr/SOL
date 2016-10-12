@@ -51,6 +51,8 @@ class List:
      def getTweets(self,max_id=None, count=None, include_rts=None,Access : _Access.WeakAccess = None):
          return _Actions.Actions.getTweetsFromList(owner_screen_name=self.user,slug=self.slug,max_id=max_id,count=count,include_rts=include_rts,Access=Access)
 
+     def postRemoveMember(self,member_id=None, member_screen_name=None,Access : _Access.WeakAccess = None):
+        return _Actions.Actions(screen_name=member_screen_name, user_id=member_id, owner_screen_name=self.user,owner_id=None, slug=self.slug, list_id=None)
 
 
 

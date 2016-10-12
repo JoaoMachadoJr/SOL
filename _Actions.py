@@ -153,6 +153,13 @@ class Actions:
              lista.append(_Tweet.Tweet(dictionary=tweet))
          return lista
 
+    def postRemoveMemberFromList(screen_name=None, user_id=None, owner_screen_name=None,owner_id=None, slug=None, list_id=None,Access : _Access.WeakAccess = None):
+         if (Access == None):
+            Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         resp=api.remove_list_member(screen_name=screen_name, user_id=user_id, owner_screen_name=owner_screen_name, owner_id=owner_id, slug=slug, list_id=list_id)
+         return resp
+
 
 
 
