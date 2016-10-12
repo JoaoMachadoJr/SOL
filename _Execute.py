@@ -247,12 +247,20 @@ print(Joao.getIsSubscriber(owner_screen_name="LainadAngouleme",slug="hogwarts"))
 Joao=acesso.me()
 print(Joao.postSubscribeDestroy(owner_screen_name="LainadAngouleme",slug="hogwarts"))
 '''
+'''
+#Verifica se um usuario é membro de uma lista
 Joao=acesso.me()
 SlytherinWorld=Actions.getUser("SlytherinWorld")
 print(SlytherinWorld.getIsMember(owner_screen_name="LainadAngouleme",slug="hogwarts"))
+'''
 
-
-
+#Pega a lista de usuarios de uma lista
+Joao= acesso.me()
+lista = _List.List()
+lista.slug="pokemon"
+lista.user="LainadAngouleme"
+for tweet in lista.getMembers():
+    print(tweet.name)
 
 
 
@@ -328,7 +336,7 @@ print(SlytherinWorld.getIsMember(owner_screen_name="LainadAngouleme",slug="hogwa
                                             POST lists/subscribers/destroy
                                                                                     (Redundante) POST lists/members/create_all
                                             GET lists/members/show
-GET lists/members
+                                            GET lists/members
 POST lists/members/create
 POST lists/destroy
 POST lists/update

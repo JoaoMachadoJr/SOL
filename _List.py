@@ -57,7 +57,8 @@ class List:
 
      def getSubscribers(self,cursor=None,Access : _Access.WeakAccess = None):
         return _Actions.Actions.getSubscribersFromList(owner_screen_name=self.user,slug=self.slug,list_id=self.id,cursor=cursor,Access=Access)
-
+     def getMembers(self,cursor=None,Access : _Access.WeakAccess = None):
+         return _Actions.Actions.getMembersFromList(owner_screen_name=self.user,slug=self.slug,list_id=self.id)
 
 
 

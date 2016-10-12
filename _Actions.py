@@ -4,6 +4,7 @@ import lib.tweepy as tweepy
 import _Access
 import _Tweet
 import _DirectMessage
+import _List
 
 global defaultAccess
 defaultAccess=None
@@ -199,6 +200,21 @@ class Actions:
              return True
          except tweepy.TweepError:
              return False
+
+    def getMembersFromList(owner_screen_name=None,slug=None,list_id=None,owner_id=None,cursor=None,Access : _Access.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/lists/members
+         '''
+         if (Access == None):
+             Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp=api.list_members(owner_screen_name=owner_screen_name,slug=slug,list_id=list_id,owner_id=owner_id,cursor=cursor)
+         for L in resp:
+             lista.append(_User.User(dictionary=L.__dict__))
+         return lista
+
+
 
 
 
