@@ -423,6 +423,17 @@ class User:
              lista.append(_List.List(dictionary=l.__dict__))
          return lista
 
+     def postSubscribe(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _Access.StrongAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/post/lists/subscribers/create
+         '''
+         if (Access == None):
+             Access=_Actions.defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp=api.subscribe_list(owner_screen_name=owner_screen_name,slug=slug,owner_id=owner_id,list_id=list_id)
+         return resp
+
      def __str__(self):
          dic=self.__dict__
          lista=list()
