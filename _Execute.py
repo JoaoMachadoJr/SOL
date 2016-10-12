@@ -223,6 +223,25 @@ NoMansSky=Actions.getUser("nomanssky")
 for lista in NoMansSky.getLists(count=1000):
     print (lista)
 '''
+'''
+#Subscriptions de uma Lista
+Joao= acesso.me()
+lista = _List.List()
+lista.slug="pokemon"
+lista.user="LainadAngouleme"
+for tweet in lista.getSubscribers():
+    print(tweet)
+'''
+
+
+
+
+
+
+
+
+
+
 
 
 '''FALTA                                    JÁ FEITO                              REMOVIDOS (Incapacidade ou desinteresse em concluir)
@@ -288,7 +307,7 @@ for lista in NoMansSky.getLists(count=1000):
                                             GET lists/statuses
                                             POST lists/members/destroy
                                             GET lists/memberships
-GET lists/subscribers
+                                            GET lists/subscribers
 POST lists/subscribers/create
 GET lists/subscribers/show
 

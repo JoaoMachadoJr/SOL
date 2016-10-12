@@ -160,6 +160,20 @@ class Actions:
          resp=api.remove_list_member(screen_name=screen_name, user_id=user_id, owner_screen_name=owner_screen_name, owner_id=owner_id, slug=slug, list_id=list_id)
          return resp
 
+    def getSubscribersFromList(owner_screen_name=None,slug=None,owner_id=None,list_id=None,cursor=None,Access : _Access.WeakAccess = None):
+         '''
+         Reference: list_subscribers
+         '''
+         if (Access == None):
+             Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp=api.list_subscribers(owner_screen_name=owner_screen_name,slug=slug,owner_id=owner_id,list_id=list_id,cursor=cursor)
+         for U in resp:
+             lista.append(_User.User(dictionary=U.__dict__))
+         return lista
+
+
 
 
 

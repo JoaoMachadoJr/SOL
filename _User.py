@@ -411,12 +411,14 @@ class User:
              lista.append(_List.List(dictionary=l.__dict__))
          return lista
 
-     def getLists(self,count=None, cursor=None,filter_to_owned_lists=None,Access : _Access.WeakAccess = None):
+
+
+     def getListsMembership(self,count=None, cursor=None,filter_to_owned_lists=None,Access : _Access.WeakAccess = None):
          if (Access == None):
             Access=_Actions.defaultAccess
          api = tweepy.API(Access.auth)
          lista = list()
-         resp= api.lists_memberships(screen_name=self.screen_name,filter_to_owned_lists=filter_to_owned_lists,cursor=cursor)
+         resp= api.lists_memberships(screen_name=self.screen_name,filter_to_owned_lists=filter_to_owned_lists,cursor=cursor,count=count)
          for l in resp:
              lista.append(_List.List(dictionary=l.__dict__))
          return lista
