@@ -211,10 +211,18 @@ lista.user="LainadAngouleme"
 for tweet in lista.getTweets():
     print(tweet)
 '''
+'''
 #Removendo um usuário de uma lista
 Joao=acesso.me()
 print(_Actions.Actions.postRemoveMemberFromList("NoMansSkyGame",slug="minha-lista",owner_screen_name="joaoxmachado"))
-
+'''
+'''
+#Listas que NoMAnSky é membro
+Joao=acesso.me()
+NoMansSky=Actions.getUser("nomanssky")
+for lista in NoMansSky.getLists(count=1000):
+    print (lista)
+'''
 
 
 '''FALTA                                    JÁ FEITO                              REMOVIDOS (Incapacidade ou desinteresse em concluir)
@@ -279,7 +287,7 @@ print(_Actions.Actions.postRemoveMemberFromList("NoMansSkyGame",slug="minha-list
                                             GET lists/list
                                             GET lists/statuses
                                             POST lists/members/destroy
-GET lists/memberships
+                                            GET lists/memberships
 GET lists/subscribers
 POST lists/subscribers/create
 GET lists/subscribers/show
