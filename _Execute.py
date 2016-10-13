@@ -288,12 +288,15 @@ for l in Joao.getListsSubscribed():
 Joao=acesso.me()
 print(_Actions.Actions.getTrendsByPlace(1)["trends"][0].keys())
 '''
+'''
 #Lugares com trends
 Joao=acesso.me()
 for lugar in _Actions.Actions.getTrendsAvailable():
     print(lugar)
-
-
+'''
+#Trends mais proximas
+Joao=acesso.me()
+print(_Actions.Actions.getTrendsClosest(0,0))
 
 
 
@@ -392,10 +395,10 @@ for lugar in _Actions.Actions.getTrendsAvailable():
                                             GET trends/place
                                             GET trends/available
                                             GET application/rate_limit_status
-GET help/configuration
-GET help/languages
-GET help/privacy
-GET help/tos
-GET trends/closest
-POST users/report_spam
+                                                                                    GET help/configuration
+                                                                                    GET help/languages
+                                                                                    GET help/privacy
+                                                                                    GET help/tos
+                                            GET trends/closest
+                                                                                    POST users/report_spam
 '''

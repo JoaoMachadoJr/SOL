@@ -279,6 +279,19 @@ class Actions:
              lista.append(_List.List(dictionary=L.__dict__))
          return lista
 
+    def getTrendsClosest(lat=None,long=None,Access : _Access.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/trends/closest
+         '''
+         if (Access == None):
+             Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp=api.trends_closest(lat=lat,long=long)
+         return resp[0]
+
+
+
 
 
 
