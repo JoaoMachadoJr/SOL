@@ -60,6 +60,8 @@ class List:
      def getMembers(self,cursor=None,Access : _Access.WeakAccess = None):
          return _Actions.Actions.getMembersFromList(owner_screen_name=self.user,slug=self.slug,list_id=self.id)
 
+     def postMemberCreate(self,screen_name=None,user_id=None,Access : _Access.StrongAccess = None):
+         return _Actions.Actions.postListMemberCreate(screen_name=screen_name,user_id=user_id,owner_screen_name=self.user,slug=self.slug,list_id=self.id,Access=Access)
 
 
      def __str__(self):

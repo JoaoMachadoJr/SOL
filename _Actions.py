@@ -214,6 +214,21 @@ class Actions:
              lista.append(_User.User(dictionary=L.__dict__))
          return lista
 
+    def postListMemberCreate(screen_name=None,user_id=None,owner_screen_name=None,owner_id=None,slug=None,list_id=None,Access : _Access.StrongAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/post/lists/members/create
+         '''
+         if (Access == None):
+             Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         try:
+            resp=api.add_list_member(screen_name=screen_name,user_id=user_id,owner_screen_name=owner_screen_name,owner_id=owner_id,slug=slug,list_id=list_id)
+            return True
+         except tweepy.TweepError:
+             return False
+
+
 
 
 

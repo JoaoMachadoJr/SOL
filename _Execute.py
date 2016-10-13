@@ -253,7 +253,7 @@ Joao=acesso.me()
 SlytherinWorld=Actions.getUser("SlytherinWorld")
 print(SlytherinWorld.getIsMember(owner_screen_name="LainadAngouleme",slug="hogwarts"))
 '''
-
+'''
 #Pega a lista de usuarios de uma lista
 Joao= acesso.me()
 lista = _List.List()
@@ -261,7 +261,15 @@ lista.slug="pokemon"
 lista.user="LainadAngouleme"
 for tweet in lista.getMembers():
     print(tweet.name)
-
+'''
+'''
+#Adiciona um usuario a uma lista como membro
+Joao= acesso.me()
+lista = _List.List()
+lista.slug="minha-lista"
+lista.user="JoaoxMachado"
+print(lista.postMemberCreate(screen_name="NoMansSkyHub"))
+'''
 
 
 
@@ -337,7 +345,7 @@ for tweet in lista.getMembers():
                                                                                     (Redundante) POST lists/members/create_all
                                             GET lists/members/show
                                             GET lists/members
-POST lists/members/create
+                                            POST lists/members/create
 POST lists/destroy
 POST lists/update
 POST lists/create

@@ -453,8 +453,8 @@ class User:
 
      def getIsMember(self,list_id=None,slug=None,user_id=None,screen_name=None,owner_screen_name=None,owner_id=None,Access : _Access.WeakAccess = None):
         return _Actions.Actions.getUserIsMember(list_id=list_id,slug=slug,user_id=self.id,screen_name=self.screen_name,owner_screen_name=owner_screen_name,owner_id=owner_id,Access=Access)
-
-
+     def postBecomeMember(self,owner_screen_name=None,owner_id=None,slug=None,list_id=None,Access : _Access.StrongAccess = None):
+         return _Actions.Actions.postListMemberCreate(screen_name=self.screen_name,user_id=self.id,owner_screen_name=owner_screen_name,owner_id=owner_id,slug=slug,list_id=list_id,Access=Access)
 
 
      def __str__(self):
