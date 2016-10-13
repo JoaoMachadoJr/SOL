@@ -214,6 +214,19 @@ class Actions:
              lista.append(_User.User(dictionary=L.__dict__))
          return lista
 
+    def getList(owner_screen_name=None,owner_id=None,slug=None,list_id=None,Access : _Access.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/lists/show
+         '''
+         if (Access == None):
+             Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp=api.get_list(owner_screen_name=owner_screen_name,owner_id=owner_id,slug=slug,list_id=list_id)
+         return _List.List(dictionary=resp.__dict__)
+
+
+
     def postListMemberCreate(screen_name=None,user_id=None,owner_screen_name=None,owner_id=None,slug=None,list_id=None,Access : _Access.StrongAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/post/lists/members/create

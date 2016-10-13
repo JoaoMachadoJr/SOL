@@ -5,7 +5,9 @@ import _Access
 import _User
 import _Tweet
 class List:
-     def __init__(self, dictionary=dict()):
+     def __init__(self, id=None,dictionary=dict()):
+         if (id!=None):
+             dictionary= _Actions.Actions.getList(list_id=id).__dict__
          self.subscriber_count=""
          self.user=""
          self.mode=""
