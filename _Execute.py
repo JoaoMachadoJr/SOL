@@ -277,13 +277,21 @@ print(Actions.getList(owner_screen_name="joaoxmachado",slug="minha-lista"))
 #outra forma de fazer
 print(_List.List(id="768815374263607296").full_name)
 '''
+'''
 #Pega as listas onde estou inscrito
 Joao= acesso.me()
 for l in Joao.getListsSubscribed():
     print(l)
-
-
-
+'''
+'''
+#Trends por lugar
+Joao=acesso.me()
+print(_Actions.Actions.getTrendsByPlace(1)["trends"][0].keys())
+'''
+#Lugares com trends
+Joao=acesso.me()
+for lugar in _Actions.Actions.getTrendsAvailable():
+    print(lugar)
 
 
 
@@ -370,19 +378,19 @@ for l in Joao.getListsSubscribed():
                                             GET lists/show
                                             GET lists/subscriptions
 
-POST lists/members/destroy_all
-GET lists/ownerships
-GET saved_searches/list
-GET saved_searches/show/:id
-POST saved_searches/create
-POST saved_searches/destroy/:id
-GET geo/id/:place_id
-GET geo/reverse_geocode
-GET geo/search
-POST geo/place
+                                                                                    POST lists/members/destroy_all
+                                                                                    GET lists/ownerships
+                                                                                    GET saved_searches/list
+                                                                                    GET saved_searches/show/:id
+                                                                                    POST saved_searches/create
+                                                                                    POST saved_searches/destroy/:id
+                                                                                    GET geo/id/:place_id
+                                                                                    GET geo/reverse_geocode
+                                                                                    GET geo/search
+                                                                                    POST geo/place
 
-GET trends/place
-GET trends/available
+                                            GET trends/place
+                                            GET trends/available
                                             GET application/rate_limit_status
 GET help/configuration
 GET help/languages

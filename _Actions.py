@@ -5,6 +5,7 @@ import _Access
 import _Tweet
 import _DirectMessage
 import _List
+import _Place
 
 global defaultAccess
 defaultAccess=None
@@ -240,6 +241,31 @@ class Actions:
             return True
          except tweepy.TweepError:
              return False
+
+    def getTrendsByPlace(id=None,exclude=None,Access : _Access.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/trends/place
+         '''
+         if (Access == None):
+             Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp=api.trends_place(id=id,exclude=exclude)
+         return resp[0]
+
+    def getTrendsAvailable(Access : _Access.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/trends/available
+         '''
+         if (Access == None):
+             Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp=api.trends_available()
+         for place in resp:
+             lista.append(_Place.Place(dictionary=place))
+         return lista
+
     def getSubscriptionsFromUser(screen_name=None,user_id=None,cursor=None,Access : _Access.WeakAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/get/lists/subscriptions
