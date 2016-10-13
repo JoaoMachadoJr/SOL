@@ -240,6 +240,20 @@ class Actions:
             return True
          except tweepy.TweepError:
              return False
+    def getSubscriptionsFromUser(screen_name=None,user_id=None,cursor=None,Access : _Access.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/lists/subscriptions
+         '''
+         if (Access == None):
+             Access=defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp=api.lists_subscriptions(screen_name=screen_name,user_id=user_id,cursor=cursor)
+         for L in resp:
+             lista.append(_List.List(dictionary=L.__dict__))
+         return lista
+
+
 
 
 

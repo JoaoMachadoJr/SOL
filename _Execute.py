@@ -270,11 +270,28 @@ lista.slug="minha-lista"
 lista.user="JoaoxMachado"
 print(lista.postMemberCreate(screen_name="NoMansSkyHub"))
 '''
+'''
 #Pega informacoes de uma lista
 Joao= acesso.me()
 print(Actions.getList(owner_screen_name="joaoxmachado",slug="minha-lista"))
 #outra forma de fazer
 print(_List.List(id="768815374263607296").full_name)
+'''
+#Pega as listas onde estou inscrito
+Joao= acesso.me()
+for l in Joao.getListsSubscribed():
+    print(l)
+
+
+
+
+
+
+
+
+
+
+
 '''FALTA                                    JÁ FEITO                              REMOVIDOS (Incapacidade ou desinteresse em concluir)
 
                                             GET statuses/mentions_timeline
@@ -351,7 +368,7 @@ print(_List.List(id="768815374263607296").full_name)
                                                                                     POST lists/update
                                                                                     POST lists/create
                                             GET lists/show
-GET lists/subscriptions
+                                            GET lists/subscriptions
 
 POST lists/members/destroy_all
 GET lists/ownerships
