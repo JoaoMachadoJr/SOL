@@ -1,15 +1,17 @@
 __author__ = 'Joao'
-import _Utils
-class Hashtags:
+from SolTw import _Utils as _Utils
+
+
+class Bounding_box:
      def __init__(self, dictionary=dict()):
-         dictionary=_Utils.CastToDictionary(dictionary)
-         dictionary=_Utils.removeEmptyFields(dictionary)
-         self.indices=""
-         self.text=""
-         if ("indices" in dictionary):
-             self.indices=dictionary["indices"]
-         if ("text" in dictionary):
-             self.text=dictionary["text"]
+         dictionary= _Utils.CastToDictionary(dictionary)
+         dictionary= _Utils.removeEmptyFields(dictionary)
+         self.coordinates=""
+         self.type=""
+         if ("coordinates" in dictionary):
+             self.coordinates=dictionary["coordinates"]
+         if ("type" in dictionary):
+             self.type=dictionary["type"]
 
 
      def __str__(self):
@@ -20,7 +22,7 @@ class Hashtags:
          for key in lista:
              if dic[key]==None or dic[key]=="":
                  del dic[key]
-         return "HASHTAGS: "+str(dic)
+         return "BOUNDING_BOX: "+str(dic)
 
      def __repr__(self):
          dic=self.__dict__
@@ -30,4 +32,4 @@ class Hashtags:
          for key in lista:
              if dic[key]==None or dic[key]=="":
                  del dic[key]
-         return "HASHTAGS: "+str(dic)
+         return "BOUNDING_BOX: "+str(dic)

@@ -1,12 +1,14 @@
 __author__ = 'Joao'
-import _Utils
-import _Entity
-import _User
-import _Access
+from SolTw import  _StrongAccess as _StrongAccess
+from SolTw import _Entity as _Entity
+from SolTw import _TwitterUser as _TwitterUser
+from SolTw import _Utils as _Utils
+
+
 class DirectMessage:
      def __init__(self,id=None, dictionary=dict()):
-         dictionary=_Utils.CastToDictionary(dictionary)
-         dictionary=_Utils.removeEmptyFields(dictionary)
+         dictionary= _Utils.CastToDictionary(dictionary)
+         dictionary= _Utils.removeEmptyFields(dictionary)
          self.recipient_screen_name=""
          self._api=""
          self.id=id
@@ -26,11 +28,11 @@ class DirectMessage:
          if ("id" in dictionary):
              self.id=dictionary["id"]
          if ("recipient" in dictionary):
-             self.recipient=_User.User(dictionary=dictionary["recipient"])
+             self.recipient= _TwitterUser.TwitterUser(dictionary=dictionary["recipient"])
          if ("recipient_id" in dictionary):
              self.recipient_id=dictionary["recipient_id"]
          if ("entities" in dictionary):
-             self.entities=_Entity.Entity(dictionary=dictionary["entities"])
+             self.entities= _Entity.Entity(dictionary=dictionary["entities"])
          if ("recipient_id_str" in dictionary):
              self.recipient_id_str=dictionary["recipient_id_str"]
          if ("sender_screen_name" in dictionary):
@@ -44,12 +46,12 @@ class DirectMessage:
          if ("created_at" in dictionary):
              self.created_at=dictionary["created_at"]
          if ("sender" in dictionary):
-             self.sender=_User.User(dictionary=dictionary["sender"])
+             self.sender= _TwitterUser.TwitterUser(dictionary=dictionary["sender"])
          if ("sender_id_str" in dictionary):
              self.sender_id_str=dictionary["sender_id_str"]
 
-     def postDestroy(self, Access : _Access.StrongAccess = None):
-         return _User.User().postDestroyDirectMessage(id=self.id,Access=Access)
+     def postDestroy(self, Access : _StrongAccess.StrongAccess = None):
+         return _TwitterUser.TwitterUser().postDestroyDirectMessage(id=self.id,Access=Access)
 
      def __str__(self):
          dic=self.__dict__

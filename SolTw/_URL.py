@@ -1,10 +1,11 @@
 __author__ = 'Joao'
-import _Utils
+from SolTw import _Utils as _Utils
+
 
 class URL:
      def __init__(self, dictionary=dict()):
-         dictionary=_Utils.CastToDictionary(dictionary)
-         dictionary=_Utils.removeEmptyFields(dictionary)
+         dictionary= _Utils.CastToDictionary(dictionary)
+         dictionary= _Utils.removeEmptyFields(dictionary)
          self.display_url=""
          self.expanded_url=""
          self.indices=""

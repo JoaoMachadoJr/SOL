@@ -3,14 +3,9 @@ __author__ = 'Joao'
 #User_Facebook= User
 import sys
 sys.path.append("lib")
+from SolTw import  _StrongAccess as _StrongAccess
+from SolTw import _Actions
 
-import _User
-import _Access
-import _Actions
-import _Tweet
-import _User
-import _Actions
-import _List
 Actions = _Actions.Actions
 
 Consumer_Key = "aqJhPEV5nKmki92nM8kDKeJdR"
@@ -22,8 +17,8 @@ Access_Token="179494740-x4OS9UjoxYDOYElxh8izYMnca5V0ilq3yJpVZ3lR"
 #ID Smurf= 741008881145548800
 
 
-#acesso = _Access.StrongAccess(Consumer_Key,Consumer_Secret,Access_Token,Access_Token_Secret)
-acesso = _Access.StrongAccess(Consumer_Key,Consumer_Secret,Access_Token,Access_Token_Secret)
+#acesso = _StrongAccess.StrongAccess(Consumer_Key,Consumer_Secret,Access_Token,Access_Token_Secret)
+acesso = _StrongAccess.StrongAccess(Consumer_Key,Consumer_Secret,Access_Token,Access_Token_Secret)
 
 #Joao = Actions.me()
 #Joao2 = _Actions.Actions.getUser(741008881145548800)

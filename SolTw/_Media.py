@@ -1,11 +1,12 @@
 __author__ = 'Joao'
-import _Sizes
-import _Utils
+from SolTw import _Utils as _Utils
+from SolTw import _Sizes as _Sizes
+
 
 class Media:
      def __init__(self, id="",dictionary=dict()):
-         dictionary=_Utils.CastToDictionary(dictionary)
-         dictionary=_Utils.removeEmptyFields(dictionary)
+         dictionary= _Utils.CastToDictionary(dictionary)
+         dictionary= _Utils.removeEmptyFields(dictionary)
          self.display_url=""
          self.expanded_url=""
          self.id=id
@@ -33,7 +34,7 @@ class Media:
          if ("media_url_https" in dictionary):
              self.media_url_https=dictionary["media_url_https"]
          if ("sizes" in dictionary):
-             self.sizes=_Sizes.Sizes(dictionary=dictionary["sizes"])
+             self.sizes= _Sizes.Sizes(dictionary=dictionary["sizes"])
          if ("source_status_id" in dictionary):
              self.source_status_id=dictionary["source_status_id"]
          if ("source_status_id_str" in dictionary):

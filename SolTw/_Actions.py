@@ -1,55 +1,56 @@
 __author__ = 'Joao'
-import _User
 import lib.tweepy as tweepy
-import _Access
-import _Tweet
-import _DirectMessage
-import _List
-import _Place
+from SolTw import _DirectMessage as _DirectMessage
+from SolTw import _WeakAccess as _WeakAccess
+from SolTw import _StrongAccess as _StrongAccess
+from SolTw import _TwitterUser as _TwitterUser
+from SolTw import  _Tweet as _Tweet
+from SolTw import _List as _List
+from SolTw import _Place as _Place
 
 global defaultAccess
 defaultAccess=None
 
 class Actions:
 
-    def setDefaultAccess(Access : _Access.WeakAccess):
+    def setDefaultAccess(Access : _WeakAccess.WeakAccess):
         defaultAccess=Access
 
-    def getUser(UsernameOrId, Access : _Access.WeakAccess = None):
+    def getUser(UsernameOrId, Access : _WeakAccess.WeakAccess = None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
         user = api.get_user(UsernameOrId)
-        return _User.User(dictionary=user)
+        return _TwitterUser.TwitterUser(dictionary=user)
 
-    def getMultipleUsers(Ids_List, Access : _Access.WeakAccess = None):
+    def getMultipleUsers(Ids_List, Access : _WeakAccess.WeakAccess = None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
         users = api.lookup_users(Ids_List)
         lista = list()
         for user in users:
-            lista.append(_User.User(dictionary=user))
+            lista.append(_TwitterUser.TwitterUser(dictionary=user))
         return lista
 
-    def me(Access : _Access.WeakAccess = None):
+    def me(Access : _WeakAccess.WeakAccess = None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
-        return _User.User(dictionary=api.me())
+        return _TwitterUser.TwitterUser(dictionary=api.me())
 
-    def getTimelineFromUser(username, Access : _Access.WeakAccess=None, count=None, since_id=None, max_id=None, include_rts=False):
+    def getTimelineFromUser(username, Access : _WeakAccess.WeakAccess=None, count=None, since_id=None, max_id=None, include_rts=False):
         if (Access == None):
             Access=defaultAccess
         return Actions.getUser(username,Access).getTimeline(Access,count=count,since_id=since_id,max_id=max_id,include_rts=include_rts)
 
-    def getRetweetsFromTweet(id, Access : _Access.WeakAccess = None, count=None):
+    def getRetweetsFromTweet(id, Access : _WeakAccess.WeakAccess = None, count=None):
         return _Tweet.Tweet(id=id).getRetweets(Access=Access,count=count)
 
-    def getTweet(id, Access : _Access.WeakAccess = None):
+    def getTweet(id, Access : _WeakAccess.WeakAccess = None):
         return _Tweet.Tweet(id=id).getShow(Access)
 
-    def getOembedFromTweet( url,Access : _Access.WeakAccess = None, maxwidth=None, hide_media=None, omit_script=None,align=None,related=None,lang=None):
+    def getOembedFromTweet( url,Access : _WeakAccess.WeakAccess = None, maxwidth=None, hide_media=None, omit_script=None,align=None,related=None,lang=None):
         '''Retorna um Tweet em formato OEMBED, a partir de uma url
         documentado em https://dev.twitter.com/rest/reference/get/statuses/oembed
         '''
@@ -58,10 +59,10 @@ class Actions:
         api = tweepy.API(Access.auth)
         return api.get_oembed(url=url,maxwidth=maxwidth,hide_media=hide_media,omit_script=omit_script,align=align,related=related,lang=lang)
 
-    def getRetweetersFromTweet( id,Access : _Access.WeakAccess = None, cursor=None, stringify_ids=None):
+    def getRetweetersFromTweet( id,Access : _WeakAccess.WeakAccess = None, cursor=None, stringify_ids=None):
         return _Tweet.Tweet(id=id).getRetweeters(id=id,cursor=cursor,stringify_ids=stringify_ids)
 
-    def getMultipleTweet(ids : list, Access : _Access.WeakAccess = None, include_entities=None, trim_user=None, map=None):
+    def getMultipleTweet(ids : list, Access : _WeakAccess.WeakAccess = None, include_entities=None, trim_user=None, map=None):
          '''Pega os tweets a partir de uma lista de ids
          Documentado em https://dev.twitter.com/rest/reference/get/statuses/lookup
          '''
@@ -77,7 +78,7 @@ class Actions:
              lista.append(_Tweet.Tweet(dictionary=tweet))
          return lista;
 
-    def getMessagesSentByMe(Access : _Access.StrongAccess = None, since_id=None, max_id=None, count=None, page=None, full_text=None):
+    def getMessagesSentByMe(Access : _StrongAccess.StrongAccess = None, since_id=None, max_id=None, count=None, page=None, full_text=None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
@@ -87,7 +88,7 @@ class Actions:
             lista.append(_DirectMessage.DirectMessage(dictionary=m))
         return lista
 
-    def getMyMessages(Access : _Access.StrongAccess = None, since_id=None, max_id=None, count=None,  full_text=None):
+    def getMyMessages(Access : _StrongAccess.StrongAccess = None, since_id=None, max_id=None, count=None,  full_text=None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
@@ -97,14 +98,14 @@ class Actions:
             lista.append(_DirectMessage.DirectMessage(dictionary=m))
         return lista
 
-    def getMessageFromId(id,Access : _Access.StrongAccess = None, full_text=None):
+    def getMessageFromId(id,Access : _StrongAccess.StrongAccess = None, full_text=None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
         messages = api.get_direct_message(id=id,full_text=full_text)
         return _DirectMessage.DirectMessage(dictionary=messages)
 
-    def searchTweets(q, Access : _Access.WeakAccess = None,lang=None, locale=None, since_id=None, geocode=None,max_id=None, since=None, until=None, result_type=None, count=None,include_entities=None, from_=None, to=None, source=None):
+    def searchTweets(q, Access : _WeakAccess.WeakAccess = None,lang=None, locale=None, since_id=None, geocode=None,max_id=None, since=None, until=None, result_type=None, count=None,include_entities=None, from_=None, to=None, source=None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
@@ -114,19 +115,19 @@ class Actions:
             lista.append(_Tweet.Tweet(dictionary=m))
         return lista
 
-    def getFriendshipInfo(source_id=None, source_screen_name=None,target_id=None,target_screen_name=None, Access : _Access.WeakAccess = None):
+    def getFriendshipInfo(source_id=None, source_screen_name=None,target_id=None,target_screen_name=None, Access : _WeakAccess.WeakAccess = None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
         return api.show_friendship(source_id=source_id, source_screen_name=source_screen_name,target_id=target_id,target_screen_name=target_screen_name )
 
-    def postDestroyTweetById(id, Access : _Access.StrongAccess = None):
+    def postDestroyTweetById(id, Access : _StrongAccess.StrongAccess = None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
         return api.destroy_status(id)
 
-    def postTweet(msg,latitude=None,longitude=None,reply_to=None,place_id=None,Access : _Access.StrongAccess = None):
+    def postTweet(msg,latitude=None,longitude=None,reply_to=None,place_id=None,Access : _StrongAccess.StrongAccess = None):
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
@@ -135,7 +136,7 @@ class Actions:
     def postRetweet(id):
         return _Tweet.Tweet(id).postRetweet()
 
-    def getFavorites(user, page=0,Access : _Access.WeakAccess = None):
+    def getFavorites(user, page=0,Access : _WeakAccess.WeakAccess = None):
          if (Access == None):
             Access=defaultAccess
          api = tweepy.API(Access.auth)
@@ -145,7 +146,7 @@ class Actions:
              lista.append(_Tweet.Tweet(dictionary=u))
          return lista
 
-    def getTweetsFromList(owner_screen_name=None, slug=None, owner_id=None, list_id=None,since_id=None, max_id=None, count=None, include_rts=None,Access : _Access.WeakAccess = None):
+    def getTweetsFromList(owner_screen_name=None, slug=None, owner_id=None, list_id=None,since_id=None, max_id=None, count=None, include_rts=None,Access : _WeakAccess.WeakAccess = None):
          if (Access == None):
             Access=defaultAccess
          api = tweepy.API(Access.auth)
@@ -155,14 +156,14 @@ class Actions:
              lista.append(_Tweet.Tweet(dictionary=tweet))
          return lista
 
-    def postRemoveMemberFromList(screen_name=None, user_id=None, owner_screen_name=None,owner_id=None, slug=None, list_id=None,Access : _Access.WeakAccess = None):
+    def postRemoveMemberFromList(screen_name=None, user_id=None, owner_screen_name=None,owner_id=None, slug=None, list_id=None,Access : _WeakAccess.WeakAccess = None):
          if (Access == None):
             Access=defaultAccess
          api = tweepy.API(Access.auth)
          resp=api.remove_list_member(screen_name=screen_name, user_id=user_id, owner_screen_name=owner_screen_name, owner_id=owner_id, slug=slug, list_id=list_id)
          return resp
 
-    def getSubscribersFromList(owner_screen_name=None,slug=None,owner_id=None,list_id=None,cursor=None,Access : _Access.WeakAccess = None):
+    def getSubscribersFromList(owner_screen_name=None,slug=None,owner_id=None,list_id=None,cursor=None,Access : _WeakAccess.WeakAccess = None):
          '''
          Reference: list_subscribers
          '''
@@ -172,9 +173,9 @@ class Actions:
          lista = list()
          resp=api.list_subscribers(owner_screen_name=owner_screen_name,slug=slug,owner_id=owner_id,list_id=list_id,cursor=cursor)
          for U in resp:
-             lista.append(_User.User(dictionary=U.__dict__))
+             lista.append(_TwitterUser.TwitterUser(dictionary=U.__dict__))
          return lista
-    def getUserIsSubscriber(owner_screen_name=None,slug=None,screen_name=None,owner_id=None,list_id=None,user_id=None,Access : _Access.WeakAccess = None):
+    def getUserIsSubscriber(owner_screen_name=None,slug=None,screen_name=None,owner_id=None,list_id=None,user_id=None,Access : _WeakAccess.WeakAccess = None):
          '''
          Reference: https://dev.twitter.com/docs/api/1.1/get/lists/subscribers/show
          '''
@@ -188,7 +189,7 @@ class Actions:
          except tweepy.TweepError:
              return False
 
-    def getUserIsMember(list_id=None,slug=None,user_id=None,screen_name=None,owner_screen_name=None,owner_id=None,Access : _Access.WeakAccess = None):
+    def getUserIsMember(list_id=None,slug=None,user_id=None,screen_name=None,owner_screen_name=None,owner_id=None,Access : _WeakAccess.WeakAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/get/lists/members/show
          '''
@@ -202,7 +203,7 @@ class Actions:
          except tweepy.TweepError:
              return False
 
-    def getMembersFromList(owner_screen_name=None,slug=None,list_id=None,owner_id=None,cursor=None,Access : _Access.WeakAccess = None):
+    def getMembersFromList(owner_screen_name=None,slug=None,list_id=None,owner_id=None,cursor=None,Access : _WeakAccess.WeakAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/get/lists/members
          '''
@@ -212,10 +213,10 @@ class Actions:
          lista = list()
          resp=api.list_members(owner_screen_name=owner_screen_name,slug=slug,list_id=list_id,owner_id=owner_id,cursor=cursor)
          for L in resp:
-             lista.append(_User.User(dictionary=L.__dict__))
+             lista.append(_TwitterUser.TwitterUser(dictionary=L.__dict__))
          return lista
 
-    def getList(owner_screen_name=None,owner_id=None,slug=None,list_id=None,Access : _Access.WeakAccess = None):
+    def getList(owner_screen_name=None,owner_id=None,slug=None,list_id=None,Access : _WeakAccess.WeakAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/get/lists/show
          '''
@@ -228,7 +229,7 @@ class Actions:
 
 
 
-    def postListMemberCreate(screen_name=None,user_id=None,owner_screen_name=None,owner_id=None,slug=None,list_id=None,Access : _Access.StrongAccess = None):
+    def postListMemberCreate(screen_name=None,user_id=None,owner_screen_name=None,owner_id=None,slug=None,list_id=None,Access : _StrongAccess.StrongAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/post/lists/members/create
          '''
@@ -242,7 +243,7 @@ class Actions:
          except tweepy.TweepError:
              return False
 
-    def getTrendsByPlace(id=None,exclude=None,Access : _Access.WeakAccess = None):
+    def getTrendsByPlace(id=None,exclude=None,Access : _WeakAccess.WeakAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/get/trends/place
          '''
@@ -253,7 +254,7 @@ class Actions:
          resp=api.trends_place(id=id,exclude=exclude)
          return resp[0]
 
-    def getTrendsAvailable(Access : _Access.WeakAccess = None):
+    def getTrendsAvailable(Access : _WeakAccess.WeakAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/get/trends/available
          '''
@@ -266,7 +267,7 @@ class Actions:
              lista.append(_Place.Place(dictionary=place))
          return lista
 
-    def getSubscriptionsFromUser(screen_name=None,user_id=None,cursor=None,Access : _Access.WeakAccess = None):
+    def getSubscriptionsFromUser(screen_name=None,user_id=None,cursor=None,Access : _WeakAccess.WeakAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/get/lists/subscriptions
          '''
@@ -279,7 +280,7 @@ class Actions:
              lista.append(_List.List(dictionary=L.__dict__))
          return lista
 
-    def getTrendsClosest(lat=None,long=None,Access : _Access.WeakAccess = None):
+    def getTrendsClosest(lat=None,long=None,Access : _WeakAccess.WeakAccess = None):
          '''
          Reference: https://dev.twitter.com/rest/reference/get/trends/closest
          '''

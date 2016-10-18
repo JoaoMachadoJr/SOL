@@ -1,14 +1,14 @@
 __author__ = 'Joao'
-import _Media
-import _URL
-import _User_Mention
-import _Hashtags
-import _Utils
+from SolTw import _User_Mention as _User_Mention
+from SolTw import _Utils as _Utils
+from SolTw import _URL as _URL
+from SolTw import _Media as _Media
+from SolTw import _Hashtags as _Hashtags
 
 class Entity:
     def __init__(self, dictionary=dict()):
-        dictionary=_Utils.CastToDictionary(dictionary)
-        dictionary=_Utils.removeEmptyFields(dictionary)
+        dictionary= _Utils.CastToDictionary(dictionary)
+        dictionary= _Utils.removeEmptyFields(dictionary)
         self.hashtags = list()
         self.media = list()
         self.urls = list()

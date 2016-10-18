@@ -1,9 +1,9 @@
 __author__ = 'Joao'
-import _Actions
-import lib.tweepy as tweepy
-import _Access
-import _User
-import _Tweet
+from SolTw import _WeakAccess as _WeakAccess
+from SolTw import  _StrongAccess as _StrongAccess
+from SolTw import _Actions as _Actions
+
+
 class List:
      def __init__(self, id=None,dictionary=dict()):
          if (id!=None):
@@ -51,18 +51,18 @@ class List:
          if ("following" in dictionary):
              self.following=dictionary["following"]
 
-     def getTweets(self,max_id=None, count=None, include_rts=None,Access : _Access.WeakAccess = None):
+     def getTweets(self,max_id=None, count=None, include_rts=None,Access : _WeakAccess.WeakAccess = None):
          return _Actions.Actions.getTweetsFromList(owner_screen_name=self.user,slug=self.slug,max_id=max_id,count=count,include_rts=include_rts,Access=Access)
 
-     def postRemoveMember(self,member_id=None, member_screen_name=None,Access : _Access.WeakAccess = None):
+     def postRemoveMember(self,member_id=None, member_screen_name=None,Access : _WeakAccess.WeakAccess = None):
         return _Actions.Actions(screen_name=member_screen_name, user_id=member_id, owner_screen_name=self.user,owner_id=None, slug=self.slug, list_id=None)
 
-     def getSubscribers(self,cursor=None,Access : _Access.WeakAccess = None):
+     def getSubscribers(self,cursor=None,Access : _WeakAccess.WeakAccess = None):
         return _Actions.Actions.getSubscribersFromList(owner_screen_name=self.user,slug=self.slug,list_id=self.id,cursor=cursor,Access=Access)
-     def getMembers(self,cursor=None,Access : _Access.WeakAccess = None):
+     def getMembers(self,cursor=None,Access : _WeakAccess.WeakAccess = None):
          return _Actions.Actions.getMembersFromList(owner_screen_name=self.user,slug=self.slug,list_id=self.id)
 
-     def postMemberCreate(self,screen_name=None,user_id=None,Access : _Access.StrongAccess = None):
+     def postMemberCreate(self,screen_name=None,user_id=None,Access : _StrongAccess.StrongAccess = None):
          return _Actions.Actions.postListMemberCreate(screen_name=screen_name,user_id=user_id,owner_screen_name=self.user,slug=self.slug,list_id=self.id,Access=Access)
 
 
