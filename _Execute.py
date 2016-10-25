@@ -292,8 +292,8 @@ for lugar in _Actions.Actions.getTrendsAvailable():
 #Trends mais proximas
 Joao=acesso.me()
 print(_Actions.Actions.getTrendsClosest(0,0))
-
-
+print(Joao.name+" "+str(Joao.token))
+help(Joao)
 
 
 

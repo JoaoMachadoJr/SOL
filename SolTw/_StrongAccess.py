@@ -17,5 +17,5 @@ class StrongAccess(_WeakAccess.WeakAccess):
             _Actions.defaultAccess=self
 
     def me(self):
-        from SolTw import _TwitterUser
-        return _TwitterUser.TwitterUser(dictionary=tweepy.API(self.auth).me())
+        from SolTw import _AuthenticatedTwitterUser
+        return _AuthenticatedTwitterUser.AuthenticatedTwitterUser(self)

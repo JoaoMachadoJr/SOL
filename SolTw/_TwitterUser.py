@@ -162,17 +162,10 @@ class TwitterUser:
          return lista
 
      def getTimeline(self, Access : _WeakAccess.WeakAccess = None, count=None, since_id=None, max_id=None, include_rts=False):
-         '''Pega a timeline de um usuario
-         Documentado em https://dev.twitter.com/rest/reference/get/statuses/user_timeline
          '''
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         lista = list()
-         tweets = api.user_timeline(user_id=self.id ,count=count, since_id=since_id, max_id=max_id, include_rts=include_rts)
-         for tweet in tweets:
-            lista.append(_Tweet.Tweet(dictionary=tweet))
-         return lista;
+         Reference https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+         '''
+         return _Actions.Actions.getTimelineFromUser(username=self.screen_name,Access=Access,count=count,since_id=since_id,max_id=max_id,include_rts=include_rts)
 
      def getHomeTimeline(self, Access : _StrongAccess.StrongAccess = None, count=None, since_id=None, max_id=None):
          '''Pega os posts na HOME do usuario
@@ -270,8 +263,7 @@ class TwitterUser:
          api.send_direct_message(user=user,text=msg)
          return True
 
-     def getDirectMessages(self,Access : _StrongAccess.StrongAccess = None, since_id=None, max_id=None, count=None,  full_text=None):
-         return _Actions.Actions.getMyMessages(Access=Access, since_id=since_id,max_id=max_id,count=count,full_text=full_text)
+
 
      def postDestroyDirectMessage(self,id,Access : _StrongAccess.StrongAccess = None):
          if (Access == None):
@@ -470,6 +462,13 @@ class TwitterUser:
              if dic[key]==None or dic[key]=="":
                  del dic[key]
          return "USER: "+str(dic)
+
+     def getUser(UsernameOrId, Access : _WeakAccess.WeakAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/users/show
+        """
+         return _Actions.Actions.getUser(UsernameOrId,Access)
+
+
 
      def __repr__(self):
          dic=self.__dict__

@@ -53,6 +53,12 @@ class DirectMessage:
      def postDestroy(self, Access : _StrongAccess.StrongAccess = None):
          return _TwitterUser.TwitterUser().postDestroyDirectMessage(id=self.id,Access=Access)
 
+     def getShow(self,Access : _StrongAccess.StrongAccess = None,full_text=None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/direct_messages/show
+         """
+         from SolTw import _Actions
+         return _Actions.Actions.getMessageFromId(id=self.id,Access=Access,full_text=full_text)
+
      def __str__(self):
          dic=self.__dict__
          lista=list()

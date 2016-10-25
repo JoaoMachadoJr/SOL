@@ -105,39 +105,19 @@ class Tweet:
 
 
      def getRetweets(self, Access : _WeakAccess.WeakAccess = None, count=None):
-         '''Pega os retweets de um tweet especifico
-         Documentado em https://dev.twitter.com/rest/reference/get/statuses/retweets/%3Aid
+         '''Reference https://dev.twitter.com/rest/reference/get/statuses/show/%3Aid
          '''
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         tweets = api.retweets(id=self.id ,count=count)
-         lista = list()
-         for tweet in tweets:
-             lista.append(Tweet(dictionary=tweet))
-         return lista;
+         return _Actions.Actions.getRetweetsFromTweet(id=self.id,Access=Access,count=count)
 
      def getShow(self, Access : _WeakAccess.WeakAccess = None):
-         '''Pega informações de um tweet especifico
-         Documentado em https://dev.twitter.com/rest/reference/get/statuses/show/%3Aid
+         '''Reference https://dev.twitter.com/rest/reference/get/statuses/show/%3Aid
          '''
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         return Tweet(dictionary=api.get_status(id=self.id))
+         return _Actions.Actions.getTweet(id=self.id,Access=Access)
 
      def getRetweeters(self, Access : _WeakAccess.WeakAccess = None, cursor=None, stringify_ids=None):
-         '''Pega ua lista de IDs das pessoas que deram retweet em um tweet especifico
-         Documentado em https://dev.twitter.com/rest/reference/get/statuses/retweeters/ids
+         '''Reference https://dev.twitter.com/rest/reference/get/statuses/retweeters/ids
          '''
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         users = api.retweeters(id=self.id,cursor=cursor,stringify_ids=stringify_ids)
-         lista = list()
-         for user in users:
-             lista.append(_TwitterUser.TwitterUser(id=user))
-         return lista;
+         return _Actions.Actions.getRetweetersFromTweet(id=self.id,cursor=cursor,stringify_ids=stringify_ids,Access=Access)
 
      def postDestroy(self, Access : _StrongAccess.StrongAccess = None):
          '''Destroi um tweet
