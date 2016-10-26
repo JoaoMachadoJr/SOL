@@ -452,6 +452,9 @@ class TwitterUser:
          return _Actions.Actions.postListMemberCreate(screen_name=self.screen_name,user_id=self.id,owner_screen_name=owner_screen_name,owner_id=owner_id,slug=slug,list_id=list_id,Access=Access)
 
      def getListsSubscribed(self,cursor=None,Access : _WeakAccess.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/lists/subscriptions
+         '''
          return _Actions.Actions.getSubscriptionsFromUser(screen_name=self.screen_name,user_id=self.id,cursor=cursor,Access=Access)
      def __str__(self):
          dic=self.__dict__

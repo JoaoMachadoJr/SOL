@@ -204,6 +204,8 @@ class Actions:
              return False
 
     def getFavorites(user, page=0,Access : _WeakAccess.WeakAccess = None):
+         '''Reference: https://dev.twitter.com/rest/reference/get/favorites/list
+         '''
          if (Access == None):
             Access=defaultAccess
          api = tweepy.API(Access.auth)
@@ -214,6 +216,8 @@ class Actions:
          return lista
 
     def getTweetsFromList(owner_screen_name=None, slug=None, owner_id=None, list_id=None,since_id=None, max_id=None, count=None, include_rts=None,Access : _WeakAccess.WeakAccess = None):
+         '''Reference: https://dev.twitter.com/docs/api/1.1/get/lists/statuses
+         '''
          if (Access == None):
             Access=defaultAccess
          api = tweepy.API(Access.auth)
@@ -224,15 +228,21 @@ class Actions:
          return lista
 
     def postRemoveMemberFromList(screen_name=None, user_id=None, owner_screen_name=None,owner_id=None, slug=None, list_id=None,Access : _WeakAccess.WeakAccess = None):
+         '''Reference: https://dev.twitter.com/docs/api/1.1/post/lists/members/destroy
+         '''
          if (Access == None):
             Access=defaultAccess
          api = tweepy.API(Access.auth)
-         resp=api.remove_list_member(screen_name=screen_name, user_id=user_id, owner_screen_name=owner_screen_name, owner_id=owner_id, slug=slug, list_id=list_id)
-         return resp
+         try:
+             resp=api.remove_list_member(screen_name=screen_name, user_id=user_id, owner_screen_name=owner_screen_name, owner_id=owner_id, slug=slug, list_id=list_id)
+             return True
+         except tweepy.TweepError:
+            return False
+
 
     def getSubscribersFromList(owner_screen_name=None,slug=None,owner_id=None,list_id=None,cursor=None,Access : _WeakAccess.WeakAccess = None):
          '''
-         Reference: list_subscribers
+         Reference:  https://dev.twitter.com/docs/api/1.1/get/lists/subscribers
          '''
          if (Access == None):
              Access=defaultAccess

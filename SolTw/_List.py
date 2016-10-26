@@ -52,17 +52,29 @@ class List:
              self.following=dictionary["following"]
 
      def getTweets(self,max_id=None, count=None, include_rts=None,Access : _WeakAccess.WeakAccess = None):
+         '''Reference: https://dev.twitter.com/docs/api/1.1/get/lists/statuses
+         '''
          return _Actions.Actions.getTweetsFromList(owner_screen_name=self.user,slug=self.slug,max_id=max_id,count=count,include_rts=include_rts,Access=Access)
 
      def postRemoveMember(self,member_id=None, member_screen_name=None,Access : _WeakAccess.WeakAccess = None):
+        '''Reference: https://dev.twitter.com/docs/api/1.1/post/lists/members/destroy
+        '''
         return _Actions.Actions(screen_name=member_screen_name, user_id=member_id, owner_screen_name=self.user,owner_id=None, slug=self.slug, list_id=None)
 
      def getSubscribers(self,cursor=None,Access : _WeakAccess.WeakAccess = None):
-        return _Actions.Actions.getSubscribersFromList(owner_screen_name=self.user,slug=self.slug,list_id=self.id,cursor=cursor,Access=Access)
+         '''Reference:  https://dev.twitter.com/docs/api/1.1/get/lists/subscribers
+         '''
+         return _Actions.Actions.getSubscribersFromList(owner_screen_name=self.user,slug=self.slug,list_id=self.id,cursor=cursor,Access=Access)
      def getMembers(self,cursor=None,Access : _WeakAccess.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/lists/members
+         '''
          return _Actions.Actions.getMembersFromList(owner_screen_name=self.user,slug=self.slug,list_id=self.id)
 
      def postMemberCreate(self,screen_name=None,user_id=None,Access : _StrongAccess.StrongAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/post/lists/members/create
+         '''
          return _Actions.Actions.postListMemberCreate(screen_name=screen_name,user_id=user_id,owner_screen_name=self.user,slug=self.slug,list_id=self.id,Access=Access)
 
 

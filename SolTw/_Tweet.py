@@ -133,6 +133,8 @@ class Tweet:
          return True
 
      def postRetweet(self,Access : _StrongAccess.StrongAccess = None ):
+         '''Reference:  https://dev.twitter.com/rest/reference/post/statuses/retweet/%3Aid
+         '''
          return _Actions.Actions.postRetweet(self.id,Access)
 
      def postFavoriteCreate(self,Access  : _StrongAccess.StrongAccess = None ):
