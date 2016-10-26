@@ -7,12 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="705aa28b-7975-4d2e-b2d7-43149a16a745" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolTw/_Actions.py" afterPath="$PROJECT_DIR$/SolTw/_Actions.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py" afterPath="$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolTw/_DirectMessage.py" afterPath="$PROJECT_DIR$/SolTw/_DirectMessage.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_Execute.py" afterPath="$PROJECT_DIR$/_Execute.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolTw/_StrongAccess.py" afterPath="$PROJECT_DIR$/SolTw/_StrongAccess.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolTw/_Tweet.py" afterPath="$PROJECT_DIR$/SolTw/_Tweet.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolTw/_TwitterUser.py" afterPath="$PROJECT_DIR$/SolTw/_TwitterUser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FacebookOrganizado.iws" />
@@ -59,11 +54,43 @@
       <file leaf-file-name="_Actions.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SolTw/_Actions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3617021" vertical-offset="2686" max-vertical-offset="6069">
-              <caret line="168" column="8" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.21702127" vertical-offset="3383" max-vertical-offset="6460">
+              <caret line="205" column="14" selection-start-line="205" selection-start-column="14" selection-end-line="205" selection-end-column="14" />
               <folding>
                 <element signature="e#20#47#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="streaming.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/tweepy/streaming.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="6418" max-vertical-offset="7735">
+              <caret line="404" column="8" selection-start-line="404" selection-start-column="8" selection-end-line="404" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_Tweet.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SolTw/_Tweet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1978" max-vertical-offset="2975">
+              <caret line="127" column="44" selection-start-line="127" selection-start-column="44" selection-end-line="127" selection-end-column="44" />
+              <folding>
+                <element signature="e#20#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/tweepy/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1471" max-vertical-offset="8449">
+              <caret line="107" column="8" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -83,8 +110,8 @@
       <file leaf-file-name="api.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tweepy/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="7953" max-vertical-offset="22848">
-              <caret line="488" column="83" selection-start-line="488" selection-start-column="13" selection-end-line="488" selection-end-column="83" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3890" max-vertical-offset="22848">
+              <caret line="249" column="90" selection-start-line="249" selection-start-column="23" selection-end-line="249" selection-end-column="90" />
               <folding />
             </state>
           </provider>
@@ -93,7 +120,7 @@
       <file leaf-file-name="_TwitterUser.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SolTw/_TwitterUser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.0689654" vertical-offset="4392" max-vertical-offset="8296">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4392" max-vertical-offset="8296">
               <caret line="267" column="33" selection-start-line="267" selection-start-column="26" selection-end-line="267" selection-end-column="33" />
               <folding>
                 <element signature="e#20#70#0" expanded="true" />
@@ -114,43 +141,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_WeakAccess.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_WeakAccess.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="259" max-vertical-offset="578">
-              <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="_AuthenticatedTwitterUser.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="142" max-vertical-offset="731">
               <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_Tweet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_Tweet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2505" max-vertical-offset="3128">
-              <caret line="119" column="122" selection-start-line="119" selection-start-column="122" selection-end-line="119" selection-end-column="122" />
-              <folding>
-                <element signature="e#20#64#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_User_Mention.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_User_Mention.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="833">
-              <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -210,11 +205,11 @@
         <option value="$PROJECT_DIR$/SolTw/_StrongAccess.py" />
         <option value="$PROJECT_DIR$/_Execute.py" />
         <option value="$PROJECT_DIR$/SolTw/__init__.py" />
-        <option value="$PROJECT_DIR$/SolTw/_Tweet.py" />
         <option value="$PROJECT_DIR$/SolTw/_TwitterUser.py" />
         <option value="$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py" />
         <option value="$PROJECT_DIR$/SolTw/_DirectMessage.py" />
         <option value="$PROJECT_DIR$/SolTw/_Actions.py" />
+        <option value="$PROJECT_DIR$/SolTw/_Tweet.py" />
       </list>
     </option>
   </component>
@@ -779,7 +774,13 @@
       <option name="project" value="LOCAL" />
       <updated>1476832267886</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Comecei a redistribuir os metodos nas classes certas">
+      <created>1477358894561</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1477358894561</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -787,7 +788,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29471228" sideWeight="0.62035227" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29937792" sideWeight="0.62035227" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.035849057" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -796,7 +797,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32830188" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29471228" sideWeight="0.37964776" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29937792" sideWeight="0.37964776" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -839,7 +840,8 @@
     <MESSAGE value="GET trends/place&#10;GET trends/available" />
     <MESSAGE value="GET trends/closest" />
     <MESSAGE value="Criei package para o twitter" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criei package para o twitter" />
+    <MESSAGE value="Comecei a redistribuir os metodos nas classes certas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Comecei a redistribuir os metodos nas classes certas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -848,13 +850,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SolFB/_Feed_Targeting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
-          <caret line="30" column="10" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolFB/_Group.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4029">
@@ -995,13 +990,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tweepy/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33157894" vertical-offset="1421" max-vertical-offset="8449">
-          <caret line="93" column="29" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolFB/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3448275" vertical-offset="429" max-vertical-offset="748">
@@ -1118,7 +1106,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1149,9 +1136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="123" max-vertical-offset="442">
           <caret line="20" column="70" selection-start-line="20" selection-start-column="70" selection-end-line="20" selection-end-column="70" />
-          <folding>
-            <element signature="e#20#47#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1165,38 +1149,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_Tweet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1811" max-vertical-offset="3128">
-          <caret line="119" column="122" selection-start-line="119" selection-start-column="122" selection-end-line="119" selection-end-column="122" />
-          <folding>
-            <element signature="e#20#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="142" max-vertical-offset="731">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_TwitterUser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0689654" vertical-offset="4392" max-vertical-offset="8296">
-          <caret line="267" column="33" selection-start-line="267" selection-start-column="26" selection-end-line="267" selection-end-column="33" />
-          <folding>
-            <element signature="e#20#70#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_Execute.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4743" max-vertical-offset="6885">
-          <caret line="294" column="36" selection-start-line="294" selection-start-column="36" selection-end-line="294" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -1211,18 +1167,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SolTw/_TwitterUser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4392" max-vertical-offset="8296">
+          <caret line="267" column="33" selection-start-line="267" selection-start-column="26" selection-end-line="267" selection-end-column="33" />
+          <folding>
+            <element signature="e#20#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tweepy/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1624" max-vertical-offset="8449">
+          <caret line="107" column="8" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tweepy/streaming.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6418" max-vertical-offset="7735">
+          <caret line="404" column="8" selection-start-line="404" selection-start-column="8" selection-end-line="404" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/tweepy/api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7953" max-vertical-offset="22848">
-          <caret line="488" column="83" selection-start-line="488" selection-start-column="13" selection-end-line="488" selection-end-column="83" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3890" max-vertical-offset="22848">
+          <caret line="249" column="90" selection-start-line="249" selection-start-column="23" selection-end-line="249" selection-end-column="90" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_Execute.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4743" max-vertical-offset="6885">
+          <caret line="294" column="36" selection-start-line="294" selection-start-column="36" selection-end-line="294" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolTw/_Tweet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1978" max-vertical-offset="2975">
+          <caret line="127" column="44" selection-start-line="127" selection-start-column="44" selection-end-line="127" selection-end-column="44" />
+          <folding>
+            <element signature="e#20#64#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SolTw/_Actions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3617021" vertical-offset="2686" max-vertical-offset="6069">
-          <caret line="168" column="8" selection-start-line="168" selection-start-column="8" selection-end-line="168" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.21702127" vertical-offset="3383" max-vertical-offset="6460">
+          <caret line="205" column="14" selection-start-line="205" selection-start-column="14" selection-end-line="205" selection-end-column="14" />
           <folding>
             <element signature="e#20#47#0" expanded="true" />
           </folding>

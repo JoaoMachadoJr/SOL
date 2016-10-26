@@ -166,19 +166,42 @@ class Actions:
         return api.show_friendship(source_id=source_id, source_screen_name=source_screen_name,target_id=target_id,target_screen_name=target_screen_name )
 
     def postDestroyTweetById(id, Access : _StrongAccess.StrongAccess = None):
+        '''Reference: reference: https://dev.twitter.com/rest/reference/post/statuses/destroy/%3Aid
+        '''
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
-        return api.destroy_status(id)
+        try:
+            api.destroy_status(id)
+            return True
+        except tweepy.TweepError:
+            return False
 
     def postTweet(msg,latitude=None,longitude=None,reply_to=None,place_id=None,Access : _StrongAccess.StrongAccess = None):
+        '''Reference: https://dev.twitter.com/rest/reference/post/statuses/update
+        '''
         if (Access == None):
             Access=defaultAccess
         api = tweepy.API(Access.auth)
-        return api.update_status(lat=latitude,long=longitude,status=msg,in_reply_to_status_id=reply_to,place_id=place_id)
+        try:
+            api.update_status(lat=latitude,long=longitude,status=msg,in_reply_to_status_id=reply_to,place_id=place_id)
+            return True;
+        except tweepy.TweepError:
+             return False
 
-    def postRetweet(id):
-        return _Tweet.Tweet(id).postRetweet()
+
+    def postRetweet(id,Access : _StrongAccess.StrongAccess = None):
+         '''Reference:  https://dev.twitter.com/rest/reference/post/statuses/retweet/%3Aid
+         '''
+         if (Access == None):
+             Access= defaultAccess
+         api=tweepy.API(Access.auth)
+         try:
+             api.retweet(id)
+             api.retweets
+             return True
+         except tweepy.TweepError:
+             return False
 
     def getFavorites(user, page=0,Access : _WeakAccess.WeakAccess = None):
          if (Access == None):

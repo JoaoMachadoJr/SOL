@@ -120,14 +120,10 @@ class Tweet:
          return _Actions.Actions.getRetweetersFromTweet(id=self.id,cursor=cursor,stringify_ids=stringify_ids,Access=Access)
 
      def postDestroy(self, Access : _StrongAccess.StrongAccess = None):
-         '''Destroi um tweet
+         '''
          Documentado em https://dev.twitter.com/rest/reference/post/statuses/destroy/%3Aid
          '''
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         api.destroy_status(self.id)
-         return True
+         return _Actions.Actions.postDestroyTweetById(id=self.id,Access=Access)
 
      def postReply(self, msg,latitude=None,longitude=None,place_id=None,Access : _StrongAccess.StrongAccess = None):
          if (Access == None):
@@ -137,12 +133,7 @@ class Tweet:
          return True
 
      def postRetweet(self,Access : _StrongAccess.StrongAccess = None ):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api=tweepy.API(Access.auth)
-         api.retweet(self.id)
-         api.retweets
-         return True
+         return _Actions.Actions.postRetweet(self.id,Access)
 
      def postFavoriteCreate(self,Access  : _StrongAccess.StrongAccess = None ):
          if (Access == None):
