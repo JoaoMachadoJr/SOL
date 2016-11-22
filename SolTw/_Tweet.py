@@ -126,11 +126,10 @@ class Tweet:
          return _Actions.Actions.postDestroyTweetById(id=self.id,Access=Access)
 
      def postReply(self, msg,latitude=None,longitude=None,place_id=None,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api=tweepy.API(Access.auth)
-         api.update_status(in_reply_to_status_id=self.id, lat=latitude,long=longitude,status=msg,place_id=place_id)
-         return True
+         """ :reference: https://dev.twitter.com/rest/reference/post/statuses/update
+            :allowed_param:'status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id', 'display_coordinates', 'media_ids'
+         """
+         return _Actions.Actions.postReply(id=self.id,msg=msg,latitude=latitude,longitude=longitude,place_id=place_id,Access=Access)
 
      def postRetweet(self,Access : _StrongAccess.StrongAccess = None ):
          '''Reference:  https://dev.twitter.com/rest/reference/post/statuses/retweet/%3Aid
@@ -138,16 +137,14 @@ class Tweet:
          return _Actions.Actions.postRetweet(self.id,Access)
 
      def postFavoriteCreate(self,Access  : _StrongAccess.StrongAccess = None ):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api=tweepy.API(Access.auth)
-         return Tweet(dictionary=api.create_favorite(id=self.id))
+         ''' :reference:https://dev.twitter.com/rest/reference/post/favorites/create
+         '''
+         return _Actions.Actions.postFavoriteTweetCreate(id=self.id,Access=Access)
 
      def postFavoriteDestroy(self,Access  : _StrongAccess.StrongAccess = None ):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api=tweepy.API(Access.auth)
-         return Tweet(dictionary=api.destroy_favorite(id=self.id))
+         ''' :reference:https://dev.twitter.com/rest/reference/post/favorites/destroy
+         '''
+         return _Actions.Actions.postFavoriteTweetDestroy(id=self.id,Access=Access)
 
 
 

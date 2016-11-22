@@ -264,13 +264,6 @@ class TwitterUser:
          return True
 
 
-
-     def postDestroyDirectMessage(self,id,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         return _DirectMessage.DirectMessage(dictionary= api.destroy_direct_message(id=id))
-
      def postFriendshipCreate(self, user,follow : bool=None,Access : _StrongAccess.StrongAccess = None):
         if (Access == None):
             Access= _Actions.defaultAccess

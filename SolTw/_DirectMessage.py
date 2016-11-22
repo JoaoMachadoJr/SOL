@@ -3,7 +3,7 @@ from SolTw import  _StrongAccess as _StrongAccess
 from SolTw import _Entity as _Entity
 from SolTw import _TwitterUser as _TwitterUser
 from SolTw import _Utils as _Utils
-
+from SolTw import _Actions as _Actions
 
 class DirectMessage:
      def __init__(self,id=None, dictionary=dict()):
@@ -51,7 +51,10 @@ class DirectMessage:
              self.sender_id_str=dictionary["sender_id_str"]
 
      def postDestroy(self, Access : _StrongAccess.StrongAccess = None):
-         return _TwitterUser.TwitterUser().postDestroyDirectMessage(id=self.id,Access=Access)
+         """ :reference: https://dev.twitter.com/rest/reference/post/direct_messages/destroy
+            :allowed_param:'id'
+         """
+         return _Actions.Actions.postDestroyDirectMessage(id=self.id,Access=Access)
 
      def getShow(self,Access : _StrongAccess.StrongAccess = None,full_text=None):
          """ :reference: https://dev.twitter.com/rest/reference/get/direct_messages/show

@@ -368,7 +368,42 @@ class Actions:
          resp=api.trends_closest(lat=lat,long=long)
          return resp[0]
 
+    def postDestroyDirectMessage(self,id,Access : _StrongAccess.StrongAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/post/direct_messages/destroy
+            :allowed_param:'id'
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         return _DirectMessage.DirectMessage(dictionary= api.destroy_direct_message(id=id))
 
+    def postReply( id,msg,latitude=None,longitude=None,place_id=None,Access : _StrongAccess.StrongAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/post/statuses/update
+            :allowed_param:'status', 'in_reply_to_status_id', 'lat', 'long', 'source', 'place_id', 'display_coordinates', 'media_ids'
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api=tweepy.API(Access.auth)
+         resp=api.update_status(in_reply_to_status_id=id, lat=latitude,long=longitude,status=msg,place_id=place_id)
+         return _Tweet.Tweet(dictionary=resp.__dictt__())
+
+    def postFavoriteTweetCreate(id,Access  : _StrongAccess.StrongAccess = None ):
+         ''' :reference:https://dev.twitter.com/rest/reference/post/favorites/create
+         '''
+         from SolTw import _Tweet
+         if (Access == None):
+            Access= defaultAccess
+         api=tweepy.API(Access.auth)
+         return _Tweet.Tweet(dictionary=api.create_favorite(id=id))
+
+    def postFavoriteTweetDestroy(id,Access  : _StrongAccess.StrongAccess = None ):
+         ''' :reference:https://dev.twitter.com/rest/reference/post/favorites/destroy
+         '''
+         from SolTw import _Tweet
+         if (Access == None):
+            Access= defaultAccess
+         api=tweepy.API(Access.auth)
+         return _Tweet.Tweet(dictionary=api.destroy_favorite(id=id))
 
 
 
