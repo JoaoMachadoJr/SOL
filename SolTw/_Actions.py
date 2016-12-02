@@ -405,12 +405,96 @@ class Actions:
          api=tweepy.API(Access.auth)
          return _Tweet.Tweet(dictionary=api.destroy_favorite(id=id))
 
+    def getMentionsTimelineFromUser( Access : _StrongAccess.StrongAccess = None, count=None, since_id=None, max_id=None):
+        '''
+            Reference: https://dev.twitter.com/rest/reference/get/statuses/mentions_timeline
+        '''
+        if (Access == None):
+            Access= defaultAccess
+        api = tweepy.API(Access.auth)
+        mentions = api.mentions_timeline(count=count, since_id=since_id, max_id=max_id)
+        lista = list()
+        for mention in mentions:
+            lista.append(_Tweet.Tweet(dictionary=mention))
+        return lista
 
+    def getHomeTimelineFromUser( Access : _StrongAccess.StrongAccess = None,id=id, count=None, since_id=None, max_id=None):
+         '''
+            Reference: https://dev.twitter.com/rest/reference/get/statuses/home_timeline
+         '''
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         tweets = api.home_timeline(user_id=id ,count=count, since_id=since_id, max_id=max_id)
+         lista = list()
+         for tweet in tweets:
+             lista.append(_Tweet.Tweet(dictionary=tweet))
+         return lista;
 
+    def getFriendsFromUser(id, Access : _WeakAccess.WeakAccess = None, cursor=None):
+         '''Pega os amigos do usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/friends/ids
+         '''
+         from SolTw import _TwitterUser
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         friends = api.friends_ids(user_id=id, cursor=cursor)
+         lista = list()
+         for f in friends:
+             lista.append(_TwitterUser.TwitterUser(id=f))
+         return lista;
 
+    def getFollowersFromUser( id,Access : _WeakAccess.WeakAccess = None, cursor=None, count=None):
+         '''Pega os seguidores do usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/followers/ids
+         '''
+         from SolTw import _TwitterUser
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         users = api.followers_ids(user_id=id, cursor=cursor,count=count)
+         lista = list()
+         for u in users:
+             lista.append(_TwitterUser.TwitterUser(id=u))
+         return lista;
 
+    def getFriendshipIncomingFromUser(id, Access : _StrongAccess.StrongAccess = None, cursor=None):
+         '''Pega requisições de amizade do usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/friendships/incoming
+         '''
+         from SolTw import _TwitterUser
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         friends = api.friendships_incoming( cursor=cursor)
+         lista = list()
+         for f in friends:
+             lista.append(_TwitterUser.TwitterUser(id=f))
+         return lista;
 
-
+    def getFriendshipOutgoingFromUser( Access : _StrongAccess.StrongAccess = None, cursor=None):
+         '''Pega requisições de amizade feita pelo usuario
+         Documentado em https://dev.twitter.com/rest/reference/get/friendships/outgoing
+         '''
+         from SolTw import _TwitterUser
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         friends = api.friendships_outgoing( cursor=cursor)
+         lista = list()
+         for f in friends:
+             lista.append(_TwitterUser.TwitterUser(id=f))
+         return lista;
+    def postTweet( msg,latitude=None,longitude=None,place_id=None,Access : _StrongAccess.StrongAccess = None):
+         '''
+            reference: https://dev.twitter.com/rest/reference/post/statuses/update
+         '''
+         if (Access == None):
+            Access= defaultAccess
+         api=tweepy.API(Access.auth)
+         api.update_status(lat=latitude,long=longitude,status=msg,place_id=place_id)
+         return True
 
 
 
