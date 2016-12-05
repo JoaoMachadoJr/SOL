@@ -157,148 +157,21 @@ class TwitterUser:
 
      def getFriends(self, Access : _WeakAccess.WeakAccess = None, cursor=None):
          '''Pega os amigos do usuario
-         Documentado em https://dev.twitter.com/rest/reference/get/friends/ids
+         Documentado em https://dev.twitter.com/rest/reference/get/friends/list
          '''
          return _Actions.Actions.getFriendsFromUser(id=self.id,Access=Access,cursor=cursor)
 
      def getFollowers(self, Access : _WeakAccess.WeakAccess = None, cursor=None, count=None):
          '''Pega os seguidores do usuario
-         Documentado em https://dev.twitter.com/rest/reference/get/followers/ids
+         Documentado em https://dev.twitter.com/rest/reference/get/followers/list
          '''
          return _Actions.Actions.getFollowersFromUser(self.id,Access,cursor,count)
 
-
-
-
-
-     def postDirectMessage(self, receiver, msg,Access : _StrongAccess.StrongAccess = None ):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         if (isinstance(receiver,TwitterUser)):
-             user=receiver.id
-         api.send_direct_message(user=user,text=msg)
-         return True
-
-
-     def postFriendshipCreate(self, user,follow : bool=None,Access : _StrongAccess.StrongAccess = None):
-        if (Access == None):
-            Access= _Actions.defaultAccess
-        api = tweepy.API(Access.auth)
-        return TwitterUser(dictionary=api.create_friendship(id=user,follow=follow))
-
-     def postFriendshipDestroy(self,user,Access : _StrongAccess.StrongAccess = None):
-        if (Access == None):
-            Access= _Actions.defaultAccess
-        api = tweepy.API(Access.auth)
-        return TwitterUser(dictionary=api.destroy_friendship(id=user))
-
-     def getFriends(self, Access : _WeakAccess.WeakAccess = None, cursor=None, count=None):
-         '''Pega os amigos do usuario
-         https://dev.twitter.com/rest/reference/get/friends/list
-         '''
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         users = api.friends(id=self.id,cursor=cursor,count=count)
-         lista = list()
-         for u in users:
-             lista.append(TwitterUser(dictionary=u))
-         return lista;
-
-     def getFollowers(self, Access : _WeakAccess.WeakAccess = None, cursor=None, count=None):
-         '''Pega os amigos do usuario
-         dev.twitter.com/rest/reference/get/followers/list
-         '''
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         users = api.followers(id=self.id,cursor=cursor,count=count)
-         lista = list()
-         for u in users:
-             lista.append(TwitterUser(dictionary=u))
-         return lista;
-
      def getFriendship(self,target_screen_name:str,Access : _WeakAccess.WeakAccess = None):
-          if (Access == None):
-            Access= _Actions.defaultAccess
-          api = tweepy.API(Access.auth)
-          resp=api.show_friendship(source_id=self.id,target_screen_name=target_screen_name)
-          f1= _Friendship.Friendship(resp[0].__dict__)
-          f2= _Friendship.Friendship(resp[1].__dict__)
-          return (f1,f2)
-
-     def postUpdateProfile(self,name=None,url=None,location=None,description=None,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         resp=api.update_profile(name=name,url=url,location=location,description=description)
-         return TwitterUser(dictionary=resp)
-
-     def postUpdateProfileImage(self,filePath,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         resp=api.update_profile_image(filename=filePath)
-         return TwitterUser(dictionary=resp)
-
-     def postUpdateProfileBanner(self,filePath,width=None, height=None, offset_left=None, offset_right=None,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         resp=api.update_profile_banner(filename=filePath, width=width, height=height, offset_left=offset_left, offset_right=offset_right)
-         return resp==None
-
-     def getSuggestedUsersBySlug(self,slug,lang=None,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         resp=api.suggested_users(slug=slug,lang=lang)
-         lista=list()
-         for u in resp:
-             lista.append(TwitterUser(dictionary=u))
-         return lista
-
-     def getSuggestedUsersWithTweetBySlug(self,slug,lang=None,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         resp=api.suggested_users_tweets(slug=slug,lang=lang)
-         lista=list()
-         for u in resp:
-             lista.append(TwitterUser(dictionary=u))
-         return lista
-
-     def getSuggestedCategories(self,lang=None,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         resp=api.suggested_categories(lang=lang)
-         return resp
-
-     def getBlocks(self,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         users = api.blocks()
-         lista = list()
-         for u in users:
-             lista.append(TwitterUser(dictionary=u))
-         return lista;
-
-     def postBlockCreate(self,user,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         resp=api.create_block(id=user)
-         return TwitterUser(dictionary=resp)
-
-     def postBlockDestroy(self,user,Access : _StrongAccess.StrongAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         resp=api.destroy_block(id=user)
-         return TwitterUser(dictionary=resp)
+          """ :reference: https://dev.twitter.com/rest/reference/get/friendships/show
+            :allowed_param:'source_id', 'source_screen_name'
+          """
+          return _Actions.Actions.getFriendship(self.id,target_screen_name,Access)
 
      def getFavorites(self,page=0,Access : _WeakAccess.WeakAccess = None):
          if not self.screen_name:
@@ -307,26 +180,16 @@ class TwitterUser:
             return _Actions.Actions.getFavorites(user=self.screen_name,page=page)
 
      def getLists(self,cursor=None,Access : _WeakAccess.WeakAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         lista = list()
-         resp= api.lists_all(screen_name=self.screen_name)
-         for l in resp:
-             lista.append(_List.List(dictionary=l.__dict__))
-         return lista
-
-
+         """ :reference: https://dev.twitter.com/rest/reference/get/lists/list
+            '
+         """
+         return _Actions.Actions.getListsFromUser(self.screen_name,Access)
 
      def getListsMembership(self,count=None, cursor=None,filter_to_owned_lists=None,Access : _WeakAccess.WeakAccess = None):
-         if (Access == None):
-            Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         lista = list()
-         resp= api.lists_memberships(screen_name=self.screen_name,filter_to_owned_lists=filter_to_owned_lists,cursor=cursor,count=count)
-         for l in resp:
-             lista.append(_List.List(dictionary=l.__dict__))
-         return lista
+         """ :reference: https://dev.twitter.com/rest/reference/get/lists/memberships
+
+         """
+         return _Actions.Actions.getListsMembershipFromUser(self.screen_name,count,cursor,filter_to_owned_lists,Access)
 
      def postSubscribe(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _StrongAccess.StrongAccess = None):
          '''

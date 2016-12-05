@@ -55,7 +55,64 @@ class AuthenticatedTwitterUser(_TwitterUser.TwitterUser):
          '''
          return _Actions.Actions.postTweet(msg,latitude,longitude,place_id,self.token)
 
+    def postDirectMessage(self, receiver, msg ):
+         ''' :reference: https://dev.twitter.com/rest/reference/post/direct_messages/new
+
+         '''
+         return _Actions.Actions.postDirectMessage(receiver,msg,self.token)
 
 
+    def postFriendshipCreate(self, user,follow : bool=None):
+        """ :reference: https://dev.twitter.com/rest/reference/post/direct_messages/new
+
+        """
+        return _Actions.Actions.postFriendshipCreate(user,follow,self.token)
+
+    def postFriendshipDestroy(self,user):
+        """ :reference: https://dev.twitter.com/rest/reference/post/direct_messages/new
+
+        """
+        return _Actions.Actions.postFriendshipDestroy(user,self.token)
+
+    def postUpdateProfile(self,name=None,url=None,location=None,description=None):
+         """ :reference: https://dev.twitter.com/rest/reference/post/account/update_profile
+         """
+         return _Actions.Actions.postUpdateProfile(name,url,location,description,self.token)
+
+    def getSuggestedUsersBySlug(self,slug,lang=None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/users/suggestions/%3Aslug
+
+         """
+         return _Actions.Actions.getSuggestedUsersBySlug(slug,lang,self.token)
+
+    def getSuggestedUsersWithTweetBySlug(self,slug,lang=None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/users/suggestions/%3Aslug/members
+
+         """
+         return _Actions.Actions.getSuggestedUsersWithTweetBySlug(slug,lang,self.token)
+
+    def getSuggestedCategories(self,lang=None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/users/suggestions
+
+         """
+         return _Actions.Actions.getSuggestedCategories(lang,self.token)
+
+    def getBlocks(self):
+         """ :reference: https://dev.twitter.com/rest/reference/get/blocks/list
+            :allowed_param:'cursor'
+         """
+         return _Actions.Actions.getBlocks(self.token)
+
+    def postBlockCreate(self,user):
+         """ :reference: https://dev.twitter.com/rest/reference/post/blocks/create
+            :allowed_param:'id', 'user_id', 'screen_name'
+         """
+         return _Actions.Actions.postBlockCreate(user,self.token)
+
+    def postBlockDestroy(self,user):
+         """ :reference: https://dev.twitter.com/rest/reference/post/blocks/destroy
+            :allowed_param:'id', 'user_id', 'screen_name'
+         """
+         return _Actions.Actions.postBlockDestroy(user,self.token)
 
 

@@ -433,30 +433,30 @@ class Actions:
 
     def getFriendsFromUser(id, Access : _WeakAccess.WeakAccess = None, cursor=None):
          '''Pega os amigos do usuario
-         Documentado em https://dev.twitter.com/rest/reference/get/friends/ids
+         Documentado em https://dev.twitter.com/rest/reference/get/friends/list
          '''
          from SolTw import _TwitterUser
          if (Access == None):
             Access= defaultAccess
          api = tweepy.API(Access.auth)
-         friends = api.friends_ids(user_id=id, cursor=cursor)
+         friends = api.friends(user_id=id, cursor=cursor)
          lista = list()
          for f in friends:
-             lista.append(_TwitterUser.TwitterUser(id=f))
+             lista.append(_TwitterUser.TwitterUser(dictionary=f))
          return lista;
 
     def getFollowersFromUser( id,Access : _WeakAccess.WeakAccess = None, cursor=None, count=None):
          '''Pega os seguidores do usuario
-         Documentado em https://dev.twitter.com/rest/reference/get/followers/ids
+         Documentado em https://dev.twitter.com/rest/reference/get/followers/list
          '''
          from SolTw import _TwitterUser
          if (Access == None):
             Access= defaultAccess
          api = tweepy.API(Access.auth)
-         users = api.followers_ids(user_id=id, cursor=cursor,count=count)
+         users = api.followers(user_id=id, cursor=cursor,count=count)
          lista = list()
          for u in users:
-             lista.append(_TwitterUser.TwitterUser(id=u))
+             lista.append(_TwitterUser.TwitterUser(dictionary=u))
          return lista;
 
     def getFriendshipIncomingFromUser(id, Access : _StrongAccess.StrongAccess = None, cursor=None):
@@ -496,8 +496,156 @@ class Actions:
          api.update_status(lat=latitude,long=longitude,status=msg,place_id=place_id)
          return True
 
+    def postDirectMessage( receiver, msg,Access : _StrongAccess.StrongAccess = None ):
+         """ :reference: https://dev.twitter.com/rest/reference/post/direct_messages/new
+
+        """
+         from SolTw import _TwitterUser
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         if (isinstance(receiver,_TwitterUser.TwitterUser)):
+             user=receiver.id
+         api.send_direct_message(user=user,text=msg)
+         return True
+
+
+    def postFriendshipCreate( user,follow : bool=None,Access : _StrongAccess.StrongAccess = None):
+        """ :reference: https://dev.twitter.com/rest/reference/post/friendships/create
+
+        """
+
+        from SolTw import _TwitterUser
+        if (Access == None):
+            Access= defaultAccess
+        api = tweepy.API(Access.auth)
+        return _TwitterUser.TwitterUser(dictionary=api.create_friendship(id=user,follow=follow))
+
+    def postFriendshipDestroy( user,Access : _StrongAccess.StrongAccess = None):
+        """ :reference: https://dev.twitter.com/rest/reference/post/friendships/destroy
+
+        """
+        from SolTw import _TwitterUser
+        if (Access == None):
+            Access= defaultAccess
+        api = tweepy.API(Access.auth)
+        return _TwitterUser.TwitterUser(dictionary=api.destroy_friendship(id=user))
+
+    def getFriendship(source_id:str,target_screen_name:str,Access : _WeakAccess.WeakAccess = None):
+          """ :reference: https://dev.twitter.com/rest/reference/get/friendships/show
+          """
+          from SolTw import _Friendship
+          if (Access == None):
+            Access= defaultAccess
+          api = tweepy.API(Access.auth)
+          resp=api.show_friendship(source_id=source_id,target_screen_name=target_screen_name)
+          f1= _Friendship.Friendship(resp[0].__dict__)
+          f2= _Friendship.Friendship(resp[1].__dict__)
+          return (f1,f2)
+
+    def postUpdateProfile(name=None,url=None,location=None,description=None,Access : _StrongAccess.StrongAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/post/account/update_profile
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         resp=api.update_profile(name=name,url=url,location=location,description=description)
+         return _TwitterUser.TwitterUser(dictionary=resp)
+
+    def getSuggestedUsersBySlug(slug,lang=None,Access : _StrongAccess.StrongAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/users/suggestions/%3Aslug
+
+         """
+
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         resp=api.suggested_users(slug=slug,lang=lang)
+         lista=list()
+         for u in resp:
+             lista.append(_TwitterUser.TwitterUser(dictionary=u))
+         return lista
+
+    def getSuggestedUsersWithTweetBySlug(slug,lang=None,Access : _StrongAccess.StrongAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/users/suggestions/%3Aslug/members
+
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         resp=api.suggested_users_tweets(slug=slug,lang=lang)
+         lista=list()
+         for u in resp:
+             lista.append(_TwitterUser.TwitterUser(dictionary=u))
+         return lista
+
+    def getSuggestedCategories(lang=None,Access : _StrongAccess.StrongAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/users/suggestions
+
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         resp=api.suggested_categories(lang=lang)
+         return resp
+
+    def getBlocks(Access : _StrongAccess.StrongAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/blocks/list
+            :allowed_param:'cursor'
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         users = api.blocks()
+         lista = list()
+         for u in users:
+             lista.append(_TwitterUser.TwitterUser(dictionary=u))
+         return lista;
+
+    def postBlockCreate(user,Access : _StrongAccess.StrongAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/post/blocks/create
+            :allowed_param:'id', 'user_id', 'screen_name'
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         resp=api.create_block(id=user)
+         return _TwitterUser.TwitterUser(dictionary=resp)
+
+    def postBlockDestroy(user,Access : _StrongAccess.StrongAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/post/blocks/destroy
+            :allowed_param:'id', 'user_id', 'screen_name'
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         resp=api.destroy_block(id=user)
+         return _TwitterUser.TwitterUser(dictionary=resp)
+
+    def getListsFromUser(screen_name,Access : _WeakAccess.WeakAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/lists/list
+            '
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp= api.lists_all(screen_name=screen_name)
+         for l in resp:
+             lista.append(_List.List(dictionary=l.__dict__))
+         return lista
 
 
 
+    def getListsMembershipFromUser(screen_name,count=None, cursor=None,filter_to_owned_lists=None,Access : _WeakAccess.WeakAccess = None):
+         """ :reference: https://dev.twitter.com/rest/reference/get/lists/memberships
 
-
+         """
+         if (Access == None):
+            Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp= api.lists_memberships(screen_name=screen_name,filter_to_owned_lists=filter_to_owned_lists,cursor=cursor,count=count)
+         for l in resp:
+             lista.append(_List.List(dictionary=l.__dict__))
+         return lista
