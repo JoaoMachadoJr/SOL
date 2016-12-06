@@ -115,4 +115,16 @@ class AuthenticatedTwitterUser(_TwitterUser.TwitterUser):
          """
          return _Actions.Actions.postBlockDestroy(user,self.token)
 
+    def postSubscribe(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/post/lists/subscribers/create
+         '''
+         return _Actions.Actions.postSubscribe(owner_screen_name,slug,owner_id,list_id,self.token)
+
+    def postSubscribeDestroy(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/post/lists/subscribers/create
+         '''
+         return _Actions.Actions.postSubscribeDestroy(owner_screen_name,slug,owner_id,list_id,self.token)
+
 

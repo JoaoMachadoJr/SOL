@@ -649,3 +649,28 @@ class Actions:
          for l in resp:
              lista.append(_List.List(dictionary=l.__dict__))
          return lista
+
+    def postSubscribe(owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _StrongAccess.StrongAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/post/lists/subscribers/create
+         '''
+         if (Access == None):
+             Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         resp=api.subscribe_list(owner_screen_name=owner_screen_name,slug=slug,owner_id=owner_id,list_id=list_id)
+         return resp
+
+    def postSubscribeDestroy(owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _StrongAccess.StrongAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/post/lists/subscribers/create
+         '''
+         if (Access == None):
+             Access= defaultAccess
+         api = tweepy.API(Access.auth)
+         lista = list()
+         try:
+             resp=api.unsubscribe_list(owner_screen_name=owner_screen_name,slug=slug,owner_id=owner_id,list_id=list_id)
+             return resp
+         except tweepy.TweepError:
+             return False

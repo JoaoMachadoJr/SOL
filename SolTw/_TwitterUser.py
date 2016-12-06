@@ -191,37 +191,22 @@ class TwitterUser:
          """
          return _Actions.Actions.getListsMembershipFromUser(self.screen_name,count,cursor,filter_to_owned_lists,Access)
 
-     def postSubscribe(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _StrongAccess.StrongAccess = None):
-         '''
-         Reference: https://dev.twitter.com/rest/reference/post/lists/subscribers/create
-         '''
-         if (Access == None):
-             Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         lista = list()
-         resp=api.subscribe_list(owner_screen_name=owner_screen_name,slug=slug,owner_id=owner_id,list_id=list_id)
-         return resp
-
-     def postSubscribeDestroy(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _StrongAccess.StrongAccess = None):
-         '''
-         Reference: https://dev.twitter.com/rest/reference/post/lists/subscribers/create
-         '''
-         if (Access == None):
-             Access= _Actions.defaultAccess
-         api = tweepy.API(Access.auth)
-         lista = list()
-         try:
-             resp=api.unsubscribe_list(owner_screen_name=owner_screen_name,slug=slug,owner_id=owner_id,list_id=list_id)
-             return resp
-         except tweepy.TweepError:
-             return False
 
      def getIsSubscriber(self,owner_screen_name=None,slug=None,owner_id=None,list_id=None,Access : _WeakAccess.WeakAccess = None):
+         '''
+         Reference: https://dev.twitter.com/docs/api/1.1/get/lists/subscribers/show
+         '''
          return _Actions.Actions.getUserIsSubscriber(owner_screen_name=owner_screen_name,slug=slug,screen_name=self.screen_name,owner_id=owner_id,list_id=list_id,user_id=self.id)
 
      def getIsMember(self,list_id=None,slug=None,user_id=None,screen_name=None,owner_screen_name=None,owner_id=None,Access : _WeakAccess.WeakAccess = None):
+        '''
+         Reference: https://dev.twitter.com/rest/reference/get/lists/members/show
+         '''
         return _Actions.Actions.getUserIsMember(list_id=list_id,slug=slug,user_id=self.id,screen_name=self.screen_name,owner_screen_name=owner_screen_name,owner_id=owner_id,Access=Access)
      def postBecomeMember(self,owner_screen_name=None,owner_id=None,slug=None,list_id=None,Access : _StrongAccess.StrongAccess = None):
+         '''
+         Reference: https://dev.twitter.com/rest/reference/get/trends/place
+         '''
          return _Actions.Actions.postListMemberCreate(screen_name=self.screen_name,user_id=self.id,owner_screen_name=owner_screen_name,owner_id=owner_id,slug=slug,list_id=list_id,Access=Access)
 
      def getListsSubscribed(self,cursor=None,Access : _WeakAccess.WeakAccess = None):
