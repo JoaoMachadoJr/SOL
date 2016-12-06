@@ -3,7 +3,7 @@ __author__ = 'Joao'
 
 import SolFB._User as _User
 import SolFB._Place as _Place
-from  SolFB._Settings import Settings as _Settings
+from  SolFB import _Actions
 from  SolFB._Utility import Utility as _Utility
 import SolFB._Comment as _Comment
 import requests
@@ -78,7 +78,7 @@ class Achievements:
 
     def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
 
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_hide,can_like,can_reply_privately,comment_count,created_time,from,like_count,message,message_tags,object,parent,private_reply_conversation,user_likes,message,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -94,7 +94,7 @@ class Achievements:
 
     def postComment(self, message, token=None, Localpath=None,FileURL=None,timeout=(5,5), maxRetries=50):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
              params={"message":message}
              graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token

@@ -2,7 +2,7 @@ __author__ = 'Joao'
 
 
 import requests
-from  SolFB._Settings import Settings as _Settings
+from  SolFB import _Actions
 from  SolFB._Utility import Utility as _Utility
 import SolFB._Cover_Photo as _Cover_Photo
 import SolFB._User as _User
@@ -73,7 +73,7 @@ class Group:
 
      def getAdmins(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/admins?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -88,7 +88,7 @@ class Group:
 
      def getDocs(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/docs?fields=id,from,subject,message,icon,created_time,updated_time,revision,can_edit,can_delete&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -104,7 +104,7 @@ class Group:
      def getEvents(self,token=None, timeout=(5,5), maxRetries=50):
          import SolFB._Events as _Events
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/docs?fields=id,can_guests_invite,cover,description,end_time,guest_list_enabled,is_page_owned,is_viewer_admin,name,owner,parent_group,start_time,ticket_uri,timezone,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -120,7 +120,7 @@ class Group:
      def getAlbums(self,token=None, timeout=(5,5), maxRetries=50):
          import SolFB._Albums as _Albums
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/albums?fields=id,can_upload,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -135,7 +135,7 @@ class Group:
 
      def getFiles(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/files?fields=id,from,group,download_link,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -150,11 +150,11 @@ class Group:
 
      def getPosts(self, token=None, dateMin="", dateMax="", limit=100, timeout=(5,5), maxRetries=50):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
 
          params={}
          if (token == None):
-            token = _Settings.token
+            token = _Actions.Actions.token
          if (dateMin!="" and dateMax!="" and dateMin > dateMax):
             raise Exception("Cannot use dateMin > dateMax")
          if (dateMax != ""):
@@ -176,7 +176,7 @@ class Group:
 
      def postPost (self,message=" ", token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          params={"message":message}
          url="https://graph.facebook.com/v2.6/"+self.id+"/feed?&access_token="+str(token)
          s=requests.post(url,params=params).json()
@@ -184,7 +184,7 @@ class Group:
 
      def getMembers(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/members?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -202,7 +202,7 @@ class Group:
      def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
          import SolFB._Photo as _Photo
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -216,7 +216,7 @@ class Group:
 
      def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
              raise Exception("You should use a LocalPath or a URL")
          if (Localpath!=None and FileURL!=None):
@@ -235,7 +235,7 @@ class Group:
 
      def getVideos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Videos?fields=id,created_time,description,embed_html,format,from,icon,picture,privacy,source,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -249,7 +249,7 @@ class Group:
 
      def getGroupFromUsername(username, token=None):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          id=username
          id2=requests.get("https://graph.facebook.com/search?q="+id+"&type=group&access_token="+token).json()
          id=id2["data"][0]["id"]
@@ -264,7 +264,7 @@ class Group:
 
      def postVideo(self,message=" ", token=None, Localpath=None, FileURL=None):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
              raise Exception("You should use a LocalPath or a URL")
          if (Localpath!=None and FileURL!=None):

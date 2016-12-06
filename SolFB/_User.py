@@ -1,4 +1,4 @@
-from SolFB import _Utility, _Post_Facebook, _Settings
+from SolFB import _Utility, _Post_Facebook, _Actions
 
 __author__ = 'Joao'
 
@@ -281,7 +281,7 @@ class User():
         que usuario.token possua um token válido.'''
 
         import requests
-        _Settings.Settings.token=self.token
+        _Actions.Actions.token=self.token
 
         dict_user = requests.get(
             "https://graph.facebook.com/v2.6/me?&fields=id,about,age_range,bio,birthday,context,cover,currency,devices,education,email,favorite_athletes,favorite_teams,first_name,gender,hometown,inspirational_people,install_type,installed,interested_in,is_shared_login,is_verified,languages,last_name,link,locale,location,meeting_for,middle_name,name,name_format,payment_pricepoints,political,public_key,quotes,relationship_status,religion,security_settings,shared_login_upgrade_required_by,significant_other,sports,test_group,third_party_id,timezone,updated_time,verified,video_upload_limits,viewer_can_send_gift,website,work&access_token=" + str(
@@ -302,7 +302,7 @@ class User():
         token=self.token
         params={}
         if (token == None):
-            token = _Settings.token
+            token = _Actions.token
         if (dateMin!="" and dateMax!="" and dateMin > dateMax):
             raise Exception("Cannot use dateMin > dateMax")
         if (dateMax != ""):
@@ -560,7 +560,7 @@ class User():
     def postAlbum(self, name="MyAlbum", message="", timeout=(5,5), maxRetries=50):
 
          if (self.token==None):
-            self.token= _Settings.token
+            self.token= _Actions.token
          params={"message":message,"name":name}
          print(params)
          r= _Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/me/albums?access_token="+self.token,params=params, timeout=timeout).json()
@@ -858,7 +858,7 @@ class User():
     def postPost (self,message=" ", token=None):
          import requests
          if (token==None):
-             token= _Settings.token
+             token= _Actions.token
          params={"message":message}
          url="https://graph.facebook.com/v2.6/"+self.id+"/feed?&access_token="+self.token
          s=requests.post(url,params=params).json()

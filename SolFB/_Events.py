@@ -4,7 +4,7 @@ __author__ = 'Joao'
 import requests
 import SolFB._Post_Facebook as _Post_Facebook
 from  SolFB._Utility import Utility as _Utility
-from  SolFB._Settings import Settings as _Settings
+from  SolFB import _Actions
 import SolFB._Cover_Photo as _Cover_Photo
 import SolFB._Group as _Group
 import SolFB._Live_Videos as _Live_Videos
@@ -76,7 +76,7 @@ class Events:
 
      def getAdmins(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/admins?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -91,7 +91,7 @@ class Events:
 
      def getAttending(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Attending?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -106,7 +106,7 @@ class Events:
 
      def getDeclined(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/declined?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -121,7 +121,7 @@ class Events:
 
      def getInterested(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/interested?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -136,7 +136,7 @@ class Events:
 
      def getLive_Videos(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/live_videos?fields=id,broadcast_start_time,creation_time,description,from,is_reference_only,live_views,permalink_url,seconds_left,status,title,total_views,video&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -151,7 +151,7 @@ class Events:
 
      def getMaybe(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/maybe?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -166,7 +166,7 @@ class Events:
 
      def getNoReply(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/noreply?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -181,7 +181,7 @@ class Events:
 
      def getRoles(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/noles?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -196,14 +196,14 @@ class Events:
 
      def getPicture(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Picture?fields=height,is_silhouette,url,width&redirect=0&type=large&access_token="+token, timeout=timeout).json()
          return r["data"]["url"]
 
      def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -218,7 +218,7 @@ class Events:
      def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
          import SolFB._Photo as _Photo
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -232,7 +232,7 @@ class Events:
 
      def getVideos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Videos?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -247,7 +247,7 @@ class Events:
 
      def postVideo(self,message=" ", token=None, Localpath=None, FileURL=None):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
              raise Exception("You should use a LocalPath or a URL")
          if (Localpath!=None and FileURL!=None):
@@ -269,7 +269,7 @@ class Events:
 
      def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
              raise Exception("You should use a LocalPath or a URL")
          if (Localpath!=None and FileURL!=None):
@@ -288,7 +288,7 @@ class Events:
 
      def postPost (self,message=" ", token=None):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          params={"message":message}
          url="https://graph.facebook.com/v2.6/"+self.id+"/feed?&access_token="+str(token)
          s=requests.post(url,params=params).json()
@@ -296,11 +296,11 @@ class Events:
 
      def getPosts(self, token=None, dateMin="", dateMax="", limit=100, timeout=(5,5), maxRetries=50):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
 
          params={}
          if (token == None):
-            token = _Settings.token
+            token = _Actions.Actions.token
          if (dateMin!="" and dateMax!="" and dateMin > dateMax):
             raise Exception("Cannot use dateMin > dateMax")
          if (dateMax != ""):

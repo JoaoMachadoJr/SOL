@@ -3,7 +3,7 @@ __author__ = 'Joao'
 import SolFB._Story_Attachment as _Story_Attachment
 
 from  SolFB._Utility import Utility as _Utility
-from  SolFB._Settings import Settings as _Settings
+from  SolFB import _Actions
 #import SolFB._User as _User
 
 class Comment:
@@ -80,7 +80,7 @@ class Comment:
 
      def getInfo(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token, timeout=timeout).json()
          c=Comment(dictionary=r)
          return c;
@@ -88,7 +88,7 @@ class Comment:
      def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
          import SolFB._User as _User
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -103,19 +103,19 @@ class Comment:
 
      def postLike(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          return str(r)
 
      def deleteLike(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token+"&method=delete", timeout=timeout).json()
          return str(r)
 
      def update(self,message=None, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          if message==None:
              message=self.message
          params={"message":message}
@@ -124,7 +124,7 @@ class Comment:
 
      def delete(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          self.update(message=" ",token=token)
          r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token+"&method=delete", timeout=timeout).json()
          return str(r)

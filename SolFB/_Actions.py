@@ -3,7 +3,7 @@ import requests
 
 #Variaveis globais
 
-class Settings:
+class Actions:
     global token
     token=""
 

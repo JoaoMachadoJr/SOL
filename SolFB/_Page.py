@@ -1,7 +1,7 @@
 __author__ = 'Joao'
 import SolFB._Post_Facebook as _Post_Facebook
 from  SolFB._Utility import Utility as _Utility
-from  SolFB._Settings import Settings as _Settings
+from  SolFB import _Actions
 import requests
 from dateutil.parser import parse
 import SolFB._Cover_Photo as _Cover_Photo
@@ -348,7 +348,7 @@ class Page:
 
      def getAlbums(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/albums?fields=id,can_upload,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -395,7 +395,7 @@ class Page:
 
      def getEvents(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/events?fields=id,can_guests_invite,cover,description,end_time,guest_list_enabled,is_page_owned,is_viewer_admin,name,owner,parent_group,start_time,ticket_uri,timezone,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -425,7 +425,7 @@ class Page:
 
      def getGlobal_Brand_Children(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Global_Brand_Children?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -455,7 +455,7 @@ class Page:
 
      def getInstant_Articles(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Instant_Articles?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -485,7 +485,7 @@ class Page:
 
      def getLikedPages(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -515,7 +515,7 @@ class Page:
 
      def getLife_Events(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/milestones?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -529,7 +529,7 @@ class Page:
 
      def getPhotos(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -543,7 +543,7 @@ class Page:
 
      def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
              raise Exception("You should use a LocalPath or a URL")
          if (Localpath!=None and FileURL!=None):
@@ -563,14 +563,14 @@ class Page:
 
      def getPicture(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Picture?fields=height,is_silhouette,url,width&redirect=0&type=large&access_token="+token, timeout=timeout).json()
          return r["data"]["url"]
 
      def getPlace_Topics(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/place_topics?access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -600,7 +600,7 @@ class Page:
 
      def getVideos(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/videos?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -614,11 +614,11 @@ class Page:
 
      def getPosts(self, token=None, dateMin="", dateMax="", limit=100, timeout=(5,5), maxRetries=50):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
 
          params={}
          if (token == None):
-            token = _Settings.token
+            token = _Actions.Actions.token
          if (dateMin!="" and dateMax!="" and dateMin > dateMax):
             raise Exception("Cannot use dateMin > dateMax")
          if (dateMax != ""):
@@ -641,7 +641,7 @@ class Page:
 
      def postPost (self,message=" ", token=None):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          params={"message":message}
          url="https://graph.facebook.com/v2.6/"+self.id+"/feed?&access_token="+str(token)
          s=requests.post(url,params=params).json()
@@ -649,7 +649,7 @@ class Page:
 
      def postVideo(self,message=" ", token=None, Localpath=None, FileURL=None):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
              raise Exception("You should use a LocalPath or a URL")
          if (Localpath!=None and FileURL!=None):

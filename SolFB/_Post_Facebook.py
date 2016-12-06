@@ -2,9 +2,9 @@ __author__ = 'Joao'
 import requests
 from dateutil.parser import parse
 
-from SolFB import _User, _Utility, _Settings
+from SolFB import _User, _Utility, _Actions
 from  SolFB._Utility import Utility as _Utility
-from  SolFB._Settings import Settings as _Settings
+from  SolFB import _Actions
 import requests
 import SolFB._Place as _Place
 import SolFB._Privacy as _Privacy
@@ -159,7 +159,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
 
     def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token= _Settings.token
+            token= _Actions.Actions.token
          #print("token="+str(token))
          r= _Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -174,25 +174,25 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
 
     def getLikesCount(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token= _Settings.token
+            token= _Actions.Actions.token
          r= _Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"?fields=likes.summary(true)&access_token="+token, timeout=timeout).json()
          return r["likes"]["summary"]["total_count"]
 
     def getCommentCount(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token= _Settings.token
+            token= _Actions.Actions.token
          r= _Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"?fields=comments.summary(true)&access_token="+token, timeout=timeout).json()
          return r["comments"]["summary"]["total_count"]
 
     def postLike(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token= _Settings.token
+            token= _Actions.Actions.token
          r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          return str(r)
 
     def getReactions(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token= _Settings.token
+            token= _Actions.Actions.token
          #print("token="+str(token))
          r= _Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/reactions?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -207,7 +207,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
 
     def getAttachments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token= _Settings.token
+            token= _Actions.Actions.token
          #print("token="+str(token))
          r= _Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Attachments?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -222,7 +222,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
 
     def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token= _Settings.token
+            token= _Actions.Actions.token
 
          r= _Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -237,7 +237,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
 
     def postComment(self, message, token=None, Localpath=None, FileURL=None):
          if (token==None):
-            token= _Settings.token
+            token= _Actions.Actions.token
          if (Localpath==None and FileURL==None):
              params={"message":message}
              graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token

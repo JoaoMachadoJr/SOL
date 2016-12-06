@@ -2,7 +2,7 @@ __author__ = 'Joao'
 
 
 
-from  SolFB._Settings import Settings as _Settings
+from  SolFB import _Actions
 from  SolFB._Utility import Utility as _Utility
 import SolFB._Photo as _Photo
 import SolFB._Comment as _Comment
@@ -52,7 +52,7 @@ class Life_Event:
 
      def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -66,7 +66,7 @@ class Life_Event:
 
      def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -80,7 +80,7 @@ class Life_Event:
          return lista
      def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
 
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()

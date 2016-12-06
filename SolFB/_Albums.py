@@ -4,7 +4,7 @@ __author__ = 'Joao'
 import SolFB._Photo as _Photo
 import SolFB._Events as _Events
 import SolFB._User as _User
-from  SolFB._Settings import Settings as _Settings
+from  SolFB import _Actions
 from  SolFB._Utility import Utility as _Utility
 import requests
 import SolFB._Comment as _Comment
@@ -70,7 +70,7 @@ class Albums:
 
      def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):
@@ -84,7 +84,7 @@ class Albums:
 
      def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
          if (token==None):
-             token=_Settings.token
+             token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
              raise Exception("You should use a LocalPath or a URL")
          if (Localpath!=None and FileURL!=None):
@@ -103,7 +103,7 @@ class Albums:
 
      def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -118,7 +118,7 @@ class Albums:
 
      def getComments(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
 
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
          lista=list()
@@ -133,13 +133,13 @@ class Albums:
 
      def postLike(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          return str(r)
 
      def postComment(self, message, token=None, Localpath=None, FileURL=None):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
              params={"message":message}
              graphurl="https://graph.facebook.com/v2.6/"+self.id+"/comments?&access_token="+token
@@ -162,12 +162,12 @@ class Albums:
 
      def getLikesCount(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"?fields=likes.summary(true)&access_token="+token, timeout=timeout).json()
          return r["likes"]["summary"]["total_count"]
 
      def getCommentCount(self,token=None, timeout=(5,5), maxRetries=50):
          if (token==None):
-            token=_Settings.token
+            token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"?fields=comments.summary(true)&access_token="+token, timeout=timeout).json()
          return r["comments"]["summary"]["total_count"]
