@@ -21,7 +21,6 @@ import SolFB._Page as _Page
 import SolFB._Page_Label as _Page_Label
 import SolFB._Accounts as _Accounts
 import SolFB._Achievements as _Achievements
-import SolFB._Adaccountgroups as _Adaccountgroups
 import SolFB._Adaccounts as _Adaccounts
 import SolFB._Adcontracts as _Adcontracts
 import SolFB._Group as _Group
@@ -476,20 +475,6 @@ class User():
         while ("data" in r and len(r["data"]) > 0):
             for a in r["data"]:
                 lista.append(_Achievements.Achievements(dictionary=a))
-            if ("next" in r["paging"]):
-                r = _Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
-            else:
-                break
-        return lista
-
-
-    def getAdaccountgroups(self, timeout=(5,5), maxRetries=50):
-        import SolFB._Adaccountgroups as _Adaccountgroups
-        r = _Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/me/Adaccountgroups?&access_token=" + self.token, timeout=timeout).json()
-        lista = list()
-        while ("data" in r and len(r["data"]) > 0):
-            for a in r["data"]:
-                lista.append(_Adaccountgroups.Adaccountgroups(dictionary=a))
             if ("next" in r["paging"]):
                 r = _Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
             else:

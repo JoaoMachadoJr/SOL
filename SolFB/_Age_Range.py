@@ -1,5 +1,8 @@
 __author__ = 'Joao'
 class Age_Range:
+     '''
+     Reference: https://developers.facebook.com/docs/graph-api/reference/age-range/
+     '''
      def __init__(self, dictionary=dict()):
          self.max=""
          self.min=""

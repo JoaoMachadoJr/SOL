@@ -4,7 +4,11 @@ __author__ = 'Joao'
 import SolFB._User as _User
 
 class Apprequests:
+
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/app-request/
+         '''
          self.id=id
          self.action_type=""
          self.application=""

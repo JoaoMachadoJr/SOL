@@ -1,6 +1,9 @@
 __author__ = 'Joao'
 class Accounts:
     def __init__(self, id="",dictionary=""):
+        '''
+        Reference: https://developers.facebook.com/docs/graph-api/reference/application/accounts/
+        '''
         self.name=""
         self.perms=list()
         self.id=id

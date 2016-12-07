@@ -1,6 +1,9 @@
 __author__ = 'Joao'
 class Adaccounts:
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/user/adaccounts/
+         '''
          self.id=id
          self.account_groups=""
          self.account_id=""

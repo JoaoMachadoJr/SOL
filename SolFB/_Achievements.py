@@ -11,6 +11,9 @@ import requests
 
 class Achievements:
     def __init__(self, id="",dictionary=dict()):
+        '''
+        Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/achievement
+        '''
         self.id=id
         self.application=""
         self.data=""
@@ -77,6 +80,9 @@ class Achievements:
          return "ARCHIEVEMENT: "+str(dict)
 
     def getComments(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+            Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/comments
+         '''
          if (token==None):
             token=_Actions.Actions.token
 
@@ -93,6 +99,9 @@ class Achievements:
 
 
     def postComment(self, message, token=None, Localpath=None,FileURL=None,timeout=(5,5), maxRetries=50):
+         '''
+            Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/comments
+         '''
          if (token==None):
              token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):

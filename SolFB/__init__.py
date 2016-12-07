@@ -2,7 +2,6 @@ __author__ = 'Joao'
 from SolFB._User import User as User
 from SolFB._Accounts import Accounts as Accounts
 from SolFB._Achievements import Achievements as Achievements
-from SolFB._Adaccountgroups import Adaccountgroups as Adaccountgroups
 from SolFB._Adaccounts import Adaccounts as Adaccounts
 from SolFB._Adcontracts import Adcontracts as Adcontracts
 from SolFB._Admin_Note import Admin_Note as Admin_Note
@@ -33,6 +32,6 @@ from SolFB._Story_Attachment import Story_Attachment as Story_Attachment
 from SolFB._Targeting import Targeting as Targeting
 from SolFB._Thread import Thread as Thread
 from SolFB._User_Device import User_Device as User_Device
-from SolFB._Actions import Actions as Settings
+from SolFB._Actions import Actions as Actions
 from SolFB._Video import Video as Video
 

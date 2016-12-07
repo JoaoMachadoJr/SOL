@@ -6,6 +6,9 @@ import SolFB._User as _User
 
 class Admin_Note:
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page-admin-note/
+         '''
          self.body=""
          self.from_=""
          self.id=id
