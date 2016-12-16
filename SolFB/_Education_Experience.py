@@ -7,6 +7,9 @@ import SolFB._User as _User
 
 class Education_Experience:
      def __init__(self,id="", dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/education-experience/
+         '''
          self.id=id
          self.classes=list()
          self.concentration=list()

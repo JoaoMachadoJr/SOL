@@ -6,6 +6,9 @@ import SolFB._User as _User
 
 class Experience:
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/experience/
+         '''
          self.id=id
          self.description=""
          self.from_=""

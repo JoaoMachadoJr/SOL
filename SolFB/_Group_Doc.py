@@ -38,7 +38,6 @@ class Group_Doc:
 
 
      def __str__(self):
-         #print(self.__dict__)
          dic=self.__dict__
          dict={}
 
@@ -47,7 +46,7 @@ class Group_Doc:
                  dict[key]=dic[key]
          return "GROUP_DOC: "+str(dict)
      def getGroup_Doc(self, token=None,timeout=(5,5), maxRetries=50):
-         import SolFB_Utility as _Utility
+         import SolFB._Utility as _Utility
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/me/Group_Doc?&access_token="+str(token), timeout=timeout).json()
          lista=list()
          while ("data" in r and len(r["data"])>0):

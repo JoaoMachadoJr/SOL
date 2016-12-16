@@ -16,6 +16,9 @@ import SolFB._Video as _Video
 
 class Group:
      def __init__(self,id="", dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/group
+         '''
          self.id=id
          self.cover=""
          self.description=""
@@ -72,6 +75,9 @@ class Group:
          return "GROUP: "+str(dict)
 
      def getAdmins(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/admins
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -87,6 +93,9 @@ class Group:
          return lista
 
      def getDocs(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/docs
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -102,6 +111,9 @@ class Group:
          return lista
 
      def getEvents(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/events
+         '''
          import SolFB._Events as _Events
          if (token==None):
             token=_Actions.Actions.token
@@ -118,6 +130,9 @@ class Group:
          return lista
 
      def getAlbums(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/albums
+         '''
          import SolFB._Albums as _Albums
          if (token==None):
             token=_Actions.Actions.token
@@ -134,6 +149,9 @@ class Group:
          return lista
 
      def getFiles(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/files
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -149,6 +167,9 @@ class Group:
          return lista
 
      def getPosts(self, token=None, dateMin="", dateMax="", limit=100, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/feed
+         '''
          if (token==None):
              token=_Actions.Actions.token
 
@@ -175,6 +196,9 @@ class Group:
          return lista
 
      def postPost (self,message=" ", token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/feed
+         '''
          if (token==None):
              token=_Actions.Actions.token
          params={"message":message}
@@ -183,6 +207,9 @@ class Group:
          return s
 
      def getMembers(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/members/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -200,6 +227,9 @@ class Group:
 
 
      def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/photos
+         '''
          import SolFB._Photo as _Photo
          if (token==None):
              token=_Actions.Actions.token
@@ -215,6 +245,9 @@ class Group:
          return lista
 
      def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/photos
+         '''
          if (token==None):
              token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
@@ -234,6 +267,9 @@ class Group:
              return requests.post(graphurl,params=params).json()
 
      def getVideos(self, token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/videos
+         '''
          if (token==None):
              token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Videos?fields=id,created_time,description,embed_html,format,from,icon,picture,privacy,source,updated_time&access_token="+token, timeout=timeout).json()
@@ -248,6 +284,9 @@ class Group:
          return lista
 
      def getGroupFromUsername(username, token=None):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/group
+         '''
          if (token==None):
              token=_Actions.Actions.token
          id=username
@@ -263,6 +302,9 @@ class Group:
 
 
      def postVideo(self,message=" ", token=None, Localpath=None, FileURL=None):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/group/videos
+         '''
          if (token==None):
              token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):

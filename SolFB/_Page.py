@@ -15,6 +15,9 @@ import SolFB._Life_Event as _Life_Event
 
 class Page:
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/
+         '''
          self.id=id
          self.about=""
          self.access_token=""
@@ -331,6 +334,9 @@ class Page:
 
 
      def getAdmin_Notes(self,Pagetoken=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/admin_notes/
+         '''
          if (Pagetoken==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (Pagetoken==None):
@@ -347,6 +353,9 @@ class Page:
          return lista
 
      def getAlbums(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/albums/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/albums?fields=id,can_upload,count,cover_photo,created_time,description,event,from,link,location,name,place,privacy,type,updated_time&access_token="+token, timeout=timeout).json()
@@ -361,6 +370,9 @@ class Page:
          return lista
 
      def postAlbum(self,token=None, name="MyAlbum", message="", timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/albums/
+         '''
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
@@ -370,6 +382,9 @@ class Page:
          return r
 
      def getBlocked(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/blocked/
+         '''
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
@@ -386,6 +401,9 @@ class Page:
          return lista
 
      def getLikesCount(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/insights/
+         '''
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
@@ -394,6 +412,9 @@ class Page:
          return r["data"][0]["values"][0]["value"]
 
      def getEvents(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/events/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/events?fields=id,can_guests_invite,cover,description,end_time,guest_list_enabled,is_page_owned,is_viewer_admin,name,owner,parent_group,start_time,ticket_uri,timezone,updated_time&access_token="+token, timeout=timeout).json()
@@ -407,23 +428,11 @@ class Page:
                  break
          return lista
 
-     def getFeatured_Videos_Collection(self,token=None, timeout=(5,5), maxRetries=50):
-         if (token==None and (self.access_token=="" or self.access_token==None)):
-             raise Exception("This action requires a page token")
-         if (token==None):
-            token=self.access_token
-         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/featured_videos_collection?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token, timeout=timeout).json()
-         lista=list()
-         while ("data" in r and len(r["data"])>0):
-             for a in r["data"]:
-                 lista.append(_Video.Video(dictionary=a))
-             if ("next" in r["paging"]):
-                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
-             else:
-                 break
-         return lista
 
      def getGlobal_Brand_Children(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/global_brand_children/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Global_Brand_Children?access_token="+token, timeout=timeout).json()
@@ -438,6 +447,9 @@ class Page:
          return lista
 
      def getInstagram_Accounts(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/instagram_accounts/
+         '''
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
@@ -453,37 +465,11 @@ class Page:
                  break
          return lista
 
-     def getInstant_Articles(self,token=None, timeout=(5,5), maxRetries=50):
-         if (token==None):
-            token=_Actions.Actions.token
-         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Instant_Articles?access_token="+token, timeout=timeout).json()
-         lista=list()
-         while ("data" in r and len(r["data"])>0):
-             for a in r["data"]:
-                 lista.append(a)
-             if ("next" in r["paging"]):
-                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
-             else:
-                 break
-         return lista
-
-     def getLabels(self,token=None, timeout=(5,5), maxRetries=50):
-         if (token==None and (self.access_token=="" or self.access_token==None)):
-             raise Exception("This action requires a page token")
-         if (token==None):
-            token=self.access_token
-         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/labels?access_token="+token, timeout=timeout).json()
-         lista=list()
-         while ("data" in r and len(r["data"])>0):
-             for a in r["data"]:
-                 lista.append(a)
-             if ("next" in r["paging"]):
-                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
-             else:
-                 break
-         return lista
 
      def getLikedPages(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/likes/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/likes?access_token="+token, timeout=timeout).json()
@@ -498,6 +484,9 @@ class Page:
          return lista
 
      def getLive_videos(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/live_videos/
+         '''
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
@@ -514,6 +503,9 @@ class Page:
          return lista
 
      def getLife_Events(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/milestones/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/milestones?access_token="+token, timeout=timeout).json()
@@ -528,6 +520,9 @@ class Page:
          return lista
 
      def getPhotos(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/photos/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/photos?access_token="+token, timeout=timeout).json()
@@ -542,6 +537,9 @@ class Page:
          return lista
 
      def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/photos/
+         '''
          if (token==None):
              token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
@@ -562,27 +560,19 @@ class Page:
 
 
      def getPicture(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/picture/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Picture?fields=height,is_silhouette,url,width&redirect=0&type=large&access_token="+token, timeout=timeout).json()
          return r["data"]["url"]
 
-     def getPlace_Topics(self,token=None, timeout=(5,5), maxRetries=50):
-         if (token==None):
-            token=_Actions.Actions.token
-         r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/place_topics?access_token="+token, timeout=timeout).json()
-         lista=list()
-         while ("data" in r and len(r["data"])>0):
-             for a in r["data"]:
-                 lista.append(a)
-             if ("next" in r["paging"]):
-                 r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
-             else:
-                 break
-         return lista
-
      def getRoles(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/page/roles
+         '''
          if (token==None and (self.access_token=="" or self.access_token==None)):
              raise Exception("This action requires a page token")
          if (token==None):
@@ -599,6 +589,9 @@ class Page:
          return lista
 
      def getVideos(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/videos/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/videos?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token, timeout=timeout).json()
@@ -613,6 +606,9 @@ class Page:
          return lista
 
      def getPosts(self, token=None, dateMin="", dateMax="", limit=100, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed
+         '''
          if (token==None):
              token=_Actions.Actions.token
 
@@ -640,6 +636,9 @@ class Page:
          return lista
 
      def postPost (self,message=" ", token=None):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/page/feed
+         '''
          if (token==None):
              token=_Actions.Actions.token
          params={"message":message}
@@ -648,6 +647,9 @@ class Page:
          return s
 
      def postVideo(self,message=" ", token=None, Localpath=None, FileURL=None):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/page/videos/
+         '''
          if (token==None):
              token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):

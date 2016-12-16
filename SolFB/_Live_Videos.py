@@ -8,6 +8,9 @@ import SolFB._User as _User
 import SolFB._Video as _Video
 class Live_Videos:
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/live-video/
+         '''
          self.id=id
          self.broadcast_start_time=""
          self.creation_time=""

@@ -1,6 +1,9 @@
 __author__ = 'Joao'
 class Message:
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/message/
+         '''
          self.created_time=""
          self.from_=""
          self.id=id

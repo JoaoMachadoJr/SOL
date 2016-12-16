@@ -10,6 +10,9 @@ import SolFB._User as _User
 
 class Life_Event:
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/life-event/
+         '''
          import SolFB._Page as _Page
          self.created_time=""
          self.description=""
@@ -51,6 +54,9 @@ class Life_Event:
          return "LIFE_EVENT: "+str(dict)
 
      def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/life-event/photos/
+         '''
          if (token==None):
              token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Photos?fields=id,album,backdated_time,backdated_time_granularity,can_delete,can_tag,created_time,from,height,icon,images,link,name,name_tags,page_story_id,picture,place,updated_time,width&access_token="+token, timeout=timeout).json()
@@ -65,6 +71,9 @@ class Life_Event:
          return lista
 
      def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/life-event/likes/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -79,6 +88,9 @@ class Life_Event:
                  break
          return lista
      def getComments(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/life-event/comments/
+         '''
          if (token==None):
             token=_Actions.Actions.token
 

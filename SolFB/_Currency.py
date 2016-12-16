@@ -1,6 +1,9 @@
 __author__ = 'Joao'
 class Currency:
      def __init__(self,dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/currency/
+         '''
          self.currency_offset=""
          self.usd_exchange=""
          self.usd_exchange_inverse=""

@@ -8,6 +8,9 @@ from  SolFB import _Actions
 
 class Comment:
      def __init__(self,id="", dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/comment
+         '''
          import SolFB._User as _User
          self.id=id
          self.attachment=""
@@ -79,6 +82,9 @@ class Comment:
          return "COMMENT: "+str(dict)
 
      def getInfo(self, token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/comment
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"?&access_token="+token, timeout=timeout).json()
@@ -86,6 +92,9 @@ class Comment:
          return c;
 
      def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/likes
+         '''
          import SolFB._User as _User
          if (token==None):
             token=_Actions.Actions.token
@@ -102,18 +111,27 @@ class Comment:
          return lista
 
      def postLike(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/likes
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          return str(r)
 
      def deleteLike(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/likes
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token+"&method=delete", timeout=timeout).json()
          return str(r)
 
      def update(self,message=None, token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/comment
+         '''
          if (token==None):
             token=_Actions.Actions.token
          if message==None:
@@ -123,6 +141,9 @@ class Comment:
          return str(r)
 
      def delete(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/comment
+         '''
          if (token==None):
             token=_Actions.Actions.token
          self.update(message=" ",token=token)

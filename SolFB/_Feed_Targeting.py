@@ -1,6 +1,9 @@
 __author__ = 'Joao'
 class Feed_Targeting:
     def __init__(self, dictionary=None):
+        '''
+        Intro: https://www.facebook.com/help/352402648173466
+        '''
         self.age_max=""
         self.age_min=""
         self.genders=""

@@ -1,6 +1,9 @@
 __author__ = 'Joao'
 class Cover_Photo:
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/cover-photo/
+         '''
          self.id=id
          self.cover_id=""
          self.offset_x=""

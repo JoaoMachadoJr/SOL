@@ -15,6 +15,9 @@ import SolFB._Comment as _Comment
 from dateutil.parser import parse
 class Events:
      def __init__(self,id="", dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event
+         '''
          self.id=id
          self.can_guests_invite=""
          self.cover=""
@@ -75,6 +78,9 @@ class Events:
 
 
      def getAdmins(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/admins/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -90,6 +96,9 @@ class Events:
          return lista
 
      def getAttending(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         User: https://developers.facebook.com/docs/graph-api/reference/event/attending/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -105,6 +114,9 @@ class Events:
          return lista
 
      def getDeclined(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/declined/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -120,6 +132,9 @@ class Events:
          return lista
 
      def getInterested(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/interested/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -135,6 +150,9 @@ class Events:
          return lista
 
      def getLive_Videos(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/live_videos/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -150,6 +168,9 @@ class Events:
          return lista
 
      def getMaybe(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/maybe/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -165,6 +186,9 @@ class Events:
          return lista
 
      def getNoReply(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/noreply/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -180,6 +204,9 @@ class Events:
          return lista
 
      def getRoles(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/roles/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -195,6 +222,9 @@ class Events:
          return lista
 
      def getPicture(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/picture/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -202,6 +232,9 @@ class Events:
          return r["data"]["url"]
 
      def getComments(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/comments/
+         '''
          if (token==None):
             token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Comments?fields=id,attachment,can_comment,can_remove,can_like,comment_count,created_time,from,like_count,message,message_tags,object,parent,user_likes,is_hidden&access_token="+token, timeout=timeout).json()
@@ -216,6 +249,9 @@ class Events:
          return lista
 
      def getPhotos(self, token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/photos/
+         '''
          import SolFB._Photo as _Photo
          if (token==None):
              token=_Actions.Actions.token
@@ -231,6 +267,9 @@ class Events:
          return lista
 
      def getVideos(self, token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/videos/
+         '''
          if (token==None):
              token=_Actions.Actions.token
          r=_Utility.prepareRequest(maxRetries=maxRetries).get("https://graph.facebook.com/v2.6/"+self.id+"/Videos?fields=backdated_time,backdated_time_granularity,id,created_time,description,embed_html,format,from,icon,is_instagram_eligible,length,permalink_url,picture,place,privacy,source,status,updated_time&access_token="+token, timeout=timeout).json()
@@ -246,6 +285,9 @@ class Events:
 
 
      def postVideo(self,message=" ", token=None, Localpath=None, FileURL=None):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/videos/
+         '''
          if (token==None):
              token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
@@ -268,6 +310,9 @@ class Events:
              return requests.post(graphurl,params=params).json()
 
      def postPhoto(self, token=None, Localpath=None, FileURL=None,message=" "):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/photos/
+         '''
          if (token==None):
              token=_Actions.Actions.token
          if (Localpath==None and FileURL==None):
@@ -287,6 +332,9 @@ class Events:
              return requests.post(graphurl,params=params).json()
 
      def postPost (self,message=" ", token=None):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/feed
+         '''
          if (token==None):
              token=_Actions.Actions.token
          params={"message":message}
@@ -295,6 +343,9 @@ class Events:
          return s
 
      def getPosts(self, token=None, dateMin="", dateMax="", limit=100, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/event/feed
+         '''
          if (token==None):
              token=_Actions.Actions.token
 
