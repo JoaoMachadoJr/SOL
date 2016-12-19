@@ -30,7 +30,6 @@ from SolFB._Properties import Properties as Properties
 from SolFB._Utility import Utility as Utility
 from SolFB._Story_Attachment import Story_Attachment as Story_Attachment
 from SolFB._Targeting import Targeting as Targeting
-from SolFB._Thread import Thread as Thread
 from SolFB._User_Device import User_Device as User_Device
 from SolFB._Actions import Actions as Actions
 from SolFB._Video import Video as Video

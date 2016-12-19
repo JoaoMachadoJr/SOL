@@ -1,6 +1,9 @@
 __author__ = 'Joao'
 class Privacy:
     def __init__(self, id="",dictionary=dict()):
+        '''
+        Reference: https://developers.facebook.com/docs/graph-api/reference/privacy/
+        '''
         self.allow=""
         self.deny=""
         self.value=""

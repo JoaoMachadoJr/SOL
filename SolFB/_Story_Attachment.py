@@ -1,6 +1,10 @@
 __author__ = 'Joao'
 class Story_Attachment:
+
      def __init__(self, dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/story-attachment/
+         '''
          self.description=""
          self.description_tags=""
          self.media=""

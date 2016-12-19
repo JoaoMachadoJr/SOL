@@ -39,62 +39,7 @@ class User():
 
 
     def __init__(self, token="", dictionary=dict(),id=""):
-        '''O construtor pode receber o token de acesso, ou não receber nada
-        Caso o construtor já receba o token, ele fará a conexão de uma vez
-        Descriçao dos campos: https://developers.facebook.com/docs/graph-api/reference/user/
-        toekn (String): Token de acesso
-        type (String): Tipo: {user, page, group}
-        id (String numérica): ID numérico do usuário njo facebook
-        age_range (dictionary: ["min", "max"]): Intervalo de idades que o usuário pode ter, baseado no seu ano de nascimento
-        bio (String): Biografia
-        birthday (String): Aniversário
-        context (dictionary:["id","all_mutual_friends","mutual_friends","mutual_likes","three_degree_mutual_friends"]): Contexto social. Mais informações:https://developers.facebook.com/docs/graph-api/reference/user-context/
-        cover (dictionary:["id","cover_id","offset_x","offset_y","source"]): Foto de capa do usuário
-        currency (dictionary:["currency_offset","usd_exchange","usd_exchange_inverse","user_currency"]): Informações sobre a moeda do país do usuário
-        devices(list): Lista de dispositivos do usuário
-        education(list): Lista de instituições onde o usuário estudou
-        email(string): Email do usuário
-        favorite_athletes(list): Lista de atletas favoritos
-        favorite_teams(list): Lista de times favoritos
-        first_name(string): Primeiro nome
-        gender(string): Gênero
-        hometown(page): cidade natal
-        inspirational_people(list): Lista de ídolos
-        install_type(string); É um ENUM, porém mal documentado
-        installed(bool): Informa se um APP especifico está instalado
-        interested_in (list): Lista de gêneros nos quais o usuário tem interesse
-        is_shared_login (bool): Se é um login compartilhado
-        is_verified (bool): Se é um usuário verificado
-        labels (list): Algumas etiquetas que o usuário pode ter
-        languages (list): Idiomas que o usuário fala
-        last_name (String): Sobrenome
-        link (String): Link para o feed do usuário
-        locale (locale): locale do usuário
-        location (page): Local do usuário
-        meeting_for(list de string): mal documentado
-        middle_name(string): Nome do meio
-        name(String): Nome completo
-        name_format(String): O formato como o nome deve aparecer
-        payment_pricepoints(dictionary["mobile"]): Mal documentado
-        political(String): Posição política
-        public_key(String): Chave pública de criptografia
-        quotes(Sring): Citações favoritas
-        relationship_status(String): Status de relacionamento
-        religion(String): Religião
-        security_settings(dictionary["secure_browsing"])
-        significant_other(User): Pessoa marcada como significant_other do usuário (esposo, melhor amigo, namorada, etc)
-        sports(list): Lista de esportes de interesse do usuário
-        test_group(int): Mal documentado
-        third_party_id(string): Id anonimo e irrastreavel
-        timezone(float): A zona temnporal do usuário
-        updated_time(datetime): ultimo update
-        verified(bool): Se o usuário é verificadoThis is distinct from the is_verified field. Someone is considered verified if they take any of the following actions: Register for mobile ,Confirm their account via SMS ,Enter a valid credit card
-        video_upload_limits(dictionary["lenght","size"]): Mal documentado
-        viewer_can_send_gift(bool): Se está apto a receber um 'gift'
-        website(string): Site do usuário
-        work(list): Lista de empregos presentes e passados
 
-        '''
 
         import SolFB._Age_Range as _Age_Range
         import SolFB._Admin_Note as _Admin_Note

@@ -17,34 +17,8 @@ import SolFB._Properties as _Properties
 
 class Post_Facebook: #Classe para os POSTs das redes sociais
     def __init__(self, id="", created_time="", message="", story="", dictionary=dict()):
-        '''self.id é o ID do post. Campo id
-        self.data é a data de criação. Campo create_date
-        self.message é o texto escrito pelo usuário. Campo message
-        self.story é o tipo de ação. Campo story. (exemplo: Fulano compartilhou uma foto de ciclano)
-        self.caption é o domínio de um site externo, caso o post contenha um link externo. Ilustração: http://imgur.com/XS4J9Zc
-        self.description é um resumo que aparece abaixo do caption quando você compartilha algo externo. Ilustração: http://imgur.com/XS4J9Zc
-        self.feed_targeting é sobre uma função onde um post aparece preferencialmente para um publico particular (escolhido por região, idade, interesse, etc). Só se aplica a páginas, e pouquissimas páginas usam
-        self.created_by guarda o ID e Nome do criador do POST
-        self.icon guarda o ícone que o facebook usa para aquele tipo de post
-        self.is_hidden guarda se o post é marcado como hidden
-        self.is_published guarda se o post já foi publicado. (Páginas podem criar postagens e não publicar na hora)
-        self.link guarda o link para o post. Caso o post seja um compartilhamento de outro post, então o link é para o post original. Caso seja um compartilhamento de link externo, o link será o link externo
-        self.message_tags guarda a lista de usuários e páginas que foram marcadas naquele post
-        self.name: De acordo com a documentação do facebook, é o 'Nome do Link'
-        self.object_id: O ID de qualquer foto ou vídeo anexado ao post
-        self.parent_id: Caso o post seja subpost de outro post maior, terá o ID do post maior
-        self.picture: Link direto para a imagem anexada ao post.
-        self.place: Caso o usuário marque no post algum local, esse campo terá as informações
-        self.privacy: Configurações de privacidade para o post
-        self.properties: Caso o post tenha um vídeo anexado, contém propriedades do vídeo
-        self.shares: Quantidade de compartilhamentos do post
-        self.source: Link direto para um vídeo anexado
-        self.status_type: Descrição da ação do post, semelhante a Story. enum{mobile_status_update, created_note, added_photos, added_video, shared_story, created_group, created_event, wall_post, app_created_story, published_story, tagged_in_photo, approved_friend}
-        self.targeting: Caso seu post seja visível apenas a uma região específica
-        self.to: Usuários mensionados ou marcados no post
-        self.type: tipo de post. enum{link, status, photo, video, offer}
-        self.updated_time: Data-Horário que foi criado, ou editado, ou recebeu seu último comentário. Para posts sobre eventos-de-vida (eg: nascer, casar-se, etc) o horário será o do evento
-        self.with_tags: Usuários marcados com o marcador 'com'. (Exemplo: Maria postou uma foto COM joão)
+        '''
+        Reference: https://developers.facebook.com/docs/graph-api/reference/post
         '''
         self.id=id
         self.admin_creator=list()
@@ -158,6 +132,9 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
 
 
     def getLikes(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Referece: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/likes
+         '''
          if (token==None):
             token= _Actions.Actions.token
          #print("token="+str(token))
@@ -185,12 +162,18 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
          return r["comments"]["summary"]["total_count"]
 
     def postLike(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/likes
+         '''
          if (token==None):
             token= _Actions.Actions.token
          r=requests.post("https://graph.facebook.com/v2.6/"+self.id+"/likes?&access_token="+token, timeout=timeout).json()
          return str(r)
 
     def getReactions(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/post/reactions
+         '''
          if (token==None):
             token= _Actions.Actions.token
          #print("token="+str(token))
@@ -206,6 +189,9 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
          return lista
 
     def getAttachments(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/attachment
+         '''
          if (token==None):
             token= _Actions.Actions.token
          #print("token="+str(token))
@@ -221,6 +207,9 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
          return lista
 
     def getComments(self,token=None, timeout=(5,5), maxRetries=50):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/comments
+         '''
          if (token==None):
             token= _Actions.Actions.token
 
@@ -236,6 +225,9 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
          return lista
 
     def postComment(self, message, token=None, Localpath=None, FileURL=None):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/comments
+         '''
          if (token==None):
             token= _Actions.Actions.token
          if (Localpath==None and FileURL==None):

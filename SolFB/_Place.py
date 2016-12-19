@@ -1,6 +1,9 @@
 __author__ = 'Joao'
 class Place:
     def __init__(self, id="",dictionary=dict()):
+        '''
+        Reference: https://developers.facebook.com/docs/graph-api/reference/place/
+        '''
         self.name=""
         self.latitude=""
         self.longitude=""

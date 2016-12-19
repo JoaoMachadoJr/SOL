@@ -6,20 +6,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="705aa28b-7975-4d2e-b2d7-43149a16a745" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Comment.py" afterPath="$PROJECT_DIR$/SolFB/_Comment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Cover_Photo.py" afterPath="$PROJECT_DIR$/SolFB/_Cover_Photo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Currency.py" afterPath="$PROJECT_DIR$/SolFB/_Currency.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Education_Experience.py" afterPath="$PROJECT_DIR$/SolFB/_Education_Experience.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Events.py" afterPath="$PROJECT_DIR$/SolFB/_Events.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Experience.py" afterPath="$PROJECT_DIR$/SolFB/_Experience.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Feed_Targeting.py" afterPath="$PROJECT_DIR$/SolFB/_Feed_Targeting.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Group.py" afterPath="$PROJECT_DIR$/SolFB/_Group.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Group_Doc.py" afterPath="$PROJECT_DIR$/SolFB/_Group_Doc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Life_Event.py" afterPath="$PROJECT_DIR$/SolFB/_Life_Event.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Live_Videos.py" afterPath="$PROJECT_DIR$/SolFB/_Live_Videos.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Message.py" afterPath="$PROJECT_DIR$/SolFB/_Message.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Page.py" afterPath="$PROJECT_DIR$/SolFB/_Page.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Photo.py" afterPath="$PROJECT_DIR$/SolFB/_Photo.py" />
+      <change type="DELETED" beforePath="C:\Users\junin\PycharmProjects\SOL\SolFB\_Thread.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Place.py" afterPath="$PROJECT_DIR$/SolFB/_Place.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Post_Facebook.py" afterPath="$PROJECT_DIR$/SolFB/_Post_Facebook.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Privacy.py" afterPath="$PROJECT_DIR$/SolFB/_Privacy.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Story_Attachment.py" afterPath="$PROJECT_DIR$/SolFB/_Story_Attachment.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_User.py" afterPath="$PROJECT_DIR$/SolFB/_User.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/__init__.py" afterPath="$PROJECT_DIR$/SolFB/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FacebookOrganizado.iws" />
@@ -53,21 +46,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_Page.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolFB/_Page.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SolFB/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="10752" max-vertical-offset="11339">
-              <caret line="645" column="12" selection-start-line="645" selection-start-column="12" selection-end-line="645" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="352" max-vertical-offset="714">
+              <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_Photo.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SolFB/_Photo.py">
+      <file leaf-file-name="_User.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SolFB/_User.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3667622" vertical-offset="3034" max-vertical-offset="3502">
-              <caret line="194" column="12" selection-start-line="194" selection-start-column="12" selection-end-line="194" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.036796536" vertical-offset="680" max-vertical-offset="13668">
+              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -81,10 +74,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/SolTw/Coordinates.py" />
-        <option value="$PROJECT_DIR$/SolTw/_Bouding_Box.py" />
-        <option value="$PROJECT_DIR$/SolTw/_Contributor.py" />
-        <option value="$PROJECT_DIR$/SolTw/_Coordinates.py" />
         <option value="$PROJECT_DIR$/SolTw/_Hashtags.py" />
         <option value="$PROJECT_DIR$/SolTw/_Media.py" />
         <option value="$PROJECT_DIR$/SolTw/_Place.py" />
@@ -110,8 +99,6 @@
         <option value="$PROJECT_DIR$/SolFB/_Actions.py" />
         <option value="$PROJECT_DIR$/SolFB/_Accounts.py" />
         <option value="$PROJECT_DIR$/SolFB/_Achievements.py" />
-        <option value="$PROJECT_DIR$/SolFB/__init__.py" />
-        <option value="$PROJECT_DIR$/SolFB/_User.py" />
         <option value="$PROJECT_DIR$/SolFB/_Adaccounts.py" />
         <option value="$PROJECT_DIR$/SolFB/_Adcontracts.py" />
         <option value="$PROJECT_DIR$/SolFB/_Admin_Note.py" />
@@ -132,6 +119,12 @@
         <option value="$PROJECT_DIR$/SolFB/_Message.py" />
         <option value="$PROJECT_DIR$/SolFB/_Page.py" />
         <option value="$PROJECT_DIR$/SolFB/_Photo.py" />
+        <option value="$PROJECT_DIR$/SolFB/_Place.py" />
+        <option value="$PROJECT_DIR$/SolFB/_Post_Facebook.py" />
+        <option value="$PROJECT_DIR$/SolFB/_Privacy.py" />
+        <option value="$PROJECT_DIR$/SolFB/_Story_Attachment.py" />
+        <option value="$PROJECT_DIR$/SolFB/__init__.py" />
+        <option value="$PROJECT_DIR$/SolFB/_User.py" />
       </list>
     </option>
   </component>
@@ -185,6 +178,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -233,7 +227,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -731,7 +724,13 @@
       <option name="project" value="LOCAL" />
       <updated>1481072545707</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Adicionando referencias nas classes do facebook (parte 2)">
+      <created>1481853672899</created>
+      <option name="number" value="00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1481853672899</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -759,12 +758,12 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34294385" sideWeight="0.6173709" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34825492" sideWeight="0.6173709" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11604095" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32409012" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12824957" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -843,7 +842,8 @@
     <MESSAGE value="Comecei a redistribuir os metodos nas classes certas (Fase 7)&#10;terminei _TweetterUser&#10;" />
     <MESSAGE value="Renomeei SolFb._Settings para SolFB._Actions" />
     <MESSAGE value="Adicionando referencias nas classes do facebook (parte 1)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionando referencias nas classes do facebook (parte 1)" />
+    <MESSAGE value="Adicionando referencias nas classes do facebook (parte 2)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionando referencias nas classes do facebook (parte 2)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -852,55 +852,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_Execute.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4743" max-vertical-offset="6885">
-          <caret line="294" column="36" selection-start-line="294" selection-start-column="36" selection-end-line="294" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_Entity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9047619" vertical-offset="476" max-vertical-offset="901">
-          <caret line="47" column="36" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_Coordinates.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2577031" vertical-offset="146" max-vertical-offset="697">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_Contributor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2577031" vertical-offset="180" max-vertical-offset="731">
-          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_DirectMessage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04761905" vertical-offset="374" max-vertical-offset="1496">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_Bouding_Box.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2577031" vertical-offset="129" max-vertical-offset="680">
-          <caret line="34" column="41" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_Friendship.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1377">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolTw/_Hashtags.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="680">
@@ -1048,13 +999,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SolFB/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
-          <caret line="3" column="60" selection-start-line="3" selection-start-column="60" selection-end-line="3" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolFB/_Adaccounts.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2624" max-vertical-offset="2992">
@@ -1129,7 +1073,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6055046" vertical-offset="5688" max-vertical-offset="6256">
           <caret line="365" column="18" selection-start-line="365" selection-start-column="16" selection-end-line="365" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1137,7 +1080,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3046595" vertical-offset="0" max-vertical-offset="748">
           <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1145,7 +1087,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1218638" vertical-offset="0" max-vertical-offset="782">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1153,7 +1094,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.23880596" vertical-offset="4887" max-vertical-offset="5474">
           <caret line="306" column="12" selection-start-line="306" selection-start-column="12" selection-end-line="306" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1161,7 +1101,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1836">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1169,7 +1108,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22201492" vertical-offset="0" max-vertical-offset="1598">
           <caret line="11" column="88" selection-start-line="11" selection-start-column="88" selection-end-line="11" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1177,7 +1115,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.20765027" vertical-offset="199" max-vertical-offset="748">
           <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1185,15 +1122,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="1105">
           <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolFB/_User.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3573" max-vertical-offset="14603">
-          <caret line="217" column="35" selection-start-line="217" selection-start-column="35" selection-end-line="217" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1201,22 +1129,85 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SolFB/_Page.py">
+    <entry file="file://$PROJECT_DIR$/SolFB/_Place.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="10752" max-vertical-offset="11339">
-          <caret line="645" column="12" selection-start-line="645" selection-start-column="12" selection-end-line="645" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.15482695" vertical-offset="0" max-vertical-offset="549">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SolFB/_Photo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3667622" vertical-offset="3034" max-vertical-offset="3502">
+        <state vertical-scroll-proportion="0.4085821" vertical-offset="2943" max-vertical-offset="3502">
           <caret line="194" column="12" selection-start-line="194" selection-start-column="12" selection-end-line="194" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_Page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.048507463" vertical-offset="10752" max-vertical-offset="11339">
+          <caret line="645" column="12" selection-start-line="645" selection-start-column="12" selection-end-line="645" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_Post_Facebook.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55597013" vertical-offset="3374" max-vertical-offset="4182">
+          <caret line="229" column="12" selection-start-line="229" selection-start-column="12" selection-end-line="229" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_Privacy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15482695" vertical-offset="0" max-vertical-offset="646">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_Properties.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="549">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_Story_Attachment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15482695" vertical-offset="0" max-vertical-offset="765">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_Targeting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="352" max-vertical-offset="714">
+          <caret line="31" column="51" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_User.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.036796536" vertical-offset="680" max-vertical-offset="13668">
+          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
           <folding />
         </state>
       </provider>
