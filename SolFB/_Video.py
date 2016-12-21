@@ -1,6 +1,9 @@
 __author__ = 'Joao'
 class Video:
      def __init__(self, id="",dictionary=dict()):
+         '''
+         Reference: https://developers.facebook.com/docs/graph-api/reference/video/
+         '''
          self.backdated_time=""
          self.backdated_time_granularity=""
          self.id=id
