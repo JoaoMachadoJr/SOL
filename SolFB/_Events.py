@@ -10,7 +10,7 @@ import SolFB._Group as _Group
 import SolFB._Live_Videos as _Live_Videos
 
 import SolFB._Video as _Video
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 import SolFB._Comment as _Comment
 from dateutil.parser import parse
 class Events:
@@ -88,7 +88,7 @@ class Events:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
@@ -106,7 +106,7 @@ class Events:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
@@ -124,7 +124,7 @@ class Events:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
@@ -142,7 +142,7 @@ class Events:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
@@ -178,7 +178,7 @@ class Events:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
@@ -196,7 +196,7 @@ class Events:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
@@ -214,7 +214,7 @@ class Events:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:

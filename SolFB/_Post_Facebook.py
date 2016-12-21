@@ -2,7 +2,7 @@ __author__ = 'Joao'
 import requests
 from dateutil.parser import parse
 
-from SolFB import _User, _Utility, _Actions
+from SolFB import _FacebookUser, _Utility, _Actions
 from  SolFB._Utility import Utility as _Utility
 from  SolFB import _Actions
 import requests
@@ -54,7 +54,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
              self.id=dictionary["id"]
         if ("admin_creator" in dictionary):
              for i in dictionary["admin_creator"]:
-                self.admin_creator.append(_User.User(dictionary=i))
+                self.admin_creator.append(_FacebookUser.FacebookUser(dictionary=i))
         if ("application" in dictionary):
              self.application=dictionary["application"]
         if ("call_to_action" in dictionary):
@@ -68,7 +68,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
         if ("feed_targeting" in dictionary):
              self.feed_targeting=_Feed_Targeting.Feed_Targeting(dictionary=dictionary["feed_targeting"])
         if ("from" in dictionary):
-             self.from_= _User.User(dictionary=dictionary["from"])
+             self.from_= _FacebookUser.FacebookUser(dictionary=dictionary["from"])
         if ("icon" in dictionary):
              self.icon=dictionary["icon"]
         if ("is_hidden" in dictionary):
@@ -110,7 +110,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
              self.targeting=dictionary["targeting"]
         if ("to" in dictionary):
              for i in dictionary["to"]:
-                self.to.append(_User.User(dictionary=i))
+                self.to.append(_FacebookUser.FacebookUser(dictionary=i))
         if ("type" in dictionary):
              self.type=dictionary["type"]
         if ("updated_time" in dictionary):
@@ -142,7 +142,7 @@ class Post_Facebook: #Classe para os POSTs das redes sociais
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_FacebookUser.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r= _Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:

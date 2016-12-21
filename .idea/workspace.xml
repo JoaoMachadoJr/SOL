@@ -6,12 +6,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="705aa28b-7975-4d2e-b2d7-43149a16a745" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\junin\PycharmProjects\SOL\SolFB\_Thread.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Place.py" afterPath="$PROJECT_DIR$/SolFB/_Place.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SolFB/_AuthenticatedFacebookUser.py" />
+      <change type="MOVED" beforePath="C:\Users\junin\PycharmProjects\SOL\SolFB\_User.py" afterPath="$PROJECT_DIR$/SolFB/_FacebookUser.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Achievements.py" afterPath="$PROJECT_DIR$/SolFB/_Achievements.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Actions.py" afterPath="$PROJECT_DIR$/SolFB/_Actions.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Admin_Note.py" afterPath="$PROJECT_DIR$/SolFB/_Admin_Note.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Albums.py" afterPath="$PROJECT_DIR$/SolFB/_Albums.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Apprequests.py" afterPath="$PROJECT_DIR$/SolFB/_Apprequests.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Comment.py" afterPath="$PROJECT_DIR$/SolFB/_Comment.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Education_Experience.py" afterPath="$PROJECT_DIR$/SolFB/_Education_Experience.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Events.py" afterPath="$PROJECT_DIR$/SolFB/_Events.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Experience.py" afterPath="$PROJECT_DIR$/SolFB/_Experience.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Group.py" afterPath="$PROJECT_DIR$/SolFB/_Group.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Group_Doc.py" afterPath="$PROJECT_DIR$/SolFB/_Group_Doc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Life_Event.py" afterPath="$PROJECT_DIR$/SolFB/_Life_Event.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Live_Videos.py" afterPath="$PROJECT_DIR$/SolFB/_Live_Videos.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Photo.py" afterPath="$PROJECT_DIR$/SolFB/_Photo.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Post_Facebook.py" afterPath="$PROJECT_DIR$/SolFB/_Post_Facebook.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Privacy.py" afterPath="$PROJECT_DIR$/SolFB/_Privacy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_Story_Attachment.py" afterPath="$PROJECT_DIR$/SolFB/_Story_Attachment.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/_User.py" afterPath="$PROJECT_DIR$/SolFB/_User.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SolFB/__init__.py" afterPath="$PROJECT_DIR$/SolFB/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -56,12 +67,84 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_User.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SolFB/_User.py">
+      <file leaf-file-name="_FacebookUser.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SolFB/_FacebookUser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.036796536" vertical-offset="680" max-vertical-offset="13668">
-              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+            <state vertical-scroll-proportion="-9.068966" vertical-offset="570" max-vertical-offset="1003">
+              <caret line="339" column="0" selection-start-line="339" selection-start-column="0" selection-end-line="339" selection-end-column="0" />
+              <folding>
+                <element signature="e#1384#9170#0" expanded="false" />
+                <element signature="e#9201#9480#0" expanded="false" />
+                <element signature="e#9514#15006#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_AuthenticatedFacebookUser.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SolFB/_AuthenticatedFacebookUser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.41125542" vertical-offset="1731" max-vertical-offset="2193">
+              <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
+              <folding>
+                <element signature="e#20#51#0" expanded="true" />
+                <element signature="e#459#2298#0" expanded="false" />
+                <element signature="e#2776#3585#0" expanded="false" />
+                <element signature="e#3656#4379#0" expanded="false" />
+                <element signature="e#4448#5951#0" expanded="false" />
+                <element signature="e#6017#6842#0" expanded="false" />
+                <element signature="e#6936#7374#0" expanded="false" />
+                <element signature="e#7444#8248#0" expanded="false" />
+                <element signature="e#8312#10233#0" expanded="false" />
+                <element signature="e#10314#11298#0" expanded="false" />
+                <element signature="e#11363#12065#0" expanded="false" />
+                <element signature="e#12129#14000#0" expanded="false" />
+                <element signature="e#14066#14896#0" expanded="false" />
+                <element signature="e#14961#15665#0" expanded="false" />
+                <element signature="e#15715#16034#0" expanded="false" />
+                <element signature="e#16105#16983#0" expanded="false" />
+                <element signature="e#17049#18921#0" expanded="false" />
+                <element signature="e#18986#20857#0" expanded="false" />
+                <element signature="e#20928#21576#0" expanded="false" />
+                <element signature="e#21642#22518#0" expanded="false" />
+                <element signature="e#22585#22961#0" expanded="false" />
+                <element signature="e#23031#24912#0" expanded="false" />
+                <element signature="e#24988#25876#0" expanded="false" />
+                <element signature="e#28031#29077#0" expanded="false" />
+                <element signature="e#29137#29511#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_AuthenticatedTwitterUser.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2312">
+              <caret line="8" column="58" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="58" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_Actions.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SolFB/_Actions.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
+              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_TwitterUser.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SolTw/_TwitterUser.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1391" max-vertical-offset="1853">
+              <caret line="208" column="12" selection-start-line="208" selection-start-column="12" selection-end-line="208" selection-end-column="12" />
+              <folding>
+                <element signature="e#499#6834#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,8 +157,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/SolTw/_Hashtags.py" />
-        <option value="$PROJECT_DIR$/SolTw/_Media.py" />
         <option value="$PROJECT_DIR$/SolTw/_Place.py" />
         <option value="$PROJECT_DIR$/SolTw/_Place_Attributes.py" />
         <option value="$PROJECT_DIR$/SolTw/_Size.py" />
@@ -96,7 +177,6 @@
         <option value="$PROJECT_DIR$/SolTw/_Actions.py" />
         <option value="$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py" />
         <option value="$PROJECT_DIR$/SolTw/_TwitterUser.py" />
-        <option value="$PROJECT_DIR$/SolFB/_Actions.py" />
         <option value="$PROJECT_DIR$/SolFB/_Accounts.py" />
         <option value="$PROJECT_DIR$/SolFB/_Achievements.py" />
         <option value="$PROJECT_DIR$/SolFB/_Adaccounts.py" />
@@ -125,6 +205,9 @@
         <option value="$PROJECT_DIR$/SolFB/_Story_Attachment.py" />
         <option value="$PROJECT_DIR$/SolFB/__init__.py" />
         <option value="$PROJECT_DIR$/SolFB/_User.py" />
+        <option value="$PROJECT_DIR$/SolFB/_Actions.py" />
+        <option value="$PROJECT_DIR$/SolFB/_FacebookUser.py" />
+        <option value="$PROJECT_DIR$/SolFB/_AuthenticatedFacebookUser.py" />
       </list>
     </option>
   </component>
@@ -178,7 +261,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -227,6 +309,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -730,7 +813,13 @@
       <option name="project" value="LOCAL" />
       <updated>1481853672899</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Adicionando referencias nas classes do facebook (parte 3)">
+      <created>1482190605844</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1482190605844</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -758,7 +847,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34825492" sideWeight="0.6173709" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35356602" sideWeight="0.6173709" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11604095" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -779,29 +868,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39800286" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11604095" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39800286" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32764506" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27303755" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935154" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34294385" sideWeight="0.6173709" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32423207" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32753405" sideWeight="0.3826291" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39800286" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -819,7 +885,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="GET lists/statuses" />
     <MESSAGE value="POST lists/members/destroy" />
     <MESSAGE value="GET lists/subscribers" />
     <MESSAGE value="POST lists/subscribers/create" />
@@ -843,22 +908,17 @@
     <MESSAGE value="Renomeei SolFb._Settings para SolFB._Actions" />
     <MESSAGE value="Adicionando referencias nas classes do facebook (parte 1)" />
     <MESSAGE value="Adicionando referencias nas classes do facebook (parte 2)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionando referencias nas classes do facebook (parte 2)" />
+    <MESSAGE value="Adicionando referencias nas classes do facebook (parte 3)" />
+    <MESSAGE value="Adicionando referencias nas classes do facebook (parte 4)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionando referencias nas classes do facebook (parte 4)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="28" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SolTw/_Hashtags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="680">
-          <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolTw/_Media.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="1207">
@@ -943,20 +1003,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71926606" vertical-offset="1767" max-vertical-offset="2312">
-          <caret line="127" column="104" selection-start-line="127" selection-start-column="104" selection-end-line="127" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolTw/_TwitterUser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81284404" vertical-offset="2940" max-vertical-offset="4080">
-          <caret line="208" column="12" selection-start-line="208" selection-start-column="12" selection-end-line="208" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolTw/_Actions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.57247704" vertical-offset="5179" max-vertical-offset="11594">
@@ -989,13 +1035,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1631" max-vertical-offset="2244">
           <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolFB/_Actions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1559633" vertical-offset="0" max-vertical-offset="545">
-          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -1204,11 +1243,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SolFB/_User.py">
+    <entry file="file://$USER_HOME$/.PyCharm40/system/python_stubs/1013586911/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.036796536" vertical-offset="680" max-vertical-offset="13668">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="87277" max-vertical-offset="97529">
+          <caret line="5143" column="8" selection-start-line="5143" selection-start-column="8" selection-end-line="5143" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolTw/_TwitterUser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1391" max-vertical-offset="1853">
+          <caret line="208" column="12" selection-start-line="208" selection-start-column="12" selection-end-line="208" selection-end-column="12" />
+          <folding>
+            <element signature="e#499#6834#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_Actions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2312">
+          <caret line="8" column="58" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_FacebookUser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.068966" vertical-offset="570" max-vertical-offset="1003">
+          <caret line="339" column="0" selection-start-line="339" selection-start-column="0" selection-end-line="339" selection-end-column="0" />
+          <folding>
+            <element signature="e#1384#9170#0" expanded="false" />
+            <element signature="e#9201#9480#0" expanded="false" />
+            <element signature="e#9514#15006#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SolFB/_AuthenticatedFacebookUser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41125542" vertical-offset="1731" max-vertical-offset="2193">
+          <caret line="439" column="0" selection-start-line="439" selection-start-column="0" selection-end-line="439" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#51#0" expanded="true" />
+            <element signature="e#459#2298#0" expanded="false" />
+            <element signature="e#2776#3585#0" expanded="false" />
+            <element signature="e#3656#4379#0" expanded="false" />
+            <element signature="e#4448#5951#0" expanded="false" />
+            <element signature="e#6017#6842#0" expanded="false" />
+            <element signature="e#6936#7374#0" expanded="false" />
+            <element signature="e#7444#8248#0" expanded="false" />
+            <element signature="e#8312#10233#0" expanded="false" />
+            <element signature="e#10314#11298#0" expanded="false" />
+            <element signature="e#11363#12065#0" expanded="false" />
+            <element signature="e#12129#14000#0" expanded="false" />
+            <element signature="e#14066#14896#0" expanded="false" />
+            <element signature="e#14961#15665#0" expanded="false" />
+            <element signature="e#15715#16034#0" expanded="false" />
+            <element signature="e#16105#16983#0" expanded="false" />
+            <element signature="e#17049#18921#0" expanded="false" />
+            <element signature="e#18986#20857#0" expanded="false" />
+            <element signature="e#20928#21576#0" expanded="false" />
+            <element signature="e#21642#22518#0" expanded="false" />
+            <element signature="e#22585#22961#0" expanded="false" />
+            <element signature="e#23031#24912#0" expanded="false" />
+            <element signature="e#24988#25876#0" expanded="false" />
+            <element signature="e#28031#29077#0" expanded="false" />
+            <element signature="e#29137#29511#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

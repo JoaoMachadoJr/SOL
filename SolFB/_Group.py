@@ -5,7 +5,7 @@ import requests
 from  SolFB import _Actions
 from  SolFB._Utility import Utility as _Utility
 import SolFB._Cover_Photo as _Cover_Photo
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 import SolFB._Group_Doc as _Group_Doc
 
 
@@ -85,7 +85,7 @@ class Group:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:
@@ -217,7 +217,7 @@ class Group:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:

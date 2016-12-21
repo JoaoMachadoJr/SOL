@@ -1,7 +1,7 @@
 __author__ = 'Joao'
 
 
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 
 
 class Experience:
@@ -19,12 +19,12 @@ class Experience:
          if ("description" in dictionary):
              self.description=dictionary["description"]
          if ("from" in dictionary):
-             self.from_=_User.User(dictionary= dictionary["from"])
+             self.from_=_User.FacebookUser(dictionary= dictionary["from"])
          if ("name" in dictionary):
              self.name=dictionary["name"]
          if ("with" in dictionary):
              for user in dictionary["with"]:
-                self.with_.append(_User.User(dictionary=dictionary["with"]))
+                self.with_.append(_User.FacebookUser(dictionary=dictionary["with"]))
 
 
      def __str__(self):

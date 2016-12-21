@@ -3,7 +3,7 @@ __author__ = 'Joao'
 
 import SolFB._Photo as _Photo
 import SolFB._Events as _Events
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 from  SolFB import _Actions
 from  SolFB._Utility import Utility as _Utility
 import requests
@@ -44,7 +44,7 @@ class Albums:
          if ("event" in dictionary):
              self.event=_Events.Events(dictionary=dictionary["event"])
          if ("from" in dictionary):
-             self.from_=_User.User(dictionary= dictionary["from"])
+             self.from_=_User.FacebookUser(dictionary= dictionary["from"])
          if ("link" in dictionary):
              self.link=dictionary["link"]
          if ("location" in dictionary):
@@ -121,7 +121,7 @@ class Albums:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:

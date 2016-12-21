@@ -1,6 +1,6 @@
 __author__ = 'Joao'
 
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 
 
 class Group_Doc:
@@ -18,7 +18,7 @@ class Group_Doc:
          if ("id" in dictionary):
              self.id=dictionary["id"]
          if ("from" in dictionary):
-             self.from_=_User.User(dictionary=dictionary["from"])
+             self.from_=_User.FacebookUser(dictionary=dictionary["from"])
          if ("subject" in dictionary):
              self.subject=dictionary["subject"]
          if ("message" in dictionary):

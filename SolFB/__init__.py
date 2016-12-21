@@ -1,5 +1,5 @@
 __author__ = 'Joao'
-from SolFB._User import User as User
+from SolFB._FacebookUser import FacebookUser as User
 from SolFB._Accounts import Accounts as Accounts
 from SolFB._Achievements import Achievements as Achievements
 from SolFB._Adaccounts import Adaccounts as Adaccounts

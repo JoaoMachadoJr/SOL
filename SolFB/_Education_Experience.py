@@ -3,7 +3,7 @@ __author__ = 'Joao'
 
 import SolFB._Experience as _Experience
 import SolFB._Page as _Page
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 
 class Education_Experience:
      def __init__(self,id="", dictionary=dict()):
@@ -34,7 +34,7 @@ class Education_Experience:
              self.type=dictionary["type"]
          if ("with" in dictionary):
              for user in dictionary["with"]:
-                 self.with_.append(_User.User(dictionary=dictionary["with"]))
+                 self.with_.append(_User.FacebookUser(dictionary=dictionary["with"]))
          if ("year" in dictionary):
              self.year=_Page.Page(dictionary=dictionary["year"])
 

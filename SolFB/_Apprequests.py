@@ -1,7 +1,7 @@
 __author__ = 'Joao'
 
 
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 
 class Apprequests:
 
@@ -29,13 +29,13 @@ class Apprequests:
          if ("data" in dictionary):
              self.data=dictionary["data"]
          if ("from" in dictionary):
-             self.from_=_User.User(dictionary=dictionary["from"])
+             self.from_=_User.FacebookUser(dictionary=dictionary["from"])
          if ("message" in dictionary):
              self.message=dictionary["message"]
          if ("object" in dictionary):
              self.object=dictionary["object"]
          if ("to" in dictionary):
-             self.to=_User.User(dictionary=dictionary["to"])
+             self.to=_User.FacebookUser(dictionary=dictionary["to"])
 
 
      def __str__(self):

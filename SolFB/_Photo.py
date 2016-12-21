@@ -9,7 +9,7 @@ import requests
 import SolFB._Events as _Events
 
 import SolFB._Comment as _Comment
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 class Photo:
      def __init__(self,id="", dictionary=dict()):
          '''
@@ -161,7 +161,7 @@ class Photo:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:

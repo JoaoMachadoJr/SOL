@@ -4,7 +4,7 @@ __author__ = 'Joao'
 from  SolFB import _Actions
 from  SolFB._Utility import Utility as _Utility
 import SolFB._Comment as _Comment
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 import SolFB._Video as _Video
 class Live_Videos:
      def __init__(self, id="",dictionary=dict()):
@@ -70,7 +70,7 @@ class Live_Videos:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:

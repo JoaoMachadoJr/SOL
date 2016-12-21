@@ -11,7 +11,7 @@ class Comment:
          '''
          Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/comment
          '''
-         import SolFB._User as _User
+         import SolFB._FacebookUser as _User
          self.id=id
          self.attachment=""
          self.can_comment=""
@@ -50,7 +50,7 @@ class Comment:
          if ("created_time" in dictionary):
              self.created_time=dictionary["created_time"]
          if ("from" in dictionary):
-             self.from_=_User.User(dictionary=dictionary["from"])
+             self.from_=_User.FacebookUser(dictionary=dictionary["from"])
          if ("like_count" in dictionary):
              self.like_count=dictionary["like_count"]
          if ("message" in dictionary):
@@ -95,7 +95,7 @@ class Comment:
          '''
          Reference: https://developers.facebook.com/docs/graph-api/reference/v2.8/object/likes
          '''
-         import SolFB._User as _User
+         import SolFB._FacebookUser as _User
          if (token==None):
             token=_Actions.Actions.token
          #print("token="+str(token))
@@ -103,7 +103,7 @@ class Comment:
          lista=list()
          while ("data" in r and len(r["data"])>0):
              for a in r["data"]:
-                 lista.append(_User.User(dictionary=a))
+                 lista.append(_User.FacebookUser(dictionary=a))
              if ("next" in r["paging"]):
                  r=_Utility.prepareRequest(maxRetries=maxRetries).get(r["paging"]["next"], timeout=timeout).json()
              else:

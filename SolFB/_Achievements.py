@@ -1,7 +1,7 @@
 __author__ = 'Joao'
 
 
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 import SolFB._Place as _Place
 from  SolFB import _Actions
 from  SolFB._Utility import Utility as _Utility
@@ -41,7 +41,7 @@ class Achievements:
         if ("end_time" in dictionary):
             self.end_time=dictionary["end_time"]
         if ("from" in dictionary):
-            self.from_=_User.User(dictionary=dictionary["from"])
+            self.from_=_User.FacebookUser(dictionary=dictionary["from"])
         if ("image" in dictionary):
             self.image=dictionary["image"]
         if ("is_explicitly_shared" in dictionary):
@@ -61,7 +61,7 @@ class Achievements:
         if ("ref" in dictionary):
             self.ref=dictionary["ref"]
         if ("from" in dictionary):
-            self.from_=_User.User(dictionary=dictionary["from"])
+            self.from_=_User.FacebookUser(dictionary=dictionary["from"])
         if ("start_time" in dictionary):
             self.start_time=dictionary["start_time"]
         if ("tags" in dictionary):

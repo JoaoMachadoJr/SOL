@@ -2,7 +2,7 @@ __author__ = 'Joao'
 
 
 import SolFB._Page as _Page
-import SolFB._User as _User
+import SolFB._FacebookUser as _User
 
 class Admin_Note:
      def __init__(self, id="",dictionary=dict()):
@@ -20,7 +20,7 @@ class Admin_Note:
          if ("id" in dictionary):
              self.id=dictionary["id"]
          if ("user" in dictionary):
-             self.user=_User.User(dictionary=dictionary["user"])
+             self.user=_User.FacebookUser(dictionary=dictionary["user"])
 
 
      def __str__(self):
