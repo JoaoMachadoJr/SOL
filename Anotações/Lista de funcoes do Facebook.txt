@@ -1,0 +1,129 @@
+FACEBOOK:
+
+Achievements.getComments: 					Obtem comentários de um Achievement
+Achievements.postComment: 					Posta um comentário em um Archievement
+Actions.debugToken: 						Consigo informações do token de acesso
+Actions.me: 								Consigo informações sobre eu
+Albums.getPhotos: 							pegar fotos em um album
+Albums.postPhoto: 							postar foto em um album
+Albums.getLikes: 							pegar quem curtiu um album 
+Albums.getComments: 						pegar comentários de um album 
+Albums.postLike: 							postar um like em um album 
+Albums.postComment: 						postar um comentário em um album
+Albums.getLikesCount: 						pegar quantidade de curtidas de um album
+Albums.getCommentCount: 					pegar quantidade de comentarios de um album
+AuthenticatedFacebookUser.getMyPosts: 		Pega as postagens do mural
+AuthenticatedFacebookUser._getMyFriends:	pega minha lista de amigos
+AuthenticatedFacebookUser.getAccounts:		Paginas das quais essa pessoa é ADMIN
+AuthenticatedFacebookUser.getAchievements:	Pega meus achievements
+AuthenticatedFacebookUser.getAdaccounts		Pega informações sobre contas de ADs
+AuthenticatedFacebookUser.getAlbums: 		Pega meus albums
+AuthenticatedFacebookUser.postAlbum: 		posta um album
+AuthenticatedFacebookUser.getApprequests	
+AuthenticatedFacebookUser.getBooks:			Pega minha lista de livros
+AuthenticatedFacebookUser.getEvents:		Pega meus eventos
+AuthenticatedFacebookUser.getFamily:		Pega minha familia
+AuthenticatedFacebookUser.getGames			Pega os jogos que eu jogo
+AuthenticatedFacebookUser.getGroups			Pega meus grupos
+AuthenticatedFacebookUser.getLikes			Pega as paginas que eu curto
+AuthenticatedFacebookUser.postPost			Faz um post no meu mural
+AuthenticatedFacebookUser.getLive_Videos	Pega um video ao vivo
+AuthenticatedFacebookUser.getMovies			Pega meus filmes preferidos
+AuthenticatedFacebookUser.getMusic			Pega minha musica
+AuthenticatedFacebookUser.getPermissions	Pega minhas permissões
+AuthenticatedFacebookUser.getPhotos			Pega minhas fotos
+AuthenticatedFacebookUser.getPicture		Pega minha foto de perfil
+AuthenticatedFacebookUser.getTelevision		Pega os programas de TV que eu gosto
+AuthenticatedFacebookUser.getVideo_Broadcasts 
+AuthenticatedFacebookUser.getVideos			Pega os videos que postei
+AuthenticatedFacebookUser.postVideo			Posto um video
+AuthenticatedFacebookUser.postPhoto			Posto uma foto
+AuthenticatedFacebookUser.postPost			Posto algo no meu mural
+Comment.getInfo								Pego informação do coment
+Comment.getLikes							Pego quem curtiu
+Comment.postLike							Faço uma curtida
+Comment.deleteLike							Desfaço uma curtida
+Comment.update								edito um comentario
+Comment.delete								excluo um comentario
+Events.getAdmins							Pego lista de admins de um evento 
+Events.getAttending				
+Events.getDeclined							Pego lista de pessoas que declinaram
+Events.getInterested						Pego lista de pessoas interessadas
+Events.getLive_Videos						Pego videos ao vivo
+Events.getMaybe								Pego lista de pessoas que talvez irão
+Events.getNoReply							pego list de pessoas que nao responderam
+Events.getRoles
+Events.getPicture							pego foto de perfil do evento
+Events.getComments							pego comentários
+Events.getPhotos							pego fotos do evento
+Events.getVideos							pego videos do evento
+Events.postVideo							posto video do evento
+Events.postPhoto							posto foto do evento
+Events.postPost								posto no mural do evento
+Events.getPosts								pego posts do evento
+Group.getAdmins								Pega admins de um grupo
+Group.getDocs
+Group.getEvents
+Group.getAlbums								Pega albums de um grupo
+Group.getFiles								Pega arquivos de um grupo
+Group.getPosts								Pega os posts de um grupo
+Group.postPost								Posta um post em um grupo
+Group.getMembers							Pega a lista de membros de um grupo
+Group.getPhotos								Pega fotos de um grupo
+Group.postPhoto								Posta uma foto em um grupo
+Group.getVideos								Pega videos de um grupo
+Group.getGroupFromUsername					
+Group.postVideo								Posta um video em um grupo
+Life_Event.getPhotos						Pega fotos de um milestone
+Life_Event.getLikes							Pega quem curtiu um milestone
+Life_Event.getComments						Pega quem comentou um milestone				
+Page.getAdmin_Notes
+Page.getAlbums								Pega os albums de uma pagina
+Page.postAlbum								Posta um album numa pagina
+Page.getBlocked								pega os usuarios bloqueados de uma pagina
+Page.getLikesCount							pega a quantidade de likes que uma pagina tem
+Page.getEvents								Pego eventos de uma pagina
+Page.getGlobal_Brand_Children
+Page.getInstagram_Accounts					Contas do Instagram vinculadas à pagina
+Page.getLikedPages
+Page.getLive_videos							pega videos ao vivo
+Page.getLife_Events							pega milestones
+Page.getPhotos								pega fotos
+Page.postPhoto								posta foto
+Page.getPicture								pega foto de perfil
+Page.getRoles								
+Page.getVideos								pega videos
+Page.getPosts								pega posts
+Page.postPost								posta posts
+Page.postVideo								posta video
+Photo.getInfo								Informações sobre a foto
+Photo.delete								Exclui a foto
+Photo.getComments							pega Comentarios da foto
+Photo.postComment							posta comentarios na foto
+Photo.getLikes								pega quem curtiu
+Photo.getLikesCount							pega quantidade de curtidas
+Photo.getCommentCount						pega quantidade de comentarios
+Photo.postLike								posta um like
+Photo.getReactions							pega reações
+Post_Facebook.getLikes						pega quem curtiu o post
+Post_Facebook.getLikesCount					pega quantidade de curtidas no post
+Post_Facebook.getCommentCount				pega quantidade de comentarios no post
+Post_Facebook.postLike						posta um comentario
+Post_Facebook.getReactions					pega as reações
+Post_Facebook.getAttachments				pega media anexada
+Post_Facebook.getComments					pega comentarios do post
+Post_Facebook.postComment					posta um comentario no post
+
+
+
+
+
+
+
+
+
+
+
+
+
+

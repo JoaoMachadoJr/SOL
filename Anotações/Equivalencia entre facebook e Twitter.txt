@@ -1,0 +1,29 @@
+FACEBOOK											TWITTER
+
+Actions.me											Actions.me
+AuthenticatedFacebookUser.getMyPosts				Actions.getTimelineFromUser
+AuthenticatedFacebookUser._getMyFriends				Actions.getFriendsFromUser
+AuthenticatedFacebookUser.getAchievements
+
+
+
+
+
+Achievements.getComments
+Achievements.postComment
+Actions.debugToken
+Albums.getPhotos
+Albums.postPhoto
+Albums.getLikes
+Albums.getComments
+Albums.postLike
+Albums.postComment
+Albums.getLikesCount
+Albums.getCommentCount
+
+
+
+
+
+
+
