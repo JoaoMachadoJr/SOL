@@ -1,3 +1,3 @@
-from SOL_MAIN import SOL
+from SOL_MAIN.sol import SOL
 
 a=SOL()

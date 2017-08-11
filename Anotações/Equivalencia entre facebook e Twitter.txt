@@ -3,10 +3,33 @@ FACEBOOK											TWITTER
 Actions.me											Actions.me
 AuthenticatedFacebookUser.getMyPosts				Actions.getTimelineFromUser
 AuthenticatedFacebookUser._getMyFriends				Actions.getFriendsFromUser
-AuthenticatedFacebookUser.getAchievements
-
-
-
+AuthenticatedFacebookUser.getLikes					Actions.getSubscriptionsFromUser
+AuthenticatedFacebookUser.postPost					Actions.postTweet
+AuthenticatedFacebookUser.getMovies					Actions.getFavorites
+AuthenticatedFacebookUser.getMusic					Actions.getFavorites
+AuthenticatedFacebookUser.getTelevision             Actions.getFavorites
+AuthenticatedFacebookUser.postVideo                 Actions.postTweet
+AuthenticatedFacebookUser.postPhoto                 Actions.postTweet
+Comment.getInfo										______________________
+Comment.getLikes									Actions.getFavorites
+Comment.postLike									Actions.postFavoriteTweetCreate
+Comment.deleteLike									Actions.postFavoriteTweetDestroy	
+Comment.delete										Actions.postDestroyTweetById
+Photo.getInfo										Actions.getTweet
+Photo.delete										Actions.postDestroyTweetById
+Photo.getComments									________________________
+Photo.postComment									Actions.postReply
+Photo.getLikes										Actions.getFavorites
+Photo.getLikesCount									Actions.getFavorites
+Photo.getCommentCount								______________________
+Photo.postLike										Actions.postFavoriteTweetCreate
+Photo.getReactions									Actions.postFavoriteTweetCreate
+Post_Facebook.getLikes								Actions.getFavorites
+Post_Facebook.getLikesCount							Actions.getFavorites
+Post_Facebook.getCommentCount						________________________
+Post_Facebook.postLike								Actions.postFavoriteTweetCreate
+Post_Facebook.getComments							________________________
+Post_Facebook.postComment							Actions.postReply
 
 
 Achievements.getComments
@@ -20,6 +43,99 @@ Albums.postLike
 Albums.postComment
 Albums.getLikesCount
 Albums.getCommentCount
+AuthenticatedFacebookUser.getAchievements
+AuthenticatedFacebookUser.getAccounts				
+AuthenticatedFacebookUser.getAdaccounts
+AuthenticatedFacebookUser.getAlbums
+AuthenticatedFacebookUser.postAlbum
+AuthenticatedFacebookUser.getApprequests
+AuthenticatedFacebookUser.getBooks:
+AuthenticatedFacebookUser.getEvents:
+AuthenticatedFacebookUser.getFamily:
+AuthenticatedFacebookUser.getGames
+AuthenticatedFacebookUser.getGroups
+AuthenticatedFacebookUser.getLive_Videos
+AuthenticatedFacebookUser.getMovies
+AuthenticatedFacebookUser.getPermissions
+AuthenticatedFacebookUser.getPhotos
+AuthenticatedFacebookUser.getPicture
+AuthenticatedFacebookUser.getVideo_Broadcasts 
+AuthenticatedFacebookUser.getVideos
+Comment.update
+Events.getAdmins
+Events.getAttending
+Events.getDeclined
+Events.getInterested
+Events.getLive_Videos
+Events.getMaybe
+Events.getNoReply
+Events.getRoles
+Events.getPicture
+Events.getComments
+Events.getPhotos
+Events.getVideos
+Events.postVideo
+Events.postPhoto
+Events.postPost
+Events.getPosts
+Group.getAdmins
+Group.getDocs
+Group.getEvents
+Group.getAlbums
+Group.getFiles
+Group.getPosts
+Group.postPost
+Group.getMembers
+Group.getPhotos
+Group.postPhoto
+Group.getVideos
+Group.getGroupFromUsername
+Group.postVideo
+Life_Event.getPhotos
+Life_Event.getLikes
+Life_Event.getComments
+Page.getAdmin_Notes
+Page.getAlbums
+Page.postAlbum
+Page.getBlocked
+Page.getLikesCount
+Page.getEvents
+Page.getGlobal_Brand_Children
+Page.getInstagram_Accounts
+Page.getLikedPages
+Page.getLive_videos
+Page.getLife_Events
+Page.getPhotos
+Page.postPhoto
+Page.getPicture
+Page.getRoles
+Page.getVideos
+Page.getPosts
+Page.postPost
+Page.postVideo
+Post_Facebook.getReactions
+Post_Facebook.getAttachments
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

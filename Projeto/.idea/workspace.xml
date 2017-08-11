@@ -6,8 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="705aa28b-7975-4d2e-b2d7-43149a16a745" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/FacebookOrganizado.iml" afterPath="$PROJECT_DIR$/.idea/FacebookOrganizado.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/FacebookOrganizado.iml" afterPath="$PROJECT_DIR$/.idea/FacebookOrganizado.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
     </list>
     <ignored path="FacebookOrganizado.iws" />
@@ -36,103 +36,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="_Sizes.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_Sizes.py">
+      <file leaf-file-name="sol.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SOL_MAIN/sol.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="189">
+              <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_Tweet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_Tweet.py">
+      <file leaf-file-name="socialnetwork.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SOL_MAIN/socialnetwork.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1988">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_TwitterUser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_TwitterUser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_URL.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_URL.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_Utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_Utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_WeakAccess.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_WeakAccess.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="55" lean-forward="true" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_AuthenticatedTwitterUser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="34" column="88" lean-forward="false" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="88" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_AuthenticatedFacebookUser.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SolFB/_AuthenticatedFacebookUser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="139" column="93" lean-forward="true" selection-start-line="139" selection-start-column="93" selection-end-line="139" selection-end-column="93" />
+            <state relative-caret-position="594">
+              <caret line="31" column="25" lean-forward="false" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
               <folding>
-                <element signature="e#459#2298#0" expanded="false" />
-                <element signature="e#3656#4379#0" expanded="false" />
-                <element signature="e#6017#6842#0" expanded="false" />
-                <element signature="e#6936#7374#0" expanded="false" />
-                <element signature="e#8312#10233#0" expanded="false" />
-                <element signature="e#10314#11298#0" expanded="false" />
-                <element signature="e#11363#12065#0" expanded="false" />
-                <element signature="e#12129#14000#0" expanded="false" />
-                <element signature="e#14066#14896#0" expanded="false" />
-                <element signature="e#14961#15665#0" expanded="false" />
-                <element signature="e#15715#16034#0" expanded="false" />
-                <element signature="e#16105#16983#0" expanded="false" />
-                <element signature="e#17049#18921#0" expanded="false" />
-                <element signature="e#18986#20857#0" expanded="false" />
-                <element signature="e#20928#21576#0" expanded="false" />
-                <element signature="e#21642#22518#0" expanded="false" />
-                <element signature="e#22585#22961#0" expanded="false" />
-                <element signature="e#23031#24912#0" expanded="false" />
-                <element signature="e#24988#25876#0" expanded="false" />
-                <element signature="e#28031#29077#0" expanded="false" />
-                <element signature="e#29137#29511#0" expanded="false" />
+                <element signature="e#47#66#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SOL_MAIN/user.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding>
+                <element signature="e#47#66#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -141,18 +73,8 @@
       <file leaf-file-name="_Execute.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_Execute.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_StrongAccess.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SolTw/_StrongAccess.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="63">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -180,8 +102,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/SolTw/__init__.py" />
-        <option value="$PROJECT_DIR$/SolTw/_List.py" />
         <option value="$PROJECT_DIR$/SolTw/_DirectMessage.py" />
         <option value="$PROJECT_DIR$/SolTw/_Entity.py" />
         <option value="$PROJECT_DIR$/SolTw/_Tweet.py" />
@@ -227,9 +147,11 @@
         <option value="$PROJECT_DIR$/SOL/socialnetwork.py" />
         <option value="$PROJECT_DIR$/SOL/__init__.py" />
         <option value="$PROJECT_DIR$/SOL/sol.py" />
-        <option value="$PROJECT_DIR$/_Execute.py" />
         <option value="$PROJECT_DIR$/SOL_MAIN/__init__.py" />
         <option value="$PROJECT_DIR$/SOL_MAIN/sol.py" />
+        <option value="$PROJECT_DIR$/SOL_MAIN/exceptions.py" />
+        <option value="$PROJECT_DIR$/SOL_MAIN/user.py" />
+        <option value="$PROJECT_DIR$/_Execute.py" />
         <option value="$PROJECT_DIR$/SOL_MAIN/socialnetwork.py" />
       </list>
     </option>
@@ -237,7 +159,7 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="width" value="1378" />
     <option name="height" value="735" />
@@ -279,6 +201,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -289,7 +213,7 @@
             <path>
               <item name="FacebookOrganizado" type="b2602c69:ProjectViewProjectNode" />
               <item name="Projeto" type="462c0819:PsiDirectoryNode" />
-              <item name="SolFB" type="462c0819:PsiDirectoryNode" />
+              <item name="SOL_MAIN" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FacebookOrganizado" type="b2602c69:ProjectViewProjectNode" />
@@ -309,8 +233,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -892,10 +814,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="1000" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.255625" sideWeight="0.6173709" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21302083" sideWeight="0.6173709" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11604095" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32764506" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -965,20 +887,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SolFB/_Adaccounts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2267">
-          <caret line="6" column="9" lean-forward="false" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SolFB/_Adcontracts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1026">
-          <caret line="4" column="94" lean-forward="false" selection-start-line="4" selection-start-column="94" selection-end-line="4" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolFB/_Admin_Note.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
@@ -1049,13 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SOL_MAIN/socialnetwork.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolFB/_FacebookUser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
@@ -1068,18 +969,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SOL_MAIN/sol.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolFB/_Feed_Targeting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1087,7 +980,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2244">
           <caret line="143" column="59" lean-forward="false" selection-start-line="143" selection-start-column="59" selection-end-line="143" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1095,7 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
           <caret line="53" column="48" lean-forward="false" selection-start-line="53" selection-start-column="48" selection-end-line="53" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1103,7 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1445">
           <caret line="89" column="20" lean-forward="false" selection-start-line="89" selection-start-column="9" selection-end-line="89" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,7 +1001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="11" column="88" lean-forward="false" selection-start-line="11" selection-start-column="88" selection-end-line="11" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1119,7 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1127,28 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="485" column="8" lean-forward="false" selection-start-line="485" selection-start-column="5" selection-end-line="485" selection-end-column="8" />
-          <folding>
-            <element signature="e#513#13872#0" expanded="false" />
-            <element signature="e#13907#14122#0" expanded="false" />
-            <element signature="e#14210#15073#0" expanded="false" />
-            <element signature="e#15151#15997#0" expanded="false" />
-            <element signature="e#16103#16661#0" expanded="false" />
-            <element signature="e#16740#17578#0" expanded="false" />
-            <element signature="e#17660#18212#0" expanded="false" />
-            <element signature="e#18290#19182#0" expanded="false" />
-            <element signature="e#19276#20016#0" expanded="false" />
-            <element signature="e#20106#20966#0" expanded="false" />
-            <element signature="e#21823#22706#0" expanded="false" />
-            <element signature="e#22789#23525#0" expanded="false" />
-            <element signature="e#23603#24321#0" expanded="false" />
-            <element signature="e#24412#25492#0" expanded="false" />
-            <element signature="e#25572#26038#0" expanded="false" />
-            <element signature="e#26115#26953#0" expanded="false" />
-            <element signature="e#27031#27946#0" expanded="false" />
-            <element signature="e#28059#29519#0" expanded="false" />
-            <element signature="e#29580#29952#0" expanded="false" />
-            <element signature="e#30043#31128#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1177,19 +1043,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="191" column="21" lean-forward="false" selection-start-line="191" selection-start-column="9" selection-end-line="191" selection-end-column="21" />
-          <folding>
-            <element signature="e#291#2814#0" expanded="false" />
-            <element signature="e#2850#3066#0" expanded="false" />
-            <element signature="e#3143#3694#0" expanded="false" />
-            <element signature="e#3769#4131#0" expanded="false" />
-            <element signature="e#4211#5091#0" expanded="false" />
-            <element signature="e#5181#6390#0" expanded="false" />
-            <element signature="e#6467#7191#0" expanded="false" />
-            <element signature="e#7273#7564#0" expanded="false" />
-            <element signature="e#7648#7945#0" expanded="false" />
-            <element signature="e#8022#8342#0" expanded="false" />
-            <element signature="e#8423#9161#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1197,7 +1050,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1205,18 +1057,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="226" column="19" lean-forward="false" selection-start-line="226" selection-start-column="8" selection-end-line="226" selection-end-column="19" />
-          <folding>
-            <element signature="e#651#4988#0" expanded="false" />
-            <element signature="e#5021#5239#0" expanded="false" />
-            <element signature="e#5318#6094#0" expanded="false" />
-            <element signature="e#6175#6468#0" expanded="false" />
-            <element signature="e#6551#6850#0" expanded="false" />
-            <element signature="e#6926#7252#0" expanded="false" />
-            <element signature="e#7332#8071#0" expanded="false" />
-            <element signature="e#8153#8949#0" expanded="false" />
-            <element signature="e#9028#9916#0" expanded="false" />
-            <element signature="e#10005#11220#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1224,7 +1064,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
           <caret line="664" column="12" lean-forward="true" selection-start-line="664" selection-start-column="12" selection-end-line="664" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1232,7 +1071,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1240,7 +1078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1248,7 +1085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1256,7 +1092,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-611">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1264,7 +1099,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1272,7 +1106,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-560">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1280,7 +1113,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-761">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1288,7 +1120,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1296,7 +1127,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-373">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1304,7 +1134,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1312,7 +1141,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1320,7 +1148,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-220">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1342,7 +1169,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SolTw/_Tweet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1988">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1364,14 +1191,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_Execute.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SolTw/_Utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1382,16 +1201,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SolTw/_WeakAccess.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="55" lean-forward="true" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
+        <state relative-caret-position="483">
+          <caret line="23" column="55" lean-forward="false" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SolTw/_AuthenticatedTwitterUser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
+        <state relative-caret-position="714">
           <caret line="34" column="88" lean-forward="false" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SOL_MAIN/exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1422,6 +1249,42 @@
             <element signature="e#24988#25876#0" expanded="false" />
             <element signature="e#28031#29077#0" expanded="false" />
             <element signature="e#29137#29511#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SOL_MAIN/sol.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="34" lean-forward="false" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_Execute.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SOL_MAIN/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#47#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SOL_MAIN/socialnetwork.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="31" column="25" lean-forward="false" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+          <folding>
+            <element signature="e#47#66#0" expanded="true" />
           </folding>
         </state>
       </provider>
