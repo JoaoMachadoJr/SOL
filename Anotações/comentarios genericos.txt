@@ -1,0 +1,3 @@
+instalar requests
+
+adicionar post.text?
