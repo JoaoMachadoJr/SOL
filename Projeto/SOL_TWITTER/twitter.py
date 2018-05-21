@@ -7,6 +7,7 @@ from SOL_TWITTER.tweet import Tweet
 from SOL_TWITTER.factory import Factory
 from lib import tweepy
 
+
 class Twitter(SocialNetwork):
     """
     Essa classe representa a rede social Twitter.
@@ -16,23 +17,24 @@ class Twitter(SocialNetwork):
     Esse projeto fez uso da ferramenta tweepy, cuja documentação pode ser encontrada no endereço: http://www.tweepy.org/
     """
 
-    def __init__(self, consumer_key: str = '',consumer_secret: str = '',access_token: str = '',access_token_secret: str = ''):
+    def __init__(self, consumer_key: str = '', consumer_secret: str = '', access_token: str = '',
+                 access_token_secret: str = ''):
         """
         Args:
-            consumer_key: Ao passar os quatro tokens para o construtor, o usuário proprietário do token será registrado como
-                usuário principal
-            consumer_secret: Ao passar os quatro tokens para o construtor, o usuário proprietário do token será registrado como
-                usuário principal
-            access_token: Ao passar os quatro tokens para o construtor, o usuário proprietário do token será registrado como
-                usuário principal
-            access_token_secret: Ao passar os quatro tokens para o construtor, o usuário proprietário do token será registrado como
-                usuário principal
+            consumer_key: Ao passar os quatro tokens para o construtor, o usuário proprietário do token será registrado
+            como usuário principal
+            consumer_secret: Ao passar os quatro tokens para o construtor, o usuário proprietário do token será
+                registrado como usuário principal
+            access_token: Ao passar os quatro tokens para o construtor, o usuário proprietário do token será registrado
+            como usuário principal
+            access_token_secret: Ao passar os quatro tokens para o construtor, o usuário proprietário do token será
+            registrado como usuário principal
         """
         self.__user = None
-        if (consumer_key!='') and (consumer_secret!='') and (access_token!='') and (access_token_secret!=''):
-            self.login(consumer_key,consumer_secret,access_token,access_token_secret)
-        self.name='Twitter'
-        self.website='www.twitter.com'
+        if (consumer_key != '') and (consumer_secret != '') and (access_token != '') and (access_token_secret != ''):
+            self.login(consumer_key, consumer_secret, access_token, access_token_secret)
+        self.name = 'Twitter'
+        self.website = 'www.twitter.com'
 
     @property
     def user(self) -> User:
@@ -45,7 +47,7 @@ class Twitter(SocialNetwork):
         Para a maioria das redes sociais é recomendável que seja feito algum tipo de validação
         das credenciais de acesso do usuário neste local
         """
-        if not self.login(val.consumer_key,val.consumer_secret,val.access_token,val.access_token_secret):
+        if not self.login(val.consumer_key, val.consumer_secret, val.access_token, val.access_token_secret):
             raise Exception('The user must have a valid user.token')
 
     def post(self, text: str = '', image: str = '', video: str = '', genericfile: str = '', post: Tweet = None) -> None:
@@ -73,9 +75,10 @@ class Twitter(SocialNetwork):
         else:
             self.user.post(text, image, video, genericfile, post)
 
-    def login(self, consumer_key: str = '',consumer_secret: str = '',access_token: str = '',access_token_secret: str = '') -> User:
+    def login(self, consumer_key: str = '', consumer_secret: str = '', access_token: str = '',
+              access_token_secret: str = '') -> User:
         """
-        Esse método recebe o conjunto de tojens, valida-os, instancia um objeto representando o usuário dono dos tokens,
+        Esse método recebe o conjunto de tokens, valida-os, instancia um objeto representando o usuário dono dos tokens,
         registra esse usuário como o usuário principal dessa instancia Twitter, e retorna o objeto contendo as
         informações desse usuário
 
@@ -92,19 +95,18 @@ class Twitter(SocialNetwork):
         auth.get_authorization_url()
         dictionary = tweepy.API(auth).me()
         a_user = Factory.user(dictionary)
-        a_user.auth=auth
-        self.__user=a_user
+        a_user.auth = auth
+        self.__user = a_user
         return self.user
-
 
     @staticmethod
     def login_instructions():
         """
-        Instrucoes de login do Twitter:
+        Instruções de login do Twitter:
         login twitter:
         1- Vá para a página https://apps.twitter.com/
         2- Cadastre o seu aplicativo
-        3- Acesse a página https://apps.twitter.com/app/, clique no seu aplicativo, e então clique em 'Keys and access tokens'
+        3- Acesse a página https://apps.twitter.com/app/, clique no seu aplicativo, e clique em 'Keys and access tokens'
         4- Copie os campos: Consumer Key e Consumer Secret
         5- Clique em Generate Consumer Key and Secret e confirme a operação
         6- Copie os valores de Access Token e Access Token Secret
@@ -120,5 +122,3 @@ class Twitter(SocialNetwork):
         5- Clique em Generate Consumer Key and Secret e confirme a operação
         6- Copie os valores de Access Token e Access Token Secret
         7- Use os tokens obtidos no passo 5 e 7 para fazer o login pelo método Twitter.login"""
-
-

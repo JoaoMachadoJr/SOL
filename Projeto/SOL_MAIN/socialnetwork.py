@@ -7,6 +7,7 @@ from SOL_MAIN.user import User
 from SOL_MAIN.post import Post
 from typing import List
 
+
 class SocialNetwork(ABC):
     """
     A classe que define o comportamento de uma rede social
@@ -30,7 +31,7 @@ class SocialNetwork(ABC):
         """
         raise NotImplementedError('Not Implemented Feature!')
 
-    def post(self, text: str = '', image: str = '', video: str = '', genericfile: str = '', post: Post = None ) -> None:
+    def post(self, text: str = '', image: str = '', video: str = '', genericfile: str = '', post: Post = None) -> None:
         """
         Adiciona conteúdo do usuário credenciado à rede social.
 
@@ -75,6 +76,6 @@ class SocialNetwork(ABC):
             return self.user.read(postID, limit)
 
     def __init__(self):
-        self.name=''
-        self.website=''
+        self.name = ''
+        self.website = ''
         pass

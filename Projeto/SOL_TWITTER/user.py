@@ -84,6 +84,38 @@ class User(User):
         else:
             Conection.api(self.auth).update_with_media(filename=a_image,status=a_text)
 
+    def read(self, postID: str = '', limit: int = 100) -> List[Post]:
+        """
+        Recupera tweets de um usuário.
 
+        O método prevê a solicitação de um tweet específico a partir de seu ID.
+        Se nenhum tweet específico for informado, o retorno do método será uma lista contendo os tweets mais recentes.
+        O método também prevê a especificação de um limite de tweets a serem retornados.
+
+        Args:
+            postID: Uma string contendo o ID de um Tweet específico da rede social.
+            limit:  Um número inteiro contendo a quantidade máxima de registros que devem ser retornados.
+
+        Raises:
+            ValueError: O usuário não foi encontrado.
+        """
+        from dateutil.parser import parse
+
+        token = self.token
+        a_graphurl="https://graph.facebook.com/v2.5/" + self.id + "/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=1000&access_token=" + token;
+        r=Conection.get(a_graphurl)
+        lista = list()
+        while ("data" in r and len(r["data"]) > 0):
+            for a in r["data"]:
+                post = _Post_Facebook.Post_Facebook(dictionary=a)
+                if ((len(lista) == limit) or (
+                        dateMin != "" and parse(post.created_time).replace(tzinfo=None) < dateMin)):
+                    return lista
+                lista.append(post)
+            if ("next" in r["paging"]):
+                r = _Utility.prepareRequest(maxRetries).get(r["paging"]["next"], timeout=timeout).json()
+            else:
+                break
+        return lista
 
 

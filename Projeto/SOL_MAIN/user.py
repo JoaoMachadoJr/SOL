@@ -4,7 +4,7 @@
 from abc import ABC
 from abc import abstractmethod
 from SOL_MAIN.post import Post
-
+from typing import List
 
 class User(ABC):
     """
