@@ -4,7 +4,7 @@
 from SOL_MAIN import SocialNetwork
 from SOL_FACEBOOK.user import User
 from SOL_FACEBOOK.post import Post
-from SOL_FACEBOOK.conection import Conection
+from SOL_FACEBOOK.connection import Connection
 from SOL_FACEBOOK.factory import Factory
 from typing import List
 
@@ -78,7 +78,7 @@ class Facebook(SocialNetwork):
         returns:
             Um objeto contendo informações sobre o usuário dono do token
         """
-        dict_user = Conection.get("https://graph.facebook.com/v2.6/me?&fields=id,about,age_range,birthday,context,cover,currency,devices,education,email,favorite_athletes,favorite_teams,first_name,gender,hometown,inspirational_people,install_type,installed,interested_in,is_shared_login,is_verified,languages,last_name,link,locale,location,meeting_for,middle_name,name,name_format,payment_pricepoints,political,public_key,quotes,relationship_status,religion,security_settings,shared_login_upgrade_required_by,significant_other,sports,test_group,third_party_id,timezone,updated_time,verified,video_upload_limits,viewer_can_send_gift,website,work&access_token=" + str(token))
+        dict_user = Connection.get("https://graph.facebook.com/v2.6/me?&fields=id,about,age_range,birthday,context,cover,currency,devices,education,email,favorite_athletes,favorite_teams,first_name,gender,hometown,inspirational_people,install_type,installed,interested_in,is_shared_login,is_verified,languages,last_name,link,locale,location,meeting_for,middle_name,name,name_format,payment_pricepoints,political,public_key,quotes,relationship_status,religion,security_settings,shared_login_upgrade_required_by,significant_other,sports,test_group,third_party_id,timezone,updated_time,verified,video_upload_limits,viewer_can_send_gift,website,work&access_token=" + str(token))
         a_user = Factory.user(dict_user)
         if a_user.name != '':
             self.__user=a_user

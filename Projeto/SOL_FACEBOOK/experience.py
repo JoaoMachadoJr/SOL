@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 class Experience:
     """
     Essa classe vincula informações sobre um gosto, pessoa, atividade ou entidade genérica a um usuário

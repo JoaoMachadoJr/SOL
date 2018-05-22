@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+from typing import List
 
 from SOL_MAIN.user import User
+from SOL_TWITTER.factory import Factory
 from SOL_TWITTER.tweet import Tweet
 from SOL_TWITTER.conection import Conection
+
 
 class User(User):
     """
@@ -12,7 +14,7 @@ class User(User):
     """
 
     def __init__(self):
-        self.auth=None
+        self.auth = None
         self.created_at = ""
         self.description = ""
         self.favourites_count = ""
@@ -35,15 +37,14 @@ class User(User):
         self.url = ""
         self.verified = ""
 
-
-    def post (self, text: str = '', image: str = '', video: str = '', genericfile: str = '', post: Tweet = None )-> None:
+    def post(self, text: str = '', image: str = '', video: str = '', genericfile: str = '', post: Tweet = None) -> None:
         """
         Envia um tweet do usuário credenciado ao Twitter.
 
         Note:
-            O Twitter não permite o envio de arquivos genericos, portanto o argumento genericfile não deverá ser
+            O Twitter não permite o envio de arquivos genéricos, portanto o parâmetro genericfile não deverá ser
             utilizado.
-            Não é permitido preencher o parâmetro post simultaneamento com os  parâmetros text, image ou video
+            Não é permitido preencher o parâmetro post simultaneamente com os  parâmetros text, image ou video
             Não é permitido enviar um video e uma imagem simultaneamente
 
         Args:
@@ -55,36 +56,37 @@ class User(User):
                          rede social.
 
         Raises:
-            ValueError: Será lançado se as regras do cláusula NOTE forem desrespeitadas
+            ValueError: Será lançado se as regras da cláusula NOTE forem desrespeitadas
         """
         if genericfile != '':
-            raise ValueError('Unsuported parameter for post on twitter: genericfile')
+            raise ValueError('Unsupported parameter for post on twitter: genericfile')
 
-        if (post is not None) and ((text!='') or (image!='') or video!=''):
+        if (post is not None) and ((text != '') or (image != '') or video != ''):
             raise ValueError('Cannot use the parameter post and the parameters [text, image, video]')
 
-        if  ((image != '') and (video != '')) or ((post is not None) and (post.image != '') and (post.video != '')):
+        if ((image != '') and (video != '')) or ((post is not None) and (post.image != '') and (post.video != '')):
             raise ValueError('Cannot send an image and a video')
 
-        if (video != '') or ((post is not None) and  (post.video != '')):
+        if (video != '') or ((post is not None) and (post.video != '')):
             raise ValueError('Not supported feature')
 
         if post is None:
             a_text = text
         else:
-            a_text=post.text
+            a_text = post.text
 
-        if (post is None) or (post.entities is None) or (post.entities.media is None) or (len(post.entities.media)==0):
-            a_image=image
+        if (post is None) or (post.entities is None) or (post.entities.media is None) or (
+                len(post.entities.media) == 0):
+            a_image = image
         else:
-            a_image=post.entities.media[0]
+            a_image = post.entities.media[0]
 
-        if a_image =='':
+        if a_image == '':
             Conection.api(self.auth).update_status(status=text)
         else:
-            Conection.api(self.auth).update_with_media(filename=a_image,status=a_text)
+            Conection.api(self.auth).update_with_media(filename=a_image, status=a_text)
 
-    def read(self, postID: str = '', limit: int = 100) -> List[Post]:
+    def read(self, post_id: str = '', limit: int = 100) -> List[Tweet]:
         """
         Recupera tweets de um usuário.
 
@@ -93,29 +95,21 @@ class User(User):
         O método também prevê a especificação de um limite de tweets a serem retornados.
 
         Args:
-            postID: Uma string contendo o ID de um Tweet específico da rede social.
+            post_id: Uma string contendo o ID de um Tweet específico da rede social.
             limit:  Um número inteiro contendo a quantidade máxima de registros que devem ser retornados.
 
         Raises:
-            ValueError: O usuário não foi encontrado.
+            ValueError: O tweet não é do usuário informado
+
         """
-        from dateutil.parser import parse
-
-        token = self.token
-        a_graphurl="https://graph.facebook.com/v2.5/" + self.id + "/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=1000&access_token=" + token;
-        r=Conection.get(a_graphurl)
-        lista = list()
-        while ("data" in r and len(r["data"]) > 0):
-            for a in r["data"]:
-                post = _Post_Facebook.Post_Facebook(dictionary=a)
-                if ((len(lista) == limit) or (
-                        dateMin != "" and parse(post.created_time).replace(tzinfo=None) < dateMin)):
-                    return lista
-                lista.append(post)
-            if ("next" in r["paging"]):
-                r = _Utility.prepareRequest(maxRetries).get(r["paging"]["next"], timeout=timeout).json()
-            else:
-                break
-        return lista
-
-
+        result = list()
+        if post_id != '':
+            tweet = Factory.tweet(Conection.api(self.auth).get_status(id=post_id))
+            if tweet.user.screen_name != self.screen_name:
+                raise ValueError('This tweet does not belong to ' + self.screen_name)
+            result.append(tweet)
+            return result
+        else:
+            for info in Conection.api(self.auth).user_timeline(screen_name=self.screen_name, count=limit):
+                result.append(Factory.tweet(dictionary=info))
+            return result

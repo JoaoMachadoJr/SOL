@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from SOL_FACEBOOK import user
-from SOL_FACEBOOK import cover_photo
+from SOL_FACEBOOK import coverphoto
 from SOL_FACEBOOK import education
 from SOL_FACEBOOK import experience
 from SOL_FACEBOOK import page
@@ -95,8 +95,8 @@ class Factory:
         return a_user
 
     @staticmethod
-    def cover_photo(dictionary: dict) -> cover_photo.Cover_Photo:
-        a_cover_photo = cover_photo.Cover_Photo
+    def cover_photo(dictionary: dict) -> coverphoto.CoverPhoto:
+        a_cover_photo = coverphoto.CoverPhoto
         if ("id" in dictionary):
             a_cover_photo.id = dictionary["id"]
         if ("cover_id" in dictionary):

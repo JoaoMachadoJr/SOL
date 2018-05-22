@@ -4,7 +4,7 @@ from pathlib import Path
 
 from SOL_MAIN import User
 from SOL_FACEBOOK.post import Post
-from SOL_FACEBOOK.conection import Conection
+from SOL_FACEBOOK.connection import Connection
 from SOL_FACEBOOK.factory import Factory
 from typing import List
 
@@ -96,14 +96,14 @@ class User(User):
             a_params = {"description": a_text}
             if Path(a_filepath).exists():
                 a_files = {'file': open(a_filepath, 'rb')}
-                Conection.post(a_graphurl, files=a_files, params=a_params)
+                Connection.post(a_graphurl, files=a_files, params=a_params)
             else:
                 a_params["file_url"] = a_filepath
-                Conection.post(a_graphurl, params=a_params).json()
+                Connection.post(a_graphurl, params=a_params).json()
         else:
             a_graphurl = "https://graph.facebook.com/v2.6/me/feed?&access_token="+str(self.token)
             a_params = {"message": a_text}
-            Conection.post(a_graphurl, params=a_params)
+            Connection.post(a_graphurl, params=a_params)
 
     def read(self, postID: str = '', limit: int = 100) -> List[Post]:
         """
@@ -125,7 +125,7 @@ class User(User):
 
         token = self.token
         a_graphurl="https://graph.facebook.com/v2.5/" + self.id + "/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=1000&access_token=" + token;
-        r=Conection.get(a_graphurl)
+        r=Connection.get(a_graphurl)
         lista = list()
         while ("data" in r and len(r["data"]) > 0):
             for a in r["data"]:

@@ -2,20 +2,26 @@
 # -*- coding: utf-8 -*-
 
 from abc import ABC
-from abc import abstractmethod
+
 
 class Post(ABC):
-    '''
+    """
     Essa classe define o conteúdo do principal tipo de publicação na rede social.
-    '''
+    """
+
+    def __init__(self):
+        self.__genericfile = ""
+        self.__video = ""
+        self.__image = ""
+        self.__text = ""
 
     @property
     def text(self) -> str:
         return self.__text
 
     @text.setter
-    def text(self,val: str):
-        self.__text=val
+    def text(self, val: str):
+        self.__text = val
 
     @property
     def image(self) -> str:
@@ -40,4 +46,3 @@ class Post(ABC):
     @genericfile.setter
     def genericfile(self, val: str):
         self.__genericfile = val
-
