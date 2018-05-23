@@ -124,7 +124,7 @@ class User(User):
         from dateutil.parser import parse
 
         token = self.token
-        a_graphurl="https://graph.facebook.com/v2.5/" + self.id + "/feed?fields=id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message,message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type,story,targeting,to,type,updated_time,with_tags&limit=1000&access_token=" + token;
+        a_graphurl="https://graph.facebook.com/v2.5/" + self.id + "/feed?fields="+User.fields()+"&limit=1000&access_token=" + token;
         r=Connection.get(a_graphurl)
         lista = list()
         while ("data" in r and len(r["data"]) > 0):
@@ -139,3 +139,10 @@ class User(User):
             else:
                 break
         return lista
+
+    @staticmethod
+    def fields() -> str:
+        """Campos a serem recuperados em uma consulta"""
+        return "id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message," \
+               "message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type," \
+               "story,targeting,to,type,updated_time,with_tags"

@@ -9,13 +9,13 @@ class CoverPhoto:
 
     def __init__(self):
         self.__id = ""
-        self.__cover_id = ""
         self.__offset_x = ""
         self.__offset_y = ""
         self.__source = ""
 
     @property
     def id(self) -> str:
+        """Identificador único da entidade"""
         return self.__id
 
     @id.setter
@@ -23,15 +23,8 @@ class CoverPhoto:
         self.__id = val
 
     @property
-    def cover_id(self) -> str:
-        return self.__cover_id
-
-    @cover_id.setter
-    def cover_id(self, val: str):
-        self.__cover_id = val
-
-    @property
     def offset_x(self) -> str:
+        """Deslocamento horizontal da foto"""
         return self.__offset_x
 
     @offset_x.setter
@@ -40,6 +33,7 @@ class CoverPhoto:
 
     @property
     def offset_y(self) -> str:
+        """Deslocamento vertical da foto"""
         return self.__offset_y
 
     @offset_y.setter
@@ -48,6 +42,7 @@ class CoverPhoto:
 
     @property
     def source(self) -> str:
+        """Link direto para a imagem"""
         return self.__source
 
     @source.setter

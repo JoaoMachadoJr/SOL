@@ -8,6 +8,7 @@ from SOL_FACEBOOK.connection import Connection
 from SOL_FACEBOOK.factory import Factory
 from typing import List
 
+
 class Facebook(SocialNetwork):
     """
     Essa classe representa a rede social Facebook.
@@ -16,17 +17,18 @@ class Facebook(SocialNetwork):
       endereço: https://developers.facebook.com/docs/graph-api
     """
 
-    def __init__(self, token : str = ''):
+    def __init__(self, token: str = ''):
         """
         Args:
             token: Ao passar um token para o construtor, o usuário proprietário do token será registrado como usuário
                    principal
         """
+        super().__init__()
         self.__user = None
         if token != '':
             self.login(token)
-        self.name='Facebook'
-        self.website='www.facebook.com'
+        self.name = 'Facebook'
+        self.website = 'www.facebook.com'
 
     @property
     def user(self) -> User:
@@ -78,53 +80,53 @@ class Facebook(SocialNetwork):
         returns:
             Um objeto contendo informações sobre o usuário dono do token
         """
-        dict_user = Connection.get("https://graph.facebook.com/v2.6/me?&fields=id,about,age_range,birthday,context,cover,currency,devices,education,email,favorite_athletes,favorite_teams,first_name,gender,hometown,inspirational_people,install_type,installed,interested_in,is_shared_login,is_verified,languages,last_name,link,locale,location,meeting_for,middle_name,name,name_format,payment_pricepoints,political,public_key,quotes,relationship_status,religion,security_settings,shared_login_upgrade_required_by,significant_other,sports,test_group,third_party_id,timezone,updated_time,verified,video_upload_limits,viewer_can_send_gift,website,work&access_token=" + str(token))
+        dict_user = Connection.get(
+            "https://graph.facebook.com/v2.6/me?&fields="+User.fields()+"&access_token=" + str(token))
         a_user = Factory.user(dict_user)
         if a_user.name != '':
-            self.__user=a_user
-            a_user.token=token
+            self.__user = a_user
+            a_user.token = token
             return a_user
-        else:
-            return None
 
     @staticmethod
-    def login_instructions():
+    def login_instructions() -> str:
         """
-        Instrucoes de login do facebook:
+        Instruções de login do facebook:
         1- Acesse a página MEUS APLICATIVOS: https://developers.facebook.com/apps/
         2- Crie um aplicativo e obtenha um ID numérico, que será chamado de APPID nesse tutorial
-        3- Acesse a página do Grapi API Explorer: https://developers.facebook.com/tools/explorer
+        3- Acesse a página do Graph API Explorer: https://developers.facebook.com/tools/explorer
         4- Selecione seu aplicativo na direita
         5- Clique em Obter Token > Obter Token de acesso do usuário
         6- Ao abrir a página de permissões, selecione todas as permissões exibidas
-        7- Confirme todas as mensagens pop-ups de permissões e aparecerem.E por fim aparecerá o seu token de acesso, basta copiá-lo
+        7- Confirme todas as mensagens pop-ups de permissões. Será exibido o seu token de acesso, guarde-o
 
         (Opcional) Como obter um token de acesso de maior duração
         1- Acesse a página: https://developers.facebook.com/apps/{seu APPID}/dashboard/
         2- No campo Chave Secreta do APlicativo, clique em Mostrar
         3- Copie essa chave secreta, nesse tutorial a chamaremos de CLIENTE_KEY
-        4- Acesse o endereço: https://graph.facebook.com/v2.10/oauth/access_token?grant_type=fb_exchange_token&client_id={Seu APPID}&client_secret={Sua CLIENTE_KEY}&fb_exchange_token={Seu Token}
-        5- A resposta será um json, o texto entre áspas que aparece logo após "Access_token" é o seu token com 60 dias de duração
+        4- Acesse o endereço: https://graph.facebook.com/v2.10/oauth/access_token?grant_type=fb_exchange_token
+                              &client_id={Seu APPID}&client_secret={Sua CLIENTE_KEY}&fb_exchange_token={Seu Token}
+        5- A resposta será um json, o texto entre áspas exibido após "Access_token" é um token com 60 dias de duração
         """
-        return """
-        Instrucoes de login do facebook:
-        1- Acesse a página MEUS APLICATIVOS: https://developers.facebook.com/apps/
-        2- Crie um aplicativo e obtenha um ID numérico, que será chamado de APPID nesse tutorial
-        3- Acesse a página do Grapi API Explorer: https://developers.facebook.com/tools/explorer
-        4- Selecione seu aplicativo na direita
-        5- Clique em Obter Token > Obter Token de acesso do usuário
-        6- Ao abrir a página de permissões, selecione todas as permissões exibidas
-        7- Confirme todas as mensagens pop-ups de permissões e aparecerem.E por fim aparecerá o seu token de acesso, basta copiá-lo
-        
-        (Opcional) Como obter um token de acesso de maior duração
-        1- Acesse a página: https://developers.facebook.com/apps/{seu APPID}/dashboard/
-        2- No campo Chave Secreta do APlicativo, clique em Mostrar
-        3- Copie essa chave secreta, nesse tutorial a chamaremos de CLIENTE_KEY
-        4- Acesse o endereço: https://graph.facebook.com/v2.10/oauth/access_token?grant_type=fb_exchange_token&client_id={Seu APPID}&client_secret={Sua CLIENTE_KEY}&fb_exchange_token={Seu Token}
-        5- A resposta será um json, o texto entre áspas que aparece logo após "Access_token" é o seu token com 60 dias de duração"""
+        return "Instruções de login do facebook:\n" \
+               "1- Acesse a página MEUS APLICATIVOS: https://developers.facebook.com/apps/\n"\
+               "2- Crie um aplicativo e obtenha um ID numérico, que será chamado de APPID nesse tutorial\n"\
+               "3- Acesse a página do Graph API Explorer: https://developers.facebook.com/tools/explorer\n"\
+               "4- Selecione seu aplicativo na direita\n"\
+               "5- Clique em Obter Token > Obter Token de acesso do usuário\n"\
+               "6- Ao abrir a página de permissões, selecione todas as permissões exibidas\n"\
+               "7- Confirme todas as mensagens pop-ups de permissões. Será exibido o seu token de acesso, guarde-o\n"\
+               "\n"\
+               "(Opcional) Como obter um token de acesso de maior duração\n"\
+               "1- Acesse a página: https://developers.facebook.com/apps/{seu APPID}/dashboard/\n"\
+               "2- No campo Chave Secreta do APlicativo, clique em Mostrar\n"\
+               "3- Copie essa chave secreta, nesse tutorial a chamaremos de CLIENTE_KEY\n"\
+               "4- Acesse o endereço: https://graph.facebook.com/v2.10/oauth/access_token?grant_type=fb_exchange_token"\
+               "&client_id={Seu APPID}&client_secret={Sua CLIENTE_KEY}&fb_exchange_token={Seu Token}\n"\
+               "5- A resposta será um json, o texto entre áspas exibido após ""Access_token"" é um token com 60 dias"\
+               "de duração"
 
-
-    def read(self, postID: str = '', limit: int = 100) -> List[Post]:
+    def read(self, post_id: str = '', limit: int = 100) -> List[Post]:
         """
         Recupera conteúdo da rede social.
         Atualmente não é possível ler a timeline de um usuário, portanto esse método lê o conteúdo presente no mural
@@ -134,8 +136,8 @@ class Facebook(SocialNetwork):
         O método também prevê a especificação de um limite de Posts a serem retornados.
 
         Args:
-            postID: Uma string contendo o ID de um Post da rede social, caso queira recuperar um post específico.
-            limit:  Um número inteiro contendo a quantidades máxima de registro que devem ser retornados.
+            post_id: Uma string contendo o ID de um Post da rede social, caso queira recuperar um post específico.
+            limit:  Um número inteiro contendo a quantidade máxima de registro que devem ser retornados.
 
         Raises:
             ValueError: Não há um usuário credenciado vinculado ao objeto SocialNetwork
@@ -143,4 +145,4 @@ class Facebook(SocialNetwork):
         if self.user is None:
             raise ValueError('This SocialNetwork has no authenticated user.')
         else:
-            return self.user.read(postID, limit)
+            return self.user.read(post_id, limit)

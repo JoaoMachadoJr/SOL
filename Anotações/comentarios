@@ -5,3 +5,18 @@
     Acredito que esteja funcionando pro facebook
     Estou fazwndo a implementação do twitter
     O codigo do Twitter.user.read está com o codigo do facebook por placeholder, essa será a proxima tarefa
+
+21/05
+    Encontrei problemas de PEP8 no código, estou refatorando
+    Fiz um Live Template para inserir propriedades, se chama 'prop'
+    Estou adicionando Propriedades para todos os atributos das minhas classes, parei em SOL_FACEBOOK.Experience
+    Descobri que SOL_Facebook.User.read está quebrado, será feito depois do Twitter
+    Proximo passo: Continuar colocando propriedades nos atributos e consertando PEP8, a partir de SOL_FACEBOOK.Experience
+
+22/05
+    Continuo fazendo refactoring de PEP8 e nas propriedades
+    Fiz com as classes Experience, CoverPhoto, Facebook, Factory e metade da Page
+    Exclui a classe de Education, pois foi depreciada
+    Aprendi a fazer Type Hint de retornos de objetos da mesma classe declarante, devo utilizar áspas simples no nome da 'classe'
+    Adicionei DocString de descrição nas minhas propriedades
+    Próximo Passo: Continuar o refactoring a partir da Page
