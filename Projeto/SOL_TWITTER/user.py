@@ -5,7 +5,7 @@ from typing import List
 from SOL_MAIN.user import User
 from SOL_TWITTER.factory import Factory
 from SOL_TWITTER.tweet import Tweet
-from SOL_TWITTER.conection import Conection
+from SOL_TWITTER.connection import Connection
 
 
 class User(User):
@@ -82,9 +82,9 @@ class User(User):
             a_image = post.entities.media[0]
 
         if a_image == '':
-            Conection.api(self.auth).update_status(status=text)
+            Connection.api(self.auth).update_status(status=text)
         else:
-            Conection.api(self.auth).update_with_media(filename=a_image, status=a_text)
+            Connection.api(self.auth).update_with_media(filename=a_image, status=a_text)
 
     def read(self, post_id: str = '', limit: int = 100) -> List[Tweet]:
         """
@@ -104,12 +104,12 @@ class User(User):
         """
         result = list()
         if post_id != '':
-            tweet = Factory.tweet(Conection.api(self.auth).get_status(id=post_id))
+            tweet = Factory.tweet(Connection.api(self.auth).get_status(id=post_id))
             if tweet.user.screen_name != self.screen_name:
                 raise ValueError('This tweet does not belong to ' + self.screen_name)
             result.append(tweet)
             return result
         else:
-            for info in Conection.api(self.auth).user_timeline(screen_name=self.screen_name, count=limit):
+            for info in Connection.api(self.auth).user_timeline(screen_name=self.screen_name, count=limit):
                 result.append(Factory.tweet(dictionary=info))
             return result

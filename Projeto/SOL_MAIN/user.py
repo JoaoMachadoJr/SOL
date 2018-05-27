@@ -43,7 +43,7 @@ class User(ABC):
 
         Args:
             post_id: Uma string contendo o ID de um Post da rede social, caso queira recuperar um post específico.
-            limit:  Um número inteiro contendo a quantidades máxima de registro que devem ser retornados.
+            limit:  Um número inteiro contendo a quantidade máxima de registro que devem ser retornados.
 
         :return: Uma lista de Posts
 

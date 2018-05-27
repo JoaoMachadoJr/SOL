@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from SOL_MAIN import SocialNetwork
+import SOL_MAIN
 from SOL_FACEBOOK.user import User
 from SOL_FACEBOOK.post import Post
 from SOL_FACEBOOK.connection import Connection
@@ -9,7 +9,7 @@ from SOL_FACEBOOK.factory import Factory
 from typing import List
 
 
-class Facebook(SocialNetwork):
+class Facebook(SOL_MAIN.SocialNetwork):
     """
     Essa classe representa a rede social Facebook.
     O endereço dessa rede social é: https://Facebook.com
@@ -77,7 +77,7 @@ class Facebook(SocialNetwork):
 
         Args:
             token: O token de acesso. Para obtê-lo consulte Facebook.login_instructions
-        returns:
+        :returns:
             Um objeto contendo informações sobre o usuário dono do token
         """
         dict_user = Connection.get(
@@ -141,6 +141,8 @@ class Facebook(SocialNetwork):
 
         Raises:
             ValueError: Não há um usuário credenciado vinculado ao objeto SocialNetwork
+        :returns:
+            Uma lista de Posts
         """
         if self.user is None:
             raise ValueError('This SocialNetwork has no authenticated user.')

@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 from typing import List
 
-from SOL_FACEBOOK import User
-
 
 class Experience:
     """
@@ -37,12 +35,12 @@ class Experience:
         self.__description = val
 
     @property
-    def from_(self) -> User:
+    def from_(self) -> 'User':
         """Usuário proprietário da entidade"""
         return self.__from_
 
     @from_.setter
-    def from_(self, val: User):
+    def from_(self, val: 'User'):
         self.__from_ = val
 
     @property
@@ -55,10 +53,10 @@ class Experience:
         self.__name = val
 
     @property
-    def with_(self) -> List[User]:
+    def with_(self) -> List['User']:
         """Outros usuário relacionados"""
         return self.__with_
 
     @with_.setter
-    def with_(self, val: List[User]):
+    def with_(self, val: List['User']):
         self.__with_ = val

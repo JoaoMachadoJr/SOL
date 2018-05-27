@@ -23,21 +23,16 @@ class Page:
         self.__emails = ""
         self.__likes = ""
         self.__general_info = ""
-        self.is_permanently_closed = ""
-        self.is_published = ""
-        self.is_unclaimed = ""
-        self.is_verified = ""
-        self.leadgen_tos_accepted = ""
-        self.link = ""
-        self.location = ""
-        self.name = ""
-        self.new_like_count = ""
-        self.parent_page = None
-        self.phone = ""
-        self.single_line_address = ""
-        self.store_number = ""
-        self.username = ""
-        self.website = ""
+        self.__is_permanently_closed = ""
+        self.__link = ""
+        self.__location = ""
+        self.__name = ""
+        self.__new_like_count = ""
+        self.__parent_page = None
+        self.__phone = ""
+        self.__single_line_address = ""
+        self.__username = ""
+        self.__website = ""
 
     @property
     def id(self) -> str:
@@ -164,5 +159,95 @@ class Page:
     @general_info.setter
     def general_info(self, val: str):
         self.__general_info = val
+
+    @property
+    def is_permanently_closed(self) -> str:
+        """Informações sobre a Page ter sido encerrada."""
+        return self.__is_permanently_closed
+
+    @is_permanently_closed.setter
+    def is_permanently_closed(self, val: str):
+        self.__is_permanently_closed = val
+
+    @property
+    def link(self) -> str:
+        """Endereço eletrônico para a página"""
+        return self.__link
+
+    @link.setter
+    def link(self, val: str):
+        self.__link = val
+
+    @property
+    def location(self) -> str:
+        """Localização geográfica da página"""
+        return self.__location
+
+    @location.setter
+    def location(self, val: str):
+        self.__location = val
+
+    @property
+    def name(self) -> str:
+        """Nome da página"""
+        return self.__name
+
+    @name.setter
+    def name(self, val: str):
+        self.__name = val
+
+    @property
+    def new_like_count(self) -> str:
+        """Quantidade de curtidas recebidas recentemente"""
+        return self.__new_like_count
+
+    @new_like_count.setter
+    def new_like_count(self, val: str):
+        self.__new_like_count = val
+
+    @property
+    def parent_page(self) -> 'Page':
+        """Página principal. Preenchido apenas em páginas derivadas de outras."""
+        return self.__parent_page
+
+    @parent_page.setter
+    def parent_page(self, val: 'Page'):
+        self.__parent_page = val
+
+    @property
+    def phone(self) -> str:
+        """Telefone de contato da página"""
+        return self.__phone
+
+    @phone.setter
+    def phone(self, val: str):
+        self.__phone = val
+
+    @property
+    def single_line_address(self) -> str:
+        """Endereço físico da página"""
+        return self.__single_line_address
+
+    @single_line_address.setter
+    def single_line_address(self, val: str):
+        self.__single_line_address = val
+
+    @property
+    def username(self) -> str:
+        """Um apelido para a página."""
+        return self.__username
+    
+    @username.setter
+    def username(self, val: str):
+        self.__username = val
+    
+    @property
+    def website(self) -> str:
+        """Site externo relacionado à página"""
+        return self.__website
+
+    @website.setter
+    def website(self, val: str):
+        self.__website = val
 
 

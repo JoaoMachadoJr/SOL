@@ -153,14 +153,6 @@ class Factory:
             a_page.general_info = dictionary["general_info"]
         if "is_permanently_closed" in dictionary:
             a_page.is_permanently_closed = dictionary["is_permanently_closed"]
-        if "is_published" in dictionary:
-            a_page.is_published = dictionary["is_published"]
-        if "is_unclaimed" in dictionary:
-            a_page.is_unclaimed = dictionary["is_unclaimed"]
-        if "is_verified" in dictionary:
-            a_page.is_verified = dictionary["is_verified"]
-        if "leadgen_tos_accepted" in dictionary:
-            a_page.leadgen_tos_accepted = dictionary["leadgen_tos_accepted"]
         if "link" in dictionary:
             a_page.link = dictionary["link"]
         if "location" in dictionary:
@@ -175,8 +167,6 @@ class Factory:
             a_page.phone = dictionary["phone"]
         if "single_line_address" in dictionary:
             a_page.single_line_address = dictionary["single_line_address"]
-        if "store_number" in dictionary:
-            a_page.store_number = dictionary["store_number"]
         if "username" in dictionary:
             a_page.username = dictionary["username"]
         if "website" in dictionary:
@@ -219,8 +209,8 @@ class Factory:
         return a_video
 
     @staticmethod
-    def feed_targeting(dictionary: dict) -> post.Feed_targeting:
-        a_feed = post.Feed_targeting()
+    def feed_targeting(dictionary: dict) -> post.FeedTargeting:
+        a_feed = post.FeedTargeting()
         if "age_max" in dictionary:
             a_feed.age_max = dictionary["age_max"]
         if "age_min" in dictionary:
@@ -244,56 +234,31 @@ class Factory:
         a_post = post.Post()
         if "id" in dictionary:
             a_post.id = dictionary["id"]
-        if "admin_creator" in dictionary:
-            for i in dictionary["admin_creator"]:
-                a_post.admin_creator.append(i)
-        if "caption" in dictionary:
-            a_post.caption = dictionary["caption"]
         if "created_time" in dictionary:
             a_post.created_time = dictionary["created_time"]
-        if "description" in dictionary:
-            a_post.description = dictionary["description"]
         if "feed_targeting" in dictionary:
             a_post.feed_targeting = Factory.feed_targeting(dictionary=dictionary["feed_targeting"])
         if "from" in dictionary:
             a_post.from_ = Factory.user(dictionary=dictionary["from"])
-        if "icon" in dictionary:
-            a_post.icon = dictionary["icon"]
         if "is_hidden" in dictionary:
             a_post.is_hidden = dictionary["is_hidden"]
-        if "is_published" in dictionary:
-            a_post.is_published = dictionary["is_published"]
         if "link" in dictionary:
             a_post.link = dictionary["link"]
         if "message" in dictionary:
             a_post.message = dictionary["message"]
         if "message_tags" in dictionary:
-            a_post.message_tags = dictionary["message_tags"]
-        if "name" in dictionary:
-            a_post.name = dictionary["name"]
-        if "object_id" in dictionary:
-            a_post.object_id = dictionary["object_id"]
-        if "parent_id" in dictionary:
-            a_post.parent_id = dictionary["parent_id"]
+            for i in dictionary["properties"]:
+                a_post.message_tags.append(i)
         if "picture" in dictionary:
             a_post.picture = dictionary["picture"]
         if "place" in dictionary:
             a_post.place = dictionary["place"]
         if "privacy" in dictionary:
             a_post.privacy = dictionary["privacy"]
-        if "properties" in dictionary:
-            for i in dictionary["properties"]:
-                a_post.properties.append(i)
         if "shares" in dictionary:
             a_post.shares = dictionary["shares"]
-        if "source" in dictionary:
-            a_post.source = dictionary["source"]
         if "status_type" in dictionary:
             a_post.status_type = dictionary["status_type"]
-        if "story" in dictionary:
-            a_post.story = dictionary["story"]
-        if "story_tags" in dictionary:
-            a_post.story_tags = dictionary["story_tags"]
         if "targeting" in dictionary:
             a_post.targeting = dictionary["targeting"]
         if "to" in dictionary:
@@ -301,14 +266,10 @@ class Factory:
                 a_post.to.append(Factory.user(dictionary=i))
         if "type" in dictionary:
             a_post.type = dictionary["type"]
-        if "updated_time" in dictionary:
-            a_post.updated_time = dictionary["updated_time"]
         if "with_tags" in dictionary:
-            a_post.with_tags = dictionary["with_tags"]
+            a_post.with_ = dictionary["with_tags"]
         if a_post.type == "video":
             a_post.video = video.Video()
             a_post.video.id = a_post.object_id
             a_post.video.source = a_post.source
-        if a_post.type == "photo":
-            a_post.image = a_post.source
         return a_post

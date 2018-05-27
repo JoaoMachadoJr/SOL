@@ -20,3 +20,10 @@
     Aprendi a fazer Type Hint de retornos de objetos da mesma classe declarante, devo utilizar áspas simples no nome da 'classe'
     Adicionei DocString de descrição nas minhas propriedades
     Próximo Passo: Continuar o refactoring a partir da Page
+
+26/05
+    Continuo fazendo refactoring de PEP8 e nas propriedades
+    Terminei o refactoring no Facebook
+    criei uma unit Utils, ela é para uso interno, ela me ajudará no refactoring
+    Observei que devo melhorar a apresentacao da classe de token do twitter, tirar a dependencia de LIB
+    Continuarei a fazer o refactoring a partir das classes do twitter

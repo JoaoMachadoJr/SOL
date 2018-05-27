@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from abc import ABC
 
-
-class Post(ABC):
+class Post:
     """
     Essa classe define o conteúdo do principal tipo de publicação na rede social.
     """
