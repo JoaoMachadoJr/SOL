@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from SOL_MAIN import SocialNetwork
+from SOL_TWITTER.connection import Connection
+from SOL_TWITTER.token import Token
 from SOL_TWITTER.user import User
 from SOL_TWITTER.tweet import Tweet
 from SOL_TWITTER.factory import Factory
-from lib import tweepy
 
 
 class Twitter(SocialNetwork):
@@ -30,6 +31,7 @@ class Twitter(SocialNetwork):
             access_token_secret: Ao passar os quatro tokens para o construtor, o usuário proprietário do token será
             registrado como usuário principal
         """
+        super().__init__()
         self.__user = None
         if (consumer_key != '') and (consumer_secret != '') and (access_token != '') and (access_token_secret != ''):
             self.login(consumer_key, consumer_secret, access_token, access_token_secret)
@@ -90,12 +92,14 @@ class Twitter(SocialNetwork):
         returns:
             Um objeto contendo informações sobre o usuário dono do token
         """
-        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-        auth.set_access_token(access_token, access_token_secret)
-        auth.get_authorization_url()
-        dictionary = tweepy.API(auth).me()
+        token = Token()
+        token.consumer_key = consumer_key
+        token.consumer_secret = consumer_secret
+        token.access_token = access_token
+        token.access_token_secret = access_token_secret
+        dictionary = Connection.api(token).me()
         a_user = Factory.user(dictionary)
-        a_user.auth = auth
+        a_user.token = token
         self.__user = a_user
         return self.user
 

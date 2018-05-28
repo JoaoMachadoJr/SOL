@@ -1,4 +1,8 @@
-from SOL_FACEBOOK.video import Video
+from SOL_TWITTER.entities import Entities
+from SOL_TWITTER.media import Media, Size
+from SOL_TWITTER.place import Place, PlaceAttributes, BoundingBox
+from SOL_TWITTER.tweet import Tweet
+from SOL_TWITTER.user import User
 
 
 def criaclasse(obj):
@@ -22,7 +26,7 @@ def criaclasse(obj):
             print("    def "+i["campo"]+"(self) -> str:")
             print("        \"\"\"Descricao\"\"\"")
             print("        return self.__"+i["campo"]+"")
-            print()
+            print("")
             print("    @"+i["campo"]+".setter")
             print("    def "+i["campo"]+"(self, val: str):")
             print("        self.__"+i["campo"]+" = val")
@@ -31,10 +35,10 @@ def criaclasse(obj):
             print("    def " + i["campo"] + "(self) -> Obj:")
             print("        \"\"\"Descricao\"\"\"")
             print("        return self.__" + i["campo"] + "")
-            print()
+            print("")
             print("    @" + i["campo"] + ".setter")
             print("    def " + i["campo"] + "(self, val: Obj):")
             print("        self.__" + i["campo"] + " = val")
 
 
-criaclasse(Video())
+criaclasse(User())

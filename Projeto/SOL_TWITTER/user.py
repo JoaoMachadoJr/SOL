@@ -4,6 +4,7 @@ from typing import List
 
 from SOL_MAIN.user import User
 from SOL_TWITTER.factory import Factory
+from SOL_TWITTER.token import Token
 from SOL_TWITTER.tweet import Tweet
 from SOL_TWITTER.connection import Connection
 
@@ -14,28 +15,175 @@ class User(User):
     """
 
     def __init__(self):
-        self.auth = None
-        self.created_at = ""
-        self.description = ""
-        self.favourites_count = ""
-        self.followers_count = ""
-        self.friends_count = ""
-        self.id = id
-        self.id_str = ""
-        self.lang = ""
-        self.listed_count = ""
-        self.location = ""
-        self.name = ""
-        self.profile_background_image_url = ""
-        self.profile_banner_url = ""
-        self.profile_image_url = ""
-        self.screen_name = ""
-        self.show_all_inline_media = ""
-        self.status = None
-        self.statuses_count = ""
-        self.time_zone = ""
-        self.url = ""
-        self.verified = ""
+        self.__token = None
+        self.__created_at = ""
+        self.__description = ""
+        self.__favourites_count = ""
+        self.__followers_count = ""
+        self.__friends_count = ""
+        self.__id = ""
+        self.__lang = ""
+        self.__listed_count = ""
+        self.__name = ""
+        self.__profile_background_image_url = ""
+        self.__profile_banner_url = ""
+        self.__profile_image_url = ""
+        self.__screen_name = ""
+        self.__statuses_count = ""
+        self.__url = ""
+
+    @property
+    def token(self) -> Token:
+        """Token de acesso"""
+        return self.__token
+
+    @token.setter
+    def token(self, val: Token):
+        self.__token = val
+
+    @property
+    def created_at(self) -> str:
+        """Data de criação do perfil"""
+        return self.__created_at
+
+    @created_at.setter
+    def created_at(self, val: str):
+        self.__created_at = val
+
+    @property
+    def description(self) -> str:
+        """Descrição disponível no perfil"""
+        return self.__description
+
+    @description.setter
+    def description(self, val: str):
+        self.__description = val
+
+    @property
+    def favourites_count(self) -> str:
+        """Quantidade de tweets curtidos por esse usuário"""
+        return self.__favourites_count
+
+    @favourites_count.setter
+    def favourites_count(self, val: str):
+        self.__favourites_count = val
+
+    @property
+    def followers_count(self) -> str:
+        """Quantidade de seguidores"""
+        return self.__followers_count
+
+    @followers_count.setter
+    def followers_count(self, val: str):
+        self.__followers_count = val
+
+    @property
+    def friends_count(self) -> str:
+        """Quantidade de amigos"""
+        return self.__friends_count
+
+    @friends_count.setter
+    def friends_count(self, val: str):
+        self.__friends_count = val
+
+    @property
+    def id(self) -> str:
+        """Identificador do usuário"""
+        return self.__id
+
+    @id.setter
+    def id(self, val: str):
+        self.__id = val
+
+    @property
+    def lang(self) -> str:
+        """Idioma"""
+        return self.__lang
+
+    @lang.setter
+    def lang(self, val: str):
+        self.__lang = val
+
+    @property
+    def listed_count(self) -> str:
+        """Quantidade de grupos que esse usuário participa"""
+        return self.__listed_count
+
+    @listed_count.setter
+    def listed_count(self, val: str):
+        self.__listed_count = val
+
+    @property
+    def location(self) -> str:
+        """Localização"""
+        return self.__location
+
+    @location.setter
+    def location(self, val: str):
+        self.__location = val
+
+    @property
+    def name(self) -> str:
+        """Nome"""
+        return self.__name
+
+    @name.setter
+    def name(self, val: str):
+        self.__name = val
+
+    @property
+    def profile_background_image_url(self) -> str:
+        """URL para a imagem de fundo do perfil"""
+        return self.__profile_background_image_url
+
+    @profile_background_image_url.setter
+    def profile_background_image_url(self, val: str):
+        self.__profile_background_image_url = val
+
+    @property
+    def profile_banner_url(self) -> str:
+        """URL para a imagem de banner"""
+        return self.__profile_banner_url
+
+    @profile_banner_url.setter
+    def profile_banner_url(self, val: str):
+        self.__profile_banner_url = val
+
+    @property
+    def profile_image_url(self) -> str:
+        """URL para a foto de perfil"""
+        return self.__profile_image_url
+
+    @profile_image_url.setter
+    def profile_image_url(self, val: str):
+        self.__profile_image_url = val
+
+    @property
+    def screen_name(self) -> str:
+        """Nome identificador do usuário na rede social"""
+        return self.__screen_name
+
+    @screen_name.setter
+    def screen_name(self, val: str):
+        self.__screen_name = val
+
+    @property
+    def statuses_count(self) -> str:
+        """Quantidade de tweets publicados"""
+        return self.__statuses_count
+
+    @statuses_count.setter
+    def statuses_count(self, val: str):
+        self.__statuses_count = val
+
+    @property
+    def url(self) -> str:
+        """URL para o perfil do usuário"""
+        return self.__url
+
+    @url.setter
+    def url(self, val: str):
+        self.__url = val
 
     def post(self, text: str = '', image: str = '', video: str = '', genericfile: str = '', post: Tweet = None) -> None:
         """

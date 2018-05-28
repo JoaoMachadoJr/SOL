@@ -26,7 +26,7 @@ class Video:
 
     @property
     def id(self) -> str:
-        """Descricao"""
+        """Identificador da entidade"""
         return self.__id
 
     @id.setter
@@ -35,7 +35,7 @@ class Video:
 
     @property
     def created_time(self) -> str:
-        """Descricao"""
+        """Horário de criação"""
         return self.__created_time
 
     @created_time.setter
@@ -44,7 +44,7 @@ class Video:
 
     @property
     def description(self) -> str:
-        """Descricao"""
+        """Descrição do vídeo"""
         return self.__description
 
     @description.setter
@@ -53,7 +53,7 @@ class Video:
 
     @property
     def embed_html(self) -> str:
-        """Descricao"""
+        """Estrutura html para uso do vídeo para site externo"""
         return self.__embed_html
 
     @embed_html.setter
@@ -62,7 +62,7 @@ class Video:
 
     @property
     def format(self) -> str:
-        """Descricao"""
+        """Formato"""
         return self.__format
 
     @format.setter
@@ -71,7 +71,7 @@ class Video:
 
     @property
     def from_(self) -> str:
-        """Descricao"""
+        """Criador do vídeo"""
         return self.__from_
 
     @from_.setter
@@ -80,7 +80,7 @@ class Video:
 
     @property
     def icon(self) -> str:
-        """Descricao"""
+        """Ícone"""
         return self.__icon
 
     @icon.setter
@@ -89,7 +89,7 @@ class Video:
 
     @property
     def length(self) -> str:
-        """Descricao"""
+        """Duração do vídeo"""
         return self.__length
 
     @length.setter
@@ -98,7 +98,7 @@ class Video:
 
     @property
     def permalink_url(self) -> str:
-        """Descricao"""
+        """URL para o vídeo"""
         return self.__permalink_url
 
     @permalink_url.setter
@@ -107,7 +107,7 @@ class Video:
 
     @property
     def picture(self) -> str:
-        """Descricao"""
+        """Imagem exibida quando o vídeo não está em reprodução"""
         return self.__picture
 
     @picture.setter
@@ -116,7 +116,7 @@ class Video:
 
     @property
     def place(self) -> str:
-        """Descricao"""
+        """Local relacionado ao vídeo"""
         return self.__place
 
     @place.setter
@@ -125,7 +125,7 @@ class Video:
 
     @property
     def privacy(self) -> str:
-        """Descricao"""
+        """Configurações de privacidade"""
         return self.__privacy
 
     @privacy.setter
@@ -134,7 +134,7 @@ class Video:
 
     @property
     def source(self) -> str:
-        """Descricao"""
+        """URL para o vídeo"""
         return self.__source
 
     @source.setter
@@ -143,7 +143,7 @@ class Video:
 
     @property
     def status(self) -> str:
-        """Descricao"""
+        """Conteúdo que acompanha o vídeo"""
         return self.__status
 
     @status.setter
@@ -152,7 +152,7 @@ class Video:
 
     @property
     def updated_time(self) -> str:
-        """Descricao"""
+        """Horário da última atualização"""
         return self.__updated_time
 
     @updated_time.setter
