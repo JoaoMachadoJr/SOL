@@ -8,6 +8,7 @@ from SOL_FACEBOOK.connection import Connection
 from SOL_FACEBOOK.experience import Experience
 from SOL_FACEBOOK.page import Page
 from SOL_FACEBOOK.post import Post
+from SOL_FACEBOOK.factory import Factory
 import SOL_MAIN
 
 
@@ -179,6 +180,16 @@ class User(SOL_MAIN.User):
     def website(self, val: str):
         self.__website = val
 
+    @staticmethod
+    def fields() -> str:
+        """Campos a serem recuperados em uma consulta"""
+        return "id,about,age_range,birthday,context,cover,currency,devices,education,email," \
+               "first_name,gender,hometown,install_type,installed,interested_in," \
+               "is_shared_login,is_verified,languages,last_name,link,locale,location,meeting_for,middle_name,name," \
+               "name_format,payment_pricepoints,political,public_key,quotes,relationship_status,religion," \
+               "security_settings,shared_login_upgrade_required_by,significant_other,test_group," \
+               "third_party_id,timezone,updated_time,verified,video_upload_limits,viewer_can_send_gift,website,work"
+    
     def post(self, text: str = '', picture: str = '', video: str = '',
              genericfile: str = '', post: Post = None) -> None:
         """
@@ -237,7 +248,7 @@ class User(SOL_MAIN.User):
             a_params = {"message": a_text}
             Connection.post(a_graphurl, params=a_params)
 
-    def read(self, postID: str = '', limit: int = 100) -> List[Post]:
+    def read(self, post_id: str = '', limit: int = 100) -> List[Post]:
         """
         Recupera conteúdo da rede social.
         Atualmente não é possível ler a timeline de um usuário, portanto esse método lê o conteúdo presente no mural
@@ -247,34 +258,32 @@ class User(SOL_MAIN.User):
         O método também prevê a especificação de um limite de Posts a serem retornados.
 
         Args:
-            postID: Uma string contendo o ID de um Post da rede social, caso queira recuperar um post específico.
+            post_id: Uma string contendo o ID de um Post da rede social, caso queira recuperar um post específico.
             limit:  Um número inteiro contendo a quantidade máxima de registro que devem ser retornados.
 
         Raises:
             ValueError: Não há um usuário credenciado vinculado ao objeto SocialNetwork
         """
-        from dateutil.parser import parse
-
         token = self.token
-        a_graphurl = "https://graph.facebook.com/v2.5/" + self.id + "/feed?fields=" + User.fields() + "&limit=1000&access_token=" + token;
-        r = Connection.get(a_graphurl)
+        a_graphurl = "https://graph.facebook.com/v2.5/" + self.id +\
+                     "/feed?fields=" + Post.fields() + "&limit=100&access_token=" + token;
+        content = Connection.get(a_graphurl, limit)
         lista = list()
-        while ("data" in r and len(r["data"]) > 0):
-            for a in r["data"]:
-                post = _Post_Facebook.Post_Facebook(dictionary=a)
-                if ((len(lista) == limit) or (
-                        dateMin != "" and parse(post.created_time).replace(tzinfo=None) < dateMin)):
-                    return lista
-                lista.append(post)
-            if ("next" in r["paging"]):
-                r = _Utility.prepareRequest(maxRetries).get(r["paging"]["next"], timeout=timeout).json()
-            else:
-                break
+        for a_item in content:
+            lista.append(Factory.post(dictionary=a_item))
         return lista
 
-    @staticmethod
-    def fields() -> str:
-        """Campos a serem recuperados em uma consulta"""
-        return "id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message," \
-               "message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type," \
-               "story,targeting,to,type,updated_time,with_tags"
+    def subscriptions(self) -> List[Page]:
+        """
+        Recupera as páginas que o usuário corrente curtiu.
+
+        :return: Uma lista de páginas
+        """
+        token = self.token
+        a_graphurl = "https://graph.facebook.com/me" + \
+                     "/likes?fields=" + Page.fields() + "&limit=1000&access_token=" + token;
+        content = Connection.get(a_graphurl, 0)
+        lista = list()
+        for a_item in content:
+            lista.append(Factory.page(dictionary=a_item))
+        return lista

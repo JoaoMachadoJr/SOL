@@ -15,7 +15,7 @@ class Factory:
     """
 
     @staticmethod
-    def user(dictionary: dict) -> user.User:
+    def user(dictionary: dict) -> 'User':
         a_user = user.User()
         if "id" in dictionary:
             a_user.id = dictionary["id"]
@@ -29,21 +29,12 @@ class Factory:
             a_user.cover = Factory.cover_photo(dictionary=dictionary["cover"])
         if "email" in dictionary:
             a_user.email = dictionary["email"]
-        if "favorite_athletes" in dictionary:
-            for i in dictionary["favorite_athletes"]:
-                a_user.favorite_athletes.append(Factory.experience(dictionary=i))
-        if "favorite_teams" in dictionary:
-            for i in dictionary["favorite_teams"]:
-                a_user.favorite_teams.append(Factory.experience(dictionary=i))
         if "first_name" in dictionary:
             a_user.first_name = dictionary["first_name"]
         if "gender" in dictionary:
             a_user.gender = dictionary["gender"]
         if "hometown" in dictionary:
             a_user.hometown = Factory.page(dictionary=dictionary["hometown"])
-        if "inspirational_people" in dictionary:
-            for i in dictionary["inspirational_people"]:
-                a_user.inspirational_people.append(Factory.experience(dictionary=i))
         if "interested_in" in dictionary:
             a_user.interested_in = dictionary["interested_in"]
         if "languages" in dictionary:
@@ -73,9 +64,6 @@ class Factory:
             a_user.religion = dictionary["religion"]
         if "significant_other" in dictionary:
             a_user.significant_other = Factory.user(dictionary=dictionary["significant_other"])
-        if "sports" in dictionary:
-            for i in dictionary["sports"]:
-                a_user.sports.append(Factory.experience(dictionary=i))
         if "timezone" in dictionary:
             a_user.timezone = dictionary["timezone"]
         if "video_upload_limits" in dictionary:
@@ -86,9 +74,6 @@ class Factory:
             a_user.website = dictionary["website"]
         if "relationship" in dictionary:
             a_user.relationship = dictionary["relationship"]
-        if "work" in dictionary:
-            for i in dictionary["work"]:
-                a_user.work.append(Factory.experience(dictionary=i))
         return a_user
 
     @staticmethod
@@ -261,15 +246,10 @@ class Factory:
             a_post.status_type = dictionary["status_type"]
         if "targeting" in dictionary:
             a_post.targeting = dictionary["targeting"]
-        if "to" in dictionary:
-            for i in dictionary["to"]:
-                a_post.to.append(Factory.user(dictionary=i))
         if "type" in dictionary:
             a_post.type = dictionary["type"]
         if "with_tags" in dictionary:
             a_post.with_ = dictionary["with_tags"]
         if a_post.type == "video":
             a_post.video = video.Video()
-            a_post.video.id = a_post.object_id
-            a_post.video.source = a_post.source
         return a_post

@@ -250,4 +250,19 @@ class Page:
     def website(self, val: str):
         self.__website = val
 
-
+    @staticmethod
+    def fields() -> str:
+        """Campos a serem recuperados em uma consulta"""
+        return "created_time,id,about,affiliation,app_id,app_links,artists_we_like,attire,awards,band_interests," \
+               "band_members,best_page,bio,birthday,booking_agent,built,can_checkin,can_post,category,category_list," \
+               "checkins,company_overview,contact_address,country_page_likes,cover,culinary_team,current_location," \
+               "description,description_html,directed_by,display_subtext,emails,features,food_styles,founded," \
+               "general_info,general_manager,genre,global_brand_page_name,global_brand_root_id,has_added_app," \
+               "hometown,hours,influences,is_community_page,is_permanently_closed,is_published,is_unclaimed," \
+               "is_verified,leadgen_tos_accepted,link,location,members,mission,mpg,name,network," \
+               "new_like_count,offer_eligible,parent_page,parking,payment_options,personal_info," \
+               "personal_interests,pharma_safety_info,phone,place_type,plot_outline,press_contact,price_range," \
+               "produced_by,products,public_transit,record_label,release_date,restaurant_services," \
+               "restaurant_specialties,schedule,screenplay_by,season,single_line_address,starring,store_number," \
+               "studio,talking_about_count,unread_message_count,unread_notif_count,unseen_message_count,username," \
+               "voip_info,website,were_here_count,written_by "

@@ -3,10 +3,8 @@
 
 import SOL_MAIN
 from SOL_FACEBOOK.user import User
-from SOL_FACEBOOK.post import Post
 from SOL_FACEBOOK.connection import Connection
 from SOL_FACEBOOK.factory import Factory
-from typing import List
 
 
 class Facebook(SOL_MAIN.SocialNetwork):
@@ -44,31 +42,6 @@ class Facebook(SOL_MAIN.SocialNetwork):
         if not self.login(val.token):
             raise Exception('The user must have a valid user.token')
 
-    def post(self, text: str = '', image: str = '', video: str = '', genericfile: str = '', post: Post = None) -> None:
-        """
-        Adiciona conteúdo do usuário credenciado à rede social.
-
-        O método prevê a inclusão de diversos tipos de mídia ao conteúdo. Fica sob responsabilidade
-        da classe de implementação restringir por meio de excessões combinações de parâmetros que não estejam de acordo
-        com a realidade da rede social ou dos recursos implementados.
-
-        Args:
-            text:        Uma string contendo o texto que faz parte do conteúdo da publicação.
-            image:       Uma string contendo o endereço da imagem que faz parte do conteúdo da publicação.
-            video:       Uma string contendo o endereço do video que faz parte do conteúdo da publicação.
-            genericfile: Em casos de redes sociais que permitem a inserção de qualquer tipo de arquivo, esse parâmetro
-                         deverá ser preenchido com o endereço do arquivo que faz parte do conteúdo da publicação.
-            post:        Um objeto do tipo Post que representa uma publicação já preenchida e pronta para ser enviada à
-                         rede social.
-
-        Raises:
-            ValueError: Não há um usuário credenciado vinculado ao objeto SocialNetwork
-        """
-        if self.user is None:
-            raise ValueError('This SocialNetwork has no authenticated user.')
-        else:
-            self.user.post(text, image, video, genericfile, post)
-
     def login(self, token: str) -> User:
         """
         Esse método recebe um token, valida esse token, instancia um objeto representando o usuário dono do token,
@@ -81,7 +54,7 @@ class Facebook(SOL_MAIN.SocialNetwork):
             Um objeto contendo informações sobre o usuário dono do token
         """
         dict_user = Connection.get(
-            "https://graph.facebook.com/v2.6/me?&fields="+User.fields()+"&access_token=" + str(token))
+            "https://graph.facebook.com/v2.6/me?&fields="+User.fields()+"&access_token=" + str(token))[0]
         a_user = Factory.user(dict_user)
         if a_user.name != '':
             self.__user = a_user
@@ -125,26 +98,3 @@ class Facebook(SOL_MAIN.SocialNetwork):
                "&client_id={Seu APPID}&client_secret={Sua CLIENTE_KEY}&fb_exchange_token={Seu Token}\n"\
                "5- A resposta será um json, o texto entre áspas exibido após ""Access_token"" é um token com 60 dias"\
                "de duração"
-
-    def read(self, post_id: str = '', limit: int = 100) -> List[Post]:
-        """
-        Recupera conteúdo da rede social.
-        Atualmente não é possível ler a timeline de um usuário, portanto esse método lê o conteúdo presente no mural
-        de um usuário
-
-        O método prevê a solicitação de um Post específico a partir de seu ID.
-        O método também prevê a especificação de um limite de Posts a serem retornados.
-
-        Args:
-            post_id: Uma string contendo o ID de um Post da rede social, caso queira recuperar um post específico.
-            limit:  Um número inteiro contendo a quantidade máxima de registro que devem ser retornados.
-
-        Raises:
-            ValueError: Não há um usuário credenciado vinculado ao objeto SocialNetwork
-        :returns:
-            Uma lista de Posts
-        """
-        if self.user is None:
-            raise ValueError('This SocialNetwork has no authenticated user.')
-        else:
-            return self.user.read(post_id, limit)

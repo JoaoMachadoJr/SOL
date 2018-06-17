@@ -97,3 +97,14 @@ class SocialNetwork(ABC):
             raise ValueError('This SocialNetwork has no authenticated user.')
         else:
             return self.user.read(post_id, limit)
+
+    def subscriptions(self) -> list:
+        """
+        Recupera as fontes de conteúdo que o usuário corrente acompanha.
+
+        :return: Uma lista de fontes de conteúdo
+        """
+        if self.user is None:
+            raise ValueError('This SocialNetwork has no authenticated user.')
+        else:
+            return self.user.subscriptions()

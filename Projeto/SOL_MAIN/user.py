@@ -51,3 +51,12 @@ class User(ABC):
             ValueError: Não há um usuário credenciado vinculado ao objeto SocialNetwork
         """
         raise NotImplementedError('Not Implemented Feature!')
+
+    @abstractmethod
+    def subscriptions(self) -> list:
+        """
+        Recupera as fontes de conteúdo que o usuário corrente acompanha.
+
+        :return: Uma lista de fontes de conteúdo
+        """
+        raise NotImplementedError('Not Implemented Feature!')

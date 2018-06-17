@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from typing import List
 
 from lib.requests import Session
 from lib.requests.adapters import HTTPAdapter
@@ -15,7 +16,7 @@ class Connection:
     timeout = (5, 5)
 
     @staticmethod
-    def get(url: str, params: dict = None) -> dict:
+    def get(url: str, limit: int = 1, params: dict = None) -> List[dict]:
         """
         Esse método envia para o facebook a url passada por parâmetro, e devolve a resposta
 
@@ -26,11 +27,24 @@ class Connection:
         """
         sessao = Session()
         sessao.mount('https://', HTTPAdapter(max_retries=Retry(total=Connection.max_retries)))
-        result = sessao.get(url, timeout=Connection.timeout, params=params).json()
-        if "error" in result:
-            raise Exception('Error on request:' + str(result['error']))
-        else:
+        content = sessao.get(url, timeout=Connection.timeout, params=params).json()
+        result = list()
+        if "error" in content:
+            raise Exception('Error on request:' + str(content['error']))
+        if "data" not in content:
+            result.append(content)
             return result
+        while "data" in content and len(content["data"]) > 0:
+            for a_result in content["data"]:
+                    if len(result) < limit or limit == 0:
+                        result.append(a_result)
+                    else:
+                        return result
+            if "next" in content["paging"]:
+                content = sessao.get(content["paging"]["next"], timeout=Connection.timeout, params=params).json()
+            else:
+                return result
+        return result
 
     @staticmethod
     def post(url: str, files: dict = None, params: dict = None) -> dict:

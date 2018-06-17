@@ -53,3 +53,23 @@ sol.post('Oh! Que saudades que tenho, Da aurora da minha vida, Da minha infânci
 """
 #FACEBOOK
 facebook.post('','','C:\\Users\\Public\\Videos\\Sample Videos\\Vida selvagem.wmv')
+
+"""
+1.2 - READ
+"""
+
+#FACEBOOK
+for a_item in facebook.read():
+    print(a_item.__dict__)
+
+#TWITTER
+for a_item in twitter.read():
+    print(a_item.__dict__)
+
+#TODAS AS REDES SOCIAIS
+for a_item in sol.read():
+    print(a_item.__dict__)
+
+"""
+
+"""

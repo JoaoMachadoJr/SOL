@@ -56,6 +56,15 @@ class Post(SOL_MAIN.Post):
         self.__message = val
 
     @property
+    def text(self) -> str:
+        """O texto do Post"""
+        return self.__message
+
+    @text.setter
+    def text(self, val: str):
+        self.__message = val
+
+    @property
     def feed_targeting(self) -> 'FeedTargeting':
         """Público alvo do Post"""
         return self.__feed_targeting
@@ -162,6 +171,13 @@ class Post(SOL_MAIN.Post):
     @with_.setter
     def with_(self, val: List[str]):
         self.__with_ = val
+
+    @staticmethod
+    def fields() -> str:
+        """Campos a serem recuperados em uma consulta"""
+        return "id,caption,created_time,description,feed_targeting,from,icon,is_hidden,is_published,link,message," \
+               "message_tags,name,object_id,parent_id,picture,place,privacy,properties,shares,source,status_type," \
+               "story,targeting,to,type,updated_time,with_tags"
 
 
 class FeedTargeting:

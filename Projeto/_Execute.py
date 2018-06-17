@@ -15,5 +15,9 @@ facebook=Facebook(facebook_token)
 sol = SOL()
 sol.socialnetworks.append(twitter)
 sol.socialnetworks.append(facebook)
-
-sol.post('Oh! Que saudades que tenho, Da aurora da minha vida, Da minha infância querida, Que os anos não trazem mais!','C:\\Users\\joao\\Pictures\\imagens facebook sacanear\\12644892_1051646468228987_2520408126616807931_n.jpg')
+"""
+for a_item in facebook.read():
+    print(a_item.__dict__)
+"""
+for a_item in twitter.subscriptions():
+    print(a_item.__dict__)
